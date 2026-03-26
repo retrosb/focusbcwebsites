@@ -838,27 +838,9 @@ function handler(req, res) {
 
     if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
-      const study = caseBySlug.get(slug);
-      if (study) {
-        if (req.method === "HEAD") {
-          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-          res.end();
-          return;
-        }
-        try {
-          const html = renderFocusbcCaseStudy(study);
-          const body = Buffer.from(injectBase(html, "/focusbc/"), "utf8");
-          res.writeHead(200, {
-            "Content-Type": "text/html; charset=utf-8",
-            "Content-Length": body.length,
-          });
-          res.end(body);
-        } catch {
-          res.writeHead(500);
-          res.end("Internal Server Error");
-        }
-        return;
-      }
+      /* Prefer npm-built HTML (case-studies-built → public/focusbc/case-studies/) over JSON
+         templates: templates use CAAP-relative assets (styles.css, caap-logo.png) and break
+         under /focusbc/ even with <base>. */
       const staticCaseDir = path.join(FOCUSBC_OUTPUT, "case-studies", slug, "index.html");
       if (fs.existsSync(staticCaseDir)) {
         if (req.method === "HEAD") {
@@ -895,6 +877,27 @@ function handler(req, res) {
           return;
         }
       }
+      const study = caseBySlug.get(slug);
+      if (study) {
+        if (req.method === "HEAD") {
+          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+          res.end();
+          return;
+        }
+        try {
+          const html = renderFocusbcCaseStudy(study);
+          const body = Buffer.from(injectBase(html, "/focusbc/"), "utf8");
+          res.writeHead(200, {
+            "Content-Type": "text/html; charset=utf-8",
+            "Content-Length": body.length,
+          });
+          res.end(body);
+        } catch {
+          res.writeHead(500);
+          res.end("Internal Server Error");
+        }
+        return;
+      }
       res.writeHead(404);
       res.end("Not Found");
       return;
@@ -905,6 +908,30 @@ function handler(req, res) {
       if (slug === "post") {
         res.writeHead(302, { Location: "/focusbc/blog" + url.search });
         res.end();
+        return;
+      }
+      const staticBlogDir = path.join(FOCUSBC_OUTPUT, "blog", slug, "index.html");
+      if (fs.existsSync(staticBlogDir)) {
+        if (req.method === "HEAD") {
+          res.writeHead(200, { "Content-Type": mimeFor(staticBlogDir) });
+          res.end();
+          return;
+        }
+        sendFile(res, staticBlogDir, { injectBaseHref: "/focusbc/" });
+        return;
+      }
+      const staticBlogPath = path.join(
+        FOCUSBC_OUTPUT,
+        "blog",
+        slug.endsWith(".html") ? slug : `${slug}.html`
+      );
+      if (fs.existsSync(staticBlogPath)) {
+        if (req.method === "HEAD") {
+          res.writeHead(200, { "Content-Type": mimeFor(staticBlogPath) });
+          res.end();
+          return;
+        }
+        sendFile(res, staticBlogPath, { injectBaseHref: "/focusbc/" });
         return;
       }
       const post = blogBySlug.get(slug);
@@ -933,30 +960,6 @@ function handler(req, res) {
           Location: "/focusbc/casestudies/" + encodeURIComponent(slug) + url.search,
         });
         res.end();
-        return;
-      }
-      const staticBlogDir = path.join(FOCUSBC_OUTPUT, "blog", slug, "index.html");
-      if (fs.existsSync(staticBlogDir)) {
-        if (req.method === "HEAD") {
-          res.writeHead(200, { "Content-Type": mimeFor(staticBlogDir) });
-          res.end();
-          return;
-        }
-        sendFile(res, staticBlogDir, { injectBaseHref: "/focusbc/" });
-        return;
-      }
-      const staticBlogPath = path.join(
-        FOCUSBC_OUTPUT,
-        "blog",
-        slug.endsWith(".html") ? slug : `${slug}.html`
-      );
-      if (fs.existsSync(staticBlogPath)) {
-        if (req.method === "HEAD") {
-          res.writeHead(200, { "Content-Type": mimeFor(staticBlogPath) });
-          res.end();
-          return;
-        }
-        sendFile(res, staticBlogPath, { injectBaseHref: "/focusbc/" });
         return;
       }
       res.writeHead(404);

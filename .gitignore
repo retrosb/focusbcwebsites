@@ -8,3 +8,6 @@ node_modules/
 # Cloudflare Pages build output (run npm run build)
 public/
 
+# Old local path (do not commit)
+focusbc-output/
+

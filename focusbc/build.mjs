@@ -375,6 +375,13 @@ const copies = [
   ["focsubc-google-dashboard.jpg", "google/google-partner-dashboard.jpg"],
   ["focusbc-google-3d.jpeg", "google/google-cloud-partner-3d.jpeg"],
   ["focusbc-google-report.jpeg", "google/google-analytics-report.jpeg"],
+  /* Home page (sources/index.html) uses WebP at media root; must be copied explicitly. */
+  ["focusbc-logo.webp", "focusbc-logo.webp"],
+  ["caap-logo.webp", "caap-logo.webp"],
+  ["virtualvenue_logo.webp", "virtualvenue_logo.webp"],
+  ["focusbc-caap-map-territory.webp", "focusbc-caap-map-territory.webp"],
+  ["focusbc-caap-city-operations.webp", "focusbc-caap-city-operations.webp"],
+  ["focusbc-sports-venue.webp", "focusbc-sports-venue.webp"],
 ];
 for (const [src, dest] of copies) {
   const fp = path.join(MEDIA_SRC, src);

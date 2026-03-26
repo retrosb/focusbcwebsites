@@ -53,4 +53,14 @@ const hub = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync(path.join(PUBLIC, "index.html"), hub);
-console.log("OK: public/index.html (hub).");
+
+/* Cloudflare Pages / Netlify-style redirects: canonical URLs with trailing slash */
+fs.writeFileSync(
+  path.join(PUBLIC, "_redirects"),
+  `# ictum.ai/focusbc and /caap — match directory index routes
+/focusbc  /focusbc/  308
+/caap     /caap/     308
+`
+);
+
+console.log("OK: public/index.html (hub), public/_redirects.");

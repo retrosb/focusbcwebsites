@@ -1,4 +1,7 @@
-# Cloudflare Pages: build command `npm run build`, output directory `public`
-name = "websites"
+# Cloudflare Pages (Dashboard → Workers & Pages → Create → Connect Git to retrosb/focusbcwebsites)
+# Build command: npm run build
+# Build output directory: public
+# Custom domain: add ictum.ai (and www if needed) under the project → Custom domains
+name = "focusbcwebsites"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "public"

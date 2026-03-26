@@ -2,6 +2,9 @@
   "name": "websites-local-server",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "node scripts/build-pages.mjs",
     "dev": "node scripts/watch-pages.mjs",

@@ -60,6 +60,12 @@ function copyTree(src, dest) {
 function writeHtmlWithNavRewrite(from, to) {
   let html = fs.readFileSync(from, "utf8");
   html = rewriteNavToIndexHtml(html);
+  if (!/<link\s+rel="icon"/i.test(html)) {
+    html = html.replace(
+      /<\/head>/i,
+      '    <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />\n  </head>'
+    );
+  }
   html = applyBasePrefix(html);
   ensureDir(path.dirname(to));
   fs.writeFileSync(to, html);
@@ -301,7 +307,11 @@ function transformHtml(html) {
   s = s.replace(/href="styles\.css"/g, 'href="/styles/styles.css"');
   s = s.replace(/<script[^>]*src="js\/[^"]+"[^>]*><\/script>/gi, "");
   s = s.replace(/<script[^>]*src="js\/[^"]+"[^>]*\/>/gi, "");
-  s = s.replace(/<link rel="icon"[^>]*>/gi, "");
+  s = s.replace(/href="media\/favicon\.ico"/g, 'href="/favicon.png"');
+  s = s.replace(
+    /<link rel="icon" href="\/favicon\.png"[^>]*>/gi,
+    '<link rel="icon" href="/favicon.png" type="image/png" sizes="any" />'
+  );
   s = s.replace(/src="\/media\/focusbc-logo\.png"/g, 'src="/media/logos/focus-bc-logo.png"');
   s = s.replace(/src="media\/caap-logo\.png"/g, 'src="/media/logos/city-as-a-platform.png"');
   s = s.replace(/src="media\/virtualvenue_logo\.png"/g, 'src="/media/logos/virtual-venue.png"');
@@ -386,6 +396,11 @@ const copies = [
 for (const [src, dest] of copies) {
   const fp = path.join(MEDIA_SRC, src);
   if (fs.existsSync(fp)) copyFile(fp, path.join(ROOT, "media", dest));
+}
+
+{
+  const fav = path.join(__dirname, "favicon.png");
+  if (fs.existsSync(fav)) copyFile(fav, path.join(ROOT, "favicon.png"));
 }
 
 const blogMap = [

@@ -834,7 +834,11 @@ function handler(req, res) {
       res.end();
       return;
     }
-    const segments = rest.split("/").filter(Boolean).map((s) => (s === "case-studies" ? "casestudies" : s));
+    /* Only the first segment is the route alias (case-studies → casestudies). Do not rewrite
+       deeper segments or /focusbc/media/case-studies/… breaks (disk uses case-studies/). */
+    const parts = rest.split("/").filter(Boolean);
+    const segments =
+      parts.length === 0 ? [] : [parts[0] === "case-studies" ? "casestudies" : parts[0], ...parts.slice(1)];
 
     if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
       const slug = segments[1];

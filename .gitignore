@@ -8,7 +8,3 @@ node_modules/
 # Cloudflare Pages build output (run npm run build)
 public/
 
-# Legacy local build output (use npm run build → public/)
-focusbc-output/
-
-caap/Archive.zip

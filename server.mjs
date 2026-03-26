@@ -7,10 +7,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 8888;
 
 const FOCUSBC = path.join(__dirname, "focusbc");
-/** Built Focus BC tree: prefers public/focusbc (npm run build) then legacy focusbc-output/. */
-const FOCUSBC_OUTPUT = fs.existsSync(path.join(__dirname, "public", "focusbc", "index.html"))
-  ? path.join(__dirname, "public", "focusbc")
-  : path.join(__dirname, "focusbc-output");
+/** Built Focus BC static tree from `npm run build` → public/focusbc/. */
+const FOCUSBC_OUTPUT = path.join(__dirname, "public", "focusbc");
 /** CAAP templates & JSON stay in repo caap/; static HTML may be served from public/caap/ after build. */
 const CAAP_SOURCE = path.join(__dirname, "caap");
 const CAAP_STATIC = fs.existsSync(path.join(__dirname, "public", "caap", "index.html"))
@@ -573,7 +571,7 @@ function focusbcCanonicalFromHtmlRest(rest) {
 }
 
 /**
- * Map URL segments after /focusbc to a file inside focusbc-output/.
+ * Map URL segments after /focusbc to a file inside public/focusbc/.
  * @returns {string|null} absolute file path or null
  */
 function resolveFocusbcFile(segments) {
@@ -756,7 +754,7 @@ function handler(req, res) {
     return;
   }
 
-  /* Site-root /media/… → focusbc-output/media (bucket build), then focusbc/media, then caap/media. */
+  /* Site-root /media/… → public/focusbc/media, then focusbc/media, then caap/media. */
   if (pathname.startsWith("/media/")) {
     const rel = pathname.slice("/media/".length);
     if (!rel || rel.includes("..")) {

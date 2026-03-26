@@ -2417,7 +2417,11 @@ a.card:hover {
 
 .case-studies-hero-visual {
   aspect-ratio: 16 / 10;
-  background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-mint) 100%);
+  background-color: var(--color-soft);
+  background-image: url("/media/hero/casestudies-hero.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .case-studies-hero-caption {
@@ -2774,9 +2778,10 @@ a.card:hover {
 }
 
 .home-figure__media--blog-hero {
-  background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-mint) 100%);
+  background-image: url("/media/hero/blog-hero.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .meta-row {
@@ -3121,27 +3126,15 @@ a.card:hover {
 }
 
 .home-figure__media--bg-solutions {
-  background-image: url("/media/focusbc-solutions.png");
+  background-image: url("/media/hero/homepage-hero-01-overview.jpeg");
 }
 
 .home-figure__media--bg-caap-city-operations {
-  background-image: url("/media/focusbc-caap-city-operations.png");
+  background-image: url("/media/hero/homepage-hero-02-city-operations.jpeg");
 }
 
 .home-figure__media--bg-sports-event {
-  background-image: url("/media/focusbc-sports-event.png");
-}
-
-.home-figure__media--bg-caap-map-territory {
-  background-image: url("/media/focusbc-caap-map-territory.png");
-}
-
-.home-figure__media--bg-caap-city-operational {
-  background-image: url("/media/focusbc-caap-city-operations.png");
-}
-
-.home-figure__media--bg-sports-venue {
-  background-image: url("/media/focusbc-sports-venue.png");
+  background-image: url("/media/hero/homepage-hero-03-sports-operations.jpeg");
 }
 
 .home-figure__cap {
@@ -3477,27 +3470,46 @@ a.card:hover {
 }
 
 .home-figure__media--google-visual-wide {
-  background-image: url("/media/focusbc-google-3d.jpeg");
+  background-image: url("/media/hero/google-hero-01-geospatial.jpeg");
 }
 
 .home-figure__media--google-visual-dash {
-  background-image: url("/media/focusbc-google-dashboard.jpg");
+  background-image: url("/media/hero/google-hero-02-cloud-dashboards.jpeg");
 }
 
 .home-figure__media--google-visual-map {
-  background-image: url("/media/focusbc-google-report.jpeg");
+  background-image: url("/media/hero/google-hero-03-field.jpeg");
 }
 
 .home-figure__media--careers-hero {
-  background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-mint) 100%);
+  background-image: url("/media/hero/careers-hero.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .home-figure__media--contact-hero {
-  background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-mint) 100%);
+  background-image: url("/media/hero/contact-hero.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+}
+
+/* Parallax targets: clip scaled images; JS adjusts background-position / transform */
+[data-parallax-bg] {
+  will-change: background-position;
+}
+
+.home-figure__media:has(img[data-parallax-img]) {
+  overflow: hidden;
+}
+
+.home-figure__media img[data-parallax-img] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
 }
 
 .contact-explore-grid a {

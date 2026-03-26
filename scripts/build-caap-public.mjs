@@ -1,6 +1,7 @@
 /**
  * Copy caap/ to public/caap/, promote flat *.html pages into folders with index.html, inject base URL for /caap/.
  */
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,7 +16,13 @@ function ensureDir(d) {
 }
 
 function copyCaap() {
-  fs.rmSync(DEST, { recursive: true, force: true });
+  if (fs.existsSync(DEST)) {
+    try {
+      fs.rmSync(DEST, { recursive: true, force: true });
+    } catch {
+      execFileSync("/bin/rm", ["-rf", DEST], { stdio: "inherit" });
+    }
+  }
   ensureDir(DEST);
   fs.cpSync(SRC, DEST, { recursive: true });
   for (const f of ["blog-post.template.html", "case-study.template.html"]) {

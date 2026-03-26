@@ -1,9 +1,10 @@
 /**
  * Convert PNG/JPEG to WebP and delete the source file after a successful write.
  *
- * Scopes:
- * - focusbc/media/{blog,case-studies,wix}
- * - caap/media (logos, wix, etc.)
+ * Scope: only WIX-imported assets used by blog/case-study content:
+ * - focusbc/media/wix
+ *
+ * Does not convert logos, heroes, marketing images, or CAAP assets.
  *
  * Run: npm run convert:blog-case-webp
  */
@@ -18,10 +19,10 @@ const ROOT = path.join(__dirname, "..");
 const RASTER = /\.(png|jpe?g)$/i;
 const MAX_WIDTH = 2400;
 
-/** e.g. .../focusbc/media/blog/x/1.png → blog/x/1.png */
+/** e.g. .../focusbc/media/wix/x.png → wix/x.png */
 function mediaRelativeKey(absPath) {
   const s = absPath.replace(/\\/g, "/");
-  const m = s.match(/\/(?:focusbc|caap)\/media\/(.+)$/);
+  const m = s.match(/\/focusbc\/media\/(.+)$/);
   return m ? m[1] : null;
 }
 
@@ -53,16 +54,10 @@ async function convertOne(absPath) {
 }
 
 async function main() {
-  const dirs = [
-    ...["blog", "case-studies", "wix"].map((s) => path.join(ROOT, "focusbc", "media", s)),
-    path.join(ROOT, "caap", "media"),
-  ];
-  const files = [];
-  for (const d of dirs) {
-    files.push(...walkRasterFiles(d));
-  }
+  const wixDir = path.join(ROOT, "focusbc", "media", "wix");
+  const files = walkRasterFiles(wixDir);
   if (!files.length) {
-    console.log("No PNG/JPEG left under focusbc/media/{blog,case-studies,wix} or caap/media.");
+    console.log("No PNG/JPEG left under focusbc/media/wix.");
     return;
   }
 
@@ -99,10 +94,6 @@ async function main() {
     ...fs.readdirSync(path.join(ROOT, "focusbc", "case-studies-built"))
       .filter((n) => n.endsWith(".html"))
       .map((n) => path.join(ROOT, "focusbc", "case-studies-built", n)),
-    ...fs.readdirSync(path.join(ROOT, "caap", "data"))
-      .filter((n) => n.endsWith(".json"))
-      .map((n) => path.join(ROOT, "caap", "data", n)),
-    ...walkCaapHtmlCss(),
   ];
 
   let patched = 0;
@@ -120,21 +111,6 @@ async function main() {
   }
 
   console.log(`OK: ${replacements.length} images → WebP (sources deleted), ${patched} text files updated.`);
-}
-
-function walkCaapHtmlCss() {
-  const out = [];
-  const caap = path.join(ROOT, "caap");
-  function walk(dir) {
-    if (!fs.existsSync(dir)) return;
-    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-      const p = path.join(dir, ent.name);
-      if (ent.isDirectory()) walk(p);
-      else if (ent.name.endsWith(".html") || ent.name === "styles.css") out.push(p);
-    }
-  }
-  walk(caap);
-  return out;
 }
 
 main().catch((e) => {

@@ -363,6 +363,10 @@ const blogListSrc = path.join(SOURCES, "js", "blog-list.js");
 if (fs.existsSync(blogListSrc)) {
   copyFile(blogListSrc, path.join(ROOT, "js", "blog-list.js"));
 }
+const parallaxSrc = path.join(SOURCES, "js", "parallax.js");
+if (fs.existsSync(parallaxSrc)) {
+  copyFile(parallaxSrc, path.join(ROOT, "js", "parallax.js"));
+}
 ["logos", "blog", "case-studies", "about", "google", "careers", "contact"].forEach((sub) =>
   ensureDir(path.join(ROOT, "media", sub))
 );
@@ -382,16 +386,10 @@ const copies = [
   ["mapify-logo.png", "logos/mapify.png"],
   ["logos/google-partner-logo.png", "logos/google-partner-logo.png"],
   ["focusbc-team.avif", "about/focus-bc-team.avif"],
-  ["focsubc-google-dashboard.jpg", "google/google-partner-dashboard.jpg"],
-  ["focusbc-google-3d.jpeg", "google/google-cloud-partner-3d.jpeg"],
-  ["focusbc-google-report.jpeg", "google/google-analytics-report.jpeg"],
   /* Home page (sources/index.html) uses WebP at media root; must be copied explicitly. */
   ["focusbc-logo.webp", "focusbc-logo.webp"],
   ["caap-logo.webp", "caap-logo.webp"],
   ["virtualvenue_logo.webp", "virtualvenue_logo.webp"],
-  ["focusbc-caap-map-territory.webp", "focusbc-caap-map-territory.webp"],
-  ["focusbc-caap-city-operations.webp", "focusbc-caap-city-operations.webp"],
-  ["focusbc-sports-venue.webp", "focusbc-sports-venue.webp"],
 ];
 for (const [src, dest] of copies) {
   const fp = path.join(MEDIA_SRC, src);
@@ -417,6 +415,9 @@ copyTree(path.join(MEDIA_SRC, "case-studies"), path.join(ROOT, "media", "case-st
 copyTree(path.join(MEDIA_SRC, "blog"), path.join(ROOT, "media", "blog"));
 if (fs.existsSync(path.join(MEDIA_SRC, "wix"))) {
   copyTree(path.join(MEDIA_SRC, "wix"), path.join(ROOT, "media", "wix"));
+}
+if (fs.existsSync(path.join(MEDIA_SRC, "hero"))) {
+  copyTree(path.join(MEDIA_SRC, "hero"), path.join(ROOT, "media", "hero"));
 }
 const CASE_BUILT_DIR = path.join(__dirname, "case-studies-built");
 if (fs.existsSync(CASE_BUILT_DIR)) {

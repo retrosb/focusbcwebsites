@@ -27,8 +27,7 @@
     <meta name="twitter:image" content="https://www.focus-bc.com/media/og-case-studies.jpg" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="js/case-studies-list.js" defer></script>
-    <script src="/js/parallax.js" defer></script>
+    <script src="/js/case-studies-list.js" defer></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -84,7 +83,7 @@
               </p>
             </div>
             <figure class="case-studies-hero-figure">
-              <div class="case-studies-hero-visual" data-parallax-bg aria-hidden="true"></div>
+              <div class="case-studies-hero-visual" aria-hidden="true"></div>
               <figcaption class="case-studies-hero-caption">
                 Focus BC proof across cities, operations, and sports environments
               </figcaption>
@@ -93,8 +92,12 @@
         </div>
       </section>
 
-      <section class="blog-filter-bar" aria-label="Filter case studies">
-        <div class="container blog-filter-bar__inner" id="case-studies-filter-mount"></div>
+      <section class="blog-filter-bar case-studies-filter-bar" aria-label="Case study categories">
+        <div class="container blog-filter-bar__inner">
+          <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all">All</button>
+          <button type="button" class="blog-filter-btn" data-filter="smart-cities">Smart Cities</button>
+          <button type="button" class="blog-filter-btn" data-filter="sports-events">Sports Events</button>
+        </div>
       </section>
 
       <section class="section section--tight case-studies-featured-wrap" aria-label="Featured case studies">

@@ -785,6 +785,25 @@ function handler(req, res) {
     return;
   }
 
+  /* Root /js/… → Focus BC built scripts (e.g. blog-list.js; pairs with /styles/…). */
+  if (pathname.startsWith("/js/")) {
+    const rel = pathname.slice("/js/".length);
+    if (!rel || rel.includes("..")) {
+      res.writeHead(400);
+      res.end("Bad Request");
+      return;
+    }
+    const jsRoot = path.join(FOCUSBC_OUTPUT, "js");
+    const f = path.join(jsRoot, rel);
+    if (fs.existsSync(f) && underRoot(jsRoot, f) && fs.statSync(f).isFile()) {
+      sendFile(res, f, {});
+      return;
+    }
+    res.writeHead(404);
+    res.end("Not Found");
+    return;
+  }
+
   /* Bucket-style /styles/… (Focus BC static build uses root-absolute CSS paths). */
   if (pathname.startsWith("/styles/")) {
     const rel = pathname.slice("/styles/".length);

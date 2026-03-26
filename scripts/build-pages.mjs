@@ -32,21 +32,131 @@ const hub = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sites</title>
+  <title>Nothing to see</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 3rem auto; padding: 0 1rem; }
-    h1 { font-size: 1.5rem; font-weight: 600; }
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
-    a.btn { display: inline-block; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 500; }
-    a.focusbc { background: #0f172a; color: #fff; }
-    a.caap { background: #0369a1; color: #fff; }
+    @keyframes enter-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.88) translateY(18px) rotate(-2deg);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.04) translateY(0) rotate(1deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
+      }
+    }
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(-4px, -5px) rotate(-0.6deg);
+      }
+      50% {
+        transform: translate(5px, 3px) rotate(0.5deg);
+      }
+      75% {
+        transform: translate(-3px, 4px) rotate(-0.3deg);
+      }
+    }
+    @keyframes sky-shift {
+      0% {
+        background-position: 0% 40%;
+      }
+      50% {
+        background-position: 100% 60%;
+      }
+      100% {
+        background-position: 0% 40%;
+      }
+    }
+    @keyframes wink {
+      0%,
+      88%,
+      100% {
+        transform: scaleY(1);
+      }
+      90%,
+      94% {
+        transform: scaleY(0.12);
+      }
+      92% {
+        transform: scaleY(1);
+      }
+    }
+    @keyframes dots {
+      0%,
+      100% {
+        opacity: 0.35;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(125deg, #f8fafc, #e0e7ff 35%, #fce7f3 65%, #e2e8f0);
+      background-size: 280% 280%;
+      animation: sky-shift 14s ease-in-out infinite;
+      color: #475569;
+    }
+    .stage {
+      padding: 2rem;
+      animation: enter-pop 0.85s cubic-bezier(0.34, 1.45, 0.64, 1) both;
+    }
+    .msg {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.65;
+      text-align: center;
+      max-width: 22rem;
+      animation: drift 4.5s ease-in-out infinite;
+    }
+    .msg .dots span {
+      display: inline-block;
+      animation: dots 1.2s ease-in-out infinite;
+    }
+    .msg .dots span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .msg .dots span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .wink {
+      display: inline-block;
+      animation: wink 3.5s ease-in-out infinite;
+      transform-origin: 50% 60%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body,
+      .stage,
+      .msg,
+      .wink,
+      .msg .dots span {
+        animation: none !important;
+      }
+      .stage {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Choose a site</h1>
-  <div class="actions">
-    <a class="btn focusbc" href="/focusbc/">Focus BC</a>
-    <a class="btn caap" href="/caap/">City as a Platform</a>
+  <div class="stage">
+    <p class="msg">
+      Well<span class="dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span> there is nothing to see here
+      <span class="wink" aria-hidden="true">;)</span>
+    </p>
   </div>
 </body>
 </html>

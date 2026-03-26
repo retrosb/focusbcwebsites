@@ -161,6 +161,35 @@ function publishedTimeMs(p) {
   return Number.isFinite(t) ? t : null;
 }
 
+/** Map case study to index filter bucket (matches case-studies.html filter buttons). */
+function deriveCaseStudyFilterKey(cs) {
+  const cats = (cs.categories || []).map((x) => String(x).replace(/&amp;/g, "&").toLowerCase());
+  const slug = String(cs.slug || "").toLowerCase();
+  const title = String(cs.title || "").toLowerCase();
+  const desc = String(cs.description || "").toLowerCase();
+  const blob = `${slug} ${title} ${desc} ${cats.join(" ")}`;
+
+  if (
+    cats.some((c) =>
+      /sports?\s*&\s*events?|global sports|venue operations|virtual venue|stadium|olympic|fifa/i.test(c)
+    ) ||
+    /\b(sports?|venues?|stadiums?|olympics?|fifa|wsa)\b|virtual-venue|sports-event|world championship|virtual venue|basketball|arena/i.test(
+      blob
+    )
+  ) {
+    return "sports-events";
+  }
+  if (
+    cats.some((c) => c.includes("smart cities") || c.includes("smart city")) ||
+    /smart city|municipal|lisbon|famalic|lagos|gira|emel|urban planning|flood|geoestrela|infralobo|resort management|waze|traffic closure|hydrogeolog|territorial|b-smart/i.test(
+      blob
+    )
+  ) {
+    return "smart-cities";
+  }
+  return "other";
+}
+
 /** Featured strip + full archive grid from import manifest */
 function caseStudyIndexBlocks(items) {
   if (!items.length) {
@@ -172,7 +201,7 @@ function caseStudyIndexBlocks(items) {
   const [a, b, ...restAll] = items;
   const stack = [b, ...restAll].filter(Boolean).slice(0, 2);
   const featuredInner = `<div class="grid-blog-featured case-studies-featured-grid">
-            <article class="blog-card--featured">
+            <article class="blog-card--featured" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(a))}">
               <div class="media-16-9 media-thumb-cover"><img src="${escAttr(a.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
               <div class="p-8 sm-p-10">
                 <p class="eyebrow">${escAttr(categoryLabel(a))}</p>
@@ -184,7 +213,7 @@ function caseStudyIndexBlocks(items) {
             <div class="case-studies-featured-stack">
               ${stack
                 .map(
-                  (cs) => `<article class="case-study-card-compact">
+                  (cs) => `<article class="case-study-card-compact" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(cs))}">
                 <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
                 <h3 class="mt-3 h3"><a href="${escAttr(caseStudyHref(cs.slug))}">${escAttr(cs.title)}</a></h3>
                 <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(cs.description, 140))}</p>
@@ -197,7 +226,7 @@ function caseStudyIndexBlocks(items) {
   const featured = `<div id="case-studies-featured-mount" class="case-studies-list-mount">${featuredInner}</div>`;
   const archiveCards = items
     .map(
-      (cs) => `<article class="blog-card--archive card card--flush">
+      (cs) => `<article class="blog-card--archive card card--flush" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(cs))}">
             <div class="media-16-10 media-thumb-cover"><img src="${escAttr(cs.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
             <div class="p-6">
               <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
@@ -363,9 +392,9 @@ const blogListSrc = path.join(SOURCES, "js", "blog-list.js");
 if (fs.existsSync(blogListSrc)) {
   copyFile(blogListSrc, path.join(ROOT, "js", "blog-list.js"));
 }
-const parallaxSrc = path.join(SOURCES, "js", "parallax.js");
-if (fs.existsSync(parallaxSrc)) {
-  copyFile(parallaxSrc, path.join(ROOT, "js", "parallax.js"));
+const caseStudiesListSrc = path.join(SOURCES, "js", "case-studies-list.js");
+if (fs.existsSync(caseStudiesListSrc)) {
+  copyFile(caseStudiesListSrc, path.join(ROOT, "js", "case-studies-list.js"));
 }
 ["logos", "blog", "case-studies", "about", "google", "careers", "contact"].forEach((sub) =>
   ensureDir(path.join(ROOT, "media", sub))
@@ -374,7 +403,8 @@ if (fs.existsSync(parallaxSrc)) {
 {
   let css = fs.readFileSync(path.join(SOURCES, "styles.css"), "utf8");
   if (BASE) {
-    css = css.replace(/url\(\s*\/media\//g, `url(${BASE}/media/`);
+    /* Quoted urls: url("/media/...") — old pattern only matched unquoted url(/media/... */
+    css = css.replace(/url\(\s*(["']?)(\/media\/)/g, (_, quote, mediaPath) => `url(${quote}${BASE}${mediaPath}`);
   }
   fs.writeFileSync(path.join(ROOT, "styles", "styles.css"), css);
 }

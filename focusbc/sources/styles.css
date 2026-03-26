@@ -3137,6 +3137,18 @@ a.card:hover {
   background-image: url("/media/hero/homepage-hero-03-sports-operations.jpeg");
 }
 
+.home-figure__media--product-territory {
+  background-image: url("/media/hero/homepage-hero-04-territory.jpeg");
+}
+
+.home-figure__media--product-dashboard {
+  background-image: url("/media/hero/homepage-hero-05-operational-dashboard.jpeg");
+}
+
+.home-figure__media--product-venue {
+  background-image: url("/media/hero/homepage-hero-06-venue-reporting.jpeg");
+}
+
 .home-figure__cap {
   margin: 0;
   padding: 0.75rem 1rem;
@@ -3493,23 +3505,6 @@ a.card:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-}
-
-/* Parallax targets: clip scaled images; JS adjusts background-position / transform */
-[data-parallax-bg] {
-  will-change: background-position;
-}
-
-.home-figure__media:has(img[data-parallax-img]) {
-  overflow: hidden;
-}
-
-.home-figure__media img[data-parallax-img] {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
 }
 
 .contact-explore-grid a {

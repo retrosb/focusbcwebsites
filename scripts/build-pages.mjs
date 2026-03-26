@@ -64,3 +64,27 @@ fs.writeFileSync(
 );
 
 console.log("OK: public/index.html (hub), public/_redirects.");
+
+/* Cloudflare Pages: https://developers.cloudflare.com/pages/platform/limits/ — 25 MiB per file */
+const CF_PAGES_MAX_BYTES = 25 * 1024 * 1024;
+function walkFiles(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkFiles(p, out);
+    else out.push(p);
+  }
+  return out;
+}
+const oversized = [];
+for (const f of walkFiles(PUBLIC)) {
+  const { size } = fs.statSync(f);
+  if (size > CF_PAGES_MAX_BYTES) oversized.push({ f, size });
+}
+if (oversized.length) {
+  console.error("Build output exceeds Cloudflare Pages per-file limit (25 MiB):");
+  for (const { f, size } of oversized) {
+    console.error(`  ${(size / 1024 / 1024).toFixed(2)} MiB  ${path.relative(ROOT, f)}`);
+  }
+  process.exit(1);
+}

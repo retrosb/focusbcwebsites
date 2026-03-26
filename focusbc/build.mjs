@@ -341,6 +341,11 @@ function transformHtml(html) {
   return s;
 }
 
+/* Full replace of output tree so removed/renamed assets (e.g. PNG→WebP) never linger in public/.
+   Stale files can break hosts with per-file size limits (e.g. Cloudflare Pages 25 MiB). */
+if (fs.existsSync(ROOT)) {
+  fs.rmSync(ROOT, { recursive: true, force: true });
+}
 ensureDir(ROOT);
 ensureDir(path.join(ROOT, "styles"));
 ensureDir(path.join(ROOT, "js"));
@@ -388,6 +393,9 @@ for (const [src, dest] of blogMap) {
 
 copyTree(path.join(MEDIA_SRC, "case-studies"), path.join(ROOT, "media", "case-studies"));
 copyTree(path.join(MEDIA_SRC, "blog"), path.join(ROOT, "media", "blog"));
+if (fs.existsSync(path.join(MEDIA_SRC, "wix"))) {
+  copyTree(path.join(MEDIA_SRC, "wix"), path.join(ROOT, "media", "wix"));
+}
 const CASE_BUILT_DIR = path.join(__dirname, "case-studies-built");
 if (fs.existsSync(CASE_BUILT_DIR)) {
   ensureDir(path.join(ROOT, "case-studies"));

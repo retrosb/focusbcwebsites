@@ -17,9 +17,11 @@
     "build:focusbc": "node focusbc/build.mjs",
     "build:caap-public": "node scripts/build-caap-public.mjs",
     "import:focusbc-case-studies": "node focusbc/scripts/import-case-studies-from-wix.mjs",
-    "import:focusbc-blog": "node focusbc/scripts/import-blog-from-wix.mjs"
+    "import:focusbc-blog": "node focusbc/scripts/import-blog-from-wix.mjs",
+    "convert:blog-case-webp": "node scripts/convert-focusbc-blog-case-media-to-webp.mjs"
   },
   "devDependencies": {
-    "chokidar": "^3.6.0"
+    "chokidar": "^3.6.0",
+    "sharp": "^0.33.5"
   }
 }

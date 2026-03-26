@@ -327,9 +327,9 @@ function transformHtml(html) {
     const slug = rest.replace(/\.html$/, "");
     return `href="/blog/${slug}/"`;
   });
-  s = s.replace(/media\/wix\/69b615_471e7059a3d34592abc924df6b97aba6~mv2\.png/g, "media/blog/smart-city-famalicao-case-study.png");
-  s = s.replace(/media\/wix\/69b615_205cad9909d04cefa41fb19b401fe3f0~mv2\.png/g, "media/blog/lisbon-floods-data-catalogue.png");
-  s = s.replace(/media\/wix\/69b615_9f54c7044e9c4cb0a44eb12f7000d07b~mv2\.jpg/g, "media/blog/sports-events-venue-operations.jpg");
+  s = s.replace(/media\/wix\/69b615_471e7059a3d34592abc924df6b97aba6~mv2\.webp/g, "media/blog/smart-city-famalicao-case-study.webp");
+  s = s.replace(/media\/wix\/69b615_205cad9909d04cefa41fb19b401fe3f0~mv2\.webp/g, "media/blog/lisbon-floods-data-catalogue.webp");
+  s = s.replace(/media\/wix\/69b615_9f54c7044e9c4cb0a44eb12f7000d07b~mv2\.webp/g, "media/blog/sports-events-venue-operations.webp");
   if (!s.includes('name="googlebot"')) {
     s = s.replace(
       /<meta name="robots" content="noindex, nofollow" \/>/i,
@@ -377,9 +377,9 @@ for (const [src, dest] of copies) {
 }
 
 const blogMap = [
-  ["wix/69b615_471e7059a3d34592abc924df6b97aba6~mv2.png", "blog/smart-city-famalicao-case-study.png"],
-  ["wix/69b615_205cad9909d04cefa41fb19b401fe3f0~mv2.png", "blog/lisbon-floods-data-catalogue.png"],
-  ["wix/69b615_9f54c7044e9c4cb0a44eb12f7000d07b~mv2.jpg", "blog/sports-events-venue-operations.jpg"],
+  ["wix/69b615_471e7059a3d34592abc924df6b97aba6~mv2.webp", "blog/smart-city-famalicao-case-study.webp"],
+  ["wix/69b615_205cad9909d04cefa41fb19b401fe3f0~mv2.webp", "blog/lisbon-floods-data-catalogue.webp"],
+  ["wix/69b615_9f54c7044e9c4cb0a44eb12f7000d07b~mv2.webp", "blog/sports-events-venue-operations.webp"],
 ];
 for (const [src, dest] of blogMap) {
   const fp = path.join(MEDIA_SRC, src);

@@ -1,0 +1,4 @@
+# Cloudflare Pages: build command `npm run build`, output directory `public`
+name = "websites"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "public"

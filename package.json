@@ -1,0 +1,24 @@
+{
+  "name": "websites-local-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-pages.mjs",
+    "dev": "node scripts/watch-pages.mjs",
+    "start": "node server.mjs",
+    "serve": "node server.mjs",
+    "build:blog": "node focusbc/scripts/build-blog-posts-json.mjs",
+    "build:case-studies": "node focusbc/scripts/build-case-studies-json.mjs",
+    "build:data": "node focusbc/scripts/build-blog-posts-json.mjs && node focusbc/scripts/build-case-studies-json.mjs",
+    "build:caap-data": "node caap/scripts/build-caap-content.mjs",
+    "build:focusbc": "node focusbc/build.mjs",
+    "build:focusbc-output": "node focusbc/build.mjs",
+    "build:caap-public": "node scripts/build-caap-public.mjs",
+    "import:focusbc-case-studies": "node focusbc/scripts/import-case-studies-from-wix.mjs",
+    "import:focusbc-blog": "node focusbc/scripts/import-blog-from-wix.mjs",
+    "gcs:website": "bash focusbc/scripts/gcs-enable-website.sh"
+  },
+  "devDependencies": {
+    "chokidar": "^3.6.0"
+  }
+}

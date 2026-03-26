@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Focus BC</title>
+    <meta
+      name="description"
+      content="Read selected insights from Focus BC on product development, city operations, geospatial workflows, and global sports events."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.focus-bc.com/blog" />
+    <meta property="og:title" content="Blog | Focus BC" />
+    <meta
+      property="og:description"
+      content="Read selected insights from Focus BC on product development, city operations, geospatial workflows, and global sports events."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.focus-bc.com/blog" />
+    <meta property="og:image" content="https://www.focus-bc.com/media/og-blog.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Blog | Focus BC" />
+    <meta
+      name="twitter:description"
+      content="Read selected insights from Focus BC on product development, city operations, geospatial workflows, and global sports events."
+    />
+    <meta name="twitter:image" content="https://www.focus-bc.com/media/og-blog.jpg" />
+    <link rel="icon" href="media/favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="/js/blog-list.js" defer></script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="./" class="site-logo"
+          ><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40"
+        /></a>
+        <details class="site-nav-mobile">
+          <summary class="site-nav-mobile__toggle">Menu</summary>
+          <nav class="site-nav-mobile__panel" aria-label="Primary navigation">
+            <a href="about">About</a>
+            <a href="google">Google</a>
+            <a href="casestudies">Case studies</a>
+            <a href="blog" aria-current="page">Blog</a>
+            <a href="careers">Careers</a>
+            <a href="contact">Contact</a>
+          </nav>
+        </details>
+        <nav class="site-nav-desktop" aria-label="Primary navigation">
+          <a href="about">About</a>
+          <a href="google">Google</a>
+          <a href="casestudies">Case studies</a>
+          <a href="blog" class="is-active" aria-current="page">Blog</a>
+          <a href="careers">Careers</a>
+          <a href="contact">Contact</a>
+        </nav>
+        <a href="contact" class="btn btn--primary btn--sm btn--header">Talk to us</a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="home-hero home-hero--white" aria-labelledby="page-title">
+        <div class="home-hero__ambient" aria-hidden="true">
+          <div class="home-hero__orb home-hero__orb--1"></div>
+          <div class="home-hero__orb home-hero__orb--2"></div>
+          <div class="home-hero__orb home-hero__orb--3"></div>
+        </div>
+        <div class="container home-hero__grid">
+          <div>
+            <p class="pill pill--hero-light">Focus BC Blog</p>
+            <h1 id="page-title" class="mt-5">Selected insights on products, operations, cities, and sports events</h1>
+            <p class="home-hero__lede mt-5 max-w-2xl">
+              We share how we think about product development, operational platforms, geospatial workflows, and the environments where our software is used.
+            </p>
+            <p class="home-hero__lede home-hero__lede--tight max-w-2xl">
+              The blog is designed to support useful conversations around platforms, operations, and practical implementation, not just publish content for the sake of it.
+            </p>
+          </div>
+          <div class="home-hero-visual home-hero-visual--single">
+            <figure class="home-figure home-figure--hero-main home-figure--on-white">
+              <div
+                class="home-figure__media home-figure__media--cover home-figure__media--blog-hero"
+                aria-hidden="true"
+              ></div>
+              <figcaption class="home-figure__cap">
+                Product thinking, operational platforms, and Focus BC insights
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-filter-bar" aria-label="Article topics">
+        <div class="container blog-filter-bar__inner">
+          <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all">All</button>
+          <button type="button" class="blog-filter-btn" data-filter="company">Product &amp; Company</button>
+          <button type="button" class="blog-filter-btn" data-filter="smart-cities">Smart Cities</button>
+          <button type="button" class="blog-filter-btn" data-filter="geospatial">Geospatial &amp; Data</button>
+          <button type="button" class="blog-filter-btn" data-filter="sports-events">Sports &amp; Events</button>
+          <button type="button" class="blog-filter-btn" data-filter="partnerships">Partnerships</button>
+        </div>
+      </section>
+
+      <section class="section section--tight container" aria-label="Featured articles">
+        <p class="sr-only">Featured and highlighted articles load from published entries in data/blog-posts.json.</p>
+        <div id="blog-featured-mount" class="blog-list-mount" data-blog-list="featured">
+          <p class="text-muted text-sm-tight">Loading articles…</p>
+        </div>
+      </section>
+
+      <section class="section section--xl bg-white" aria-labelledby="latest-heading">
+        <div class="container">
+          <div class="home-section-head">
+            <div class="max-w-3xl min-w-0">
+              <p class="eyebrow">Latest articles</p>
+              <h2 id="latest-heading" class="mt-3">Selected content from across the Focus BC ecosystem</h2>
+              <p class="lead lead--relaxed mt-4">
+                The blog is designed to strengthen authority, support product positioning, and connect readers to the right next step.
+              </p>
+            </div>
+          </div>
+          <div id="blog-archive-grid" class="grid grid-3 gap-lg mt-10 blog-list-mount" data-blog-list="archive"></div>
+        </div>
+      </section>
+
+      <section class="section section--xl home-section--mist">
+        <div class="container home-trust-panel">
+          <div>
+            <p class="eyebrow">Editorial approach</p>
+            <h2 class="mt-3">Content that supports products, operations, and useful conversations</h2>
+          </div>
+          <div>
+            <p class="lead lead--relaxed">
+              The Focus BC blog is designed to explain how we think about products, operations, implementation, and the environments where our software is used.
+            </p>
+            <p class="lead lead--relaxed mt-6">
+              The goal is to publish selected content that strengthens authority, supports product positioning, and creates useful context for clients, partners, and future team members.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-cta-shell" aria-labelledby="blog-cta-heading">
+        <div class="home-cta-final">
+          <div class="max-w-2xl">
+            <p class="eyebrow">Next step</p>
+            <h2 id="blog-cta-heading" class="mt-3">Want to explore the products behind these ideas?</h2>
+            <p class="lead-lg mt-4">
+              If you want to understand how Focus BC products work in practice, the best next step is to explore the portfolio or start a conversation with our team.
+            </p>
+          </div>
+          <div class="home-cta-final__actions">
+            <a href="contact" class="btn btn--white btn--lg">Contact us</a>
+            <a href="casestudies" class="btn btn--ghost-light btn--lg">View case studies</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__strap">
+        <div class="container site-footer__strap-inner">
+          <div>
+            <p class="site-footer__strap-tagline">
+              Operational platforms for cities and global sports events.<br />
+              Built as products. Delivered for operations.
+            </p>
+            <p class="site-footer__strap-note">Focus BC · Google Premier Partner · Lisbon</p>
+          </div>
+          <a href="contact" class="btn btn--white btn--sm shrink-0">Talk to us</a>
+        </div>
+      </div>
+      <div class="site-footer__body">
+        <div class="container site-footer__grid">
+          <div>
+            <a href="./"><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40" /></a>
+            <p class="footer-tagline">
+              Operational platforms for cities and global sports events.<br />
+              Built as products. Delivered for operations.
+            </p>
+          </div>
+          <div>
+            <h3>Company</h3>
+            <ul>
+              <li><a href="about">About</a></li>
+              <li><a href="casestudies">Case studies</a></li>
+              <li><a href="blog">Blog</a></li>
+              <li><a href="careers">Careers</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Offers</h3>
+            <ul>
+              <li><a href="https://www.virtualvenue-events.com/" target="_blank" rel="noopener noreferrer">Virtual Venue</a></li>
+              <li><a href="https://www.city-platform.com/" target="_blank" rel="noopener noreferrer">City as a Platform</a></li>
+              <li><a href="google">Google partnership</a></li>
+            </ul>
+            <p class="footer-note">
+              Mapify powers geospatial and integration capability <strong>inside</strong> City as a Platform.
+              <a href="https://www.mapify.ai/" rel="noopener noreferrer">Mapify</a>
+            </p>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <ul>
+              <li><a href="contact">Get in touch</a></li>
+              <li><a href="mailto:info@focus-bc.com">info@focus-bc.com</a></li>
+              <li><a href="https://www.linkedin.com" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

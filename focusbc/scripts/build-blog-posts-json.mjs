@@ -1,0 +1,232 @@
+/**
+ * One-time / maintenance: regenerates focusbc/data/blog-posts.json from rows below
+ * (exported from Wix sitemap). Run: node focusbc/scripts/build-blog-posts-json.mjs
+ *
+ * Each post includes governance fields:
+ * - publish: listed on /blog when true
+ * - index: intended for search indexing when true (use robots meta when generating post HTML)
+ * - pillar: smart-cities | sports-events | company
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const out = path.join(__dirname, "../data/blog-posts.json");
+
+/** Slugs that live under /casestudies/ (see build-case-studies-json.mjs), not the blog. */
+const CASE_STUDY_SLUGS = new Set([
+  "b-smart-famalicao-case-study-smart-city-management-solution",
+  "lisbon-case-study-floods-data-catalogue",
+  "urban-planning-and-management-platform",
+  "renault-smart-factory",
+  "gira-emel-bike-realtime",
+  "choicecar-routing-optimization",
+  "lisbon-traffic-closures-solution",
+  "infralobo-smart-resort",
+  "delta-cafes-salesforce-optimization",
+  "chronopost-pickup-optimization",
+  "geoestrela-incident-management",
+]);
+
+/** [slug, lastmod, imageUrl or "", imageAlt] — alt may be empty */
+const ROWS = [
+  ["lisbon-traffic-closures-solution", "2026-03-24", "media/wix/d0f2e4_25ec4a7d402244fcac680eb785031a77~mv2_d_4608_3072_s_4_2.jpg", "Lisbon City Hall logo overlaid on Praça do Comércio in Lisbon, with people walking across the square under a bright blue sky."],
+  ["virtual-venue-renews-partnership-with-world-football-summit", "2025-09-03", "media/wix/eb9055_36045b4756bd4bf2bc9955f452c3e5d5~mv2.avif", ""],
+  ["alumni-stories-joao-franco", "2025-12-02", "media/wix/eb9055_e5ab5f73a5a046589d3cad0c9647bcb9~mv2.png", "Man wearing a black jacket and knit hat standing by a wooden railing in front of a powerful waterfall. Snow and ice surround the rushing water, and a dense forest of evergreen trees covers the hillside in the background under an overcast sky."],
+  ["location-intelligence-myths-slowing-down-your-business", "2026-03-24", "media/wix/69b615_f47bbc57cdc5412f8e293cac22c4f60b~mv2.jpg", "Two business professionals standing on a balcony at night reviewing a laptop, with city lights blurred in the background; one holds a takeaway coffee cup while discussing the screen."],
+  ["alumni-stories-rita-martins", "2026-03-23", "media/wix/eb9055_0858bda12c914260b4e6e1c10acd424b~mv2.jpeg", "Rita standing on a stone bridge by a calm river, smiling at the camera. She is wearing a denim jacket over a black top and white trousers, with a light-colored shoulder bag. In the background, there are hillside forests and a row of buildings along the riverbank under a blue sky with light clouds."],
+  ["lisbon-case-study-floods-data-catalogue", "2026-03-24", "media/wix/69b615_205cad9909d04cefa41fb19b401fe3f0~mv2.png", "Aerial view of Lisbon’s Praça do Comércio and the Tagus River with the Lisboa Câmara Municipal logo centered over the image."],
+  ["focus-bc-announces-partnership-with-junitec-the-junior-enterprise-of-técnico", "2025-08-07", "media/wix/69b615_c0a464ea81e848439e49e0c8e305d447~mv2.jpg", "Photo taken to celebrate the partnership between Junitec and Focus BC."],
+  ["focus-bc-partners-with-data-colab-to-accelerate-the-digital-transformation-of-organizations", "2026-03-23", "media/wix/69b615_bb31dd83eefc4214802310b9573d55c1~mv2.png", "Graphic announcement slide with the logos of Data Colab and Centro de Inteligência Territorial on the left, the text “We’re happy to announce a new partnership!” on the right, and the Focus BC logo centered at the bottom on a light green background."],
+  ["gira-emel-bike-realtime", "2026-03-24", "media/wix/d0f2e4_5e3845e9c4b2423e99fb67fa3751f1cc~mv2_d_1806_1203_s_2.jpg", "City street scene featuring a parked bicycle and a pedestrian walking on a cobblestone sidewalk."],
+  ["mapify-web-summit-2018", "2026-03-24", "media/wix/a2d517_434e3e01b58940be96e56903755db410~mv2_d_2560_1920_s_2.jpg", "Web Summit main stage with large illuminated “web summit” signage in red and green lights, speakers on stage and audience silhouettes in the foreground."],
+  ["4-and-a-half-day-workweek-at-focus-bc", "2026-03-25", "media/wix/69b615_51e88de35c784ad682622b379711e6a7~mv2.png", "Relaxed lounge area with colorful bean bag chairs arranged in a circle, facing a wall-mounted TV in a bright room with large windows."],
+  ["alumni-stories-guilherme-bernardo", "2026-02-25", "media/wix/eb9055_7448cca3e48a42619b77991a16d61fd2~mv2.webp", "Guilherme smiling in a large city square, wearing a bright red puffer jacket over a beige turtleneck. The background shows historic European buildings and people walking around."],
+  ["a-hybrid-way-of-working-at-focus-bc", "2026-03-24", "media/wix/69b615_b136d55916dd476a87265a2a38dde41c~mv2.jpeg", "Focus BC team seated in a bright office lounge, attentively watching a presentation during an informal team meeting."],
+  ["focus-bc-at-google-cloud-day-lisbon-25", "2026-03-23", "media/wix/eb9055_e32c99818c394c5483509e745b43a8ef~mv2.png", "Promotional banner for Google Cloud Day Lisbon featuring the Google Cloud logo and the headline “Discover the new way to cloud.” The date 26.6.25 is displayed prominently. A blue button reads “Registe-se agora,” and the Focus BC logo appears at the bottom. The design includes colorful geometric shapes in green, blue, yellow, and red on a light background."],
+  ["focusbc-7th-anniversary", "2026-03-24", "media/wix/d0f2e4_3f1041bd50c44d2496d47c3b4f3c5c8f~mv2_d_2064_1548_s_2.jpg", "Team gathered around a table celebrating with a birthday cake featuring the Focus BC logo, as a colleague blows out a candle while others clap and smile."],
+  ["focus-bc-at-portugal-smart-cities-summit-2022", "2026-03-24", "media/wix/69b615_51ac3e0ad6884b1c9bc06b2da0f04fcc~mv2.png", "Focus BC team standing together at an exhibition booth promoting the City as a Platform urban intelligence solution, with Google Maps and Google Cloud logos displayed."],
+  ["focus-bc-brings-mapify-to-junitec", "2025-08-07", "media/wix/eb9055_2e858f90c80f4d6f8cba81aa06ee4b9c~mv2.jpg", "Mario Sobral delivers a live demonstration to Junitec members during a Mapify workshop, pointing at a digital map interface displayed on a large screen. Participants are seated on colorful beanbags and stools, attentively following the session in a bright, modern room filled with natural light and greenery."],
+  ["focus-bc-receives-pme-excelência-2021-award", "2026-03-24", "media/wix/69b615_633c679f0d2346589228cb5fc4969c3e~mv2.png", "Yellow banner displaying “Excelência’21 PME” with logos of IAPMEI, Turismo de Portugal, and the Portuguese Republic, celebrating business excellence."],
+  ["urban-planning-and-management-platform", "2026-03-25", "media/wix/d0f2e4_cb49acb79a7b403ea61a4aa4e0241de8~mv2.jpg", "Turquoise water between rocky sea cliffs in Lagos, Portugal."],
+  ["14-years-of-focus-bc", "2026-02-25", "media/wix/eb9055_af2c9c31002c4359b836459560a940fe~mv2.png", "A white table with a “Focus BC – Celebrating 14 Years” cake, photo cupcakes, two bottles of sparkling wine, stacked paper cups, and team members standing behind it."],
+  ["being-a-junior-developer-at-focus-bc", "2026-03-24", "media/wix/69b615_dfd12a6ac6234264b560b2ec87b49a84~mv2.png", "Two young professionals smiling and making peace signs while working on laptops at a desk in a bright office."],
+  ["chronopost-pickup-optimization", "2026-03-24", "media/wix/d0f2e4_6fc0a8d1ecba44d988d01d3298a3b009~mv2_d_3000_1698_s_2.jpg", "Chronopost logo centered over a warehouse interior with tall storage racks filled with boxes and pallets labeled by rack numbers."],
+  ["kick-off-event-2022", "2026-03-25", "media/wix/69b615_8f139d614e404d22a1e5e5240f49f0a1~mv2.png", "Focus BC team group photo outdoors on a lawn, with members standing and crouching together in matching dark jackets."],
+  ["inside-mariana-coelho-internship", "2026-03-20", "media/wix/eb9055_e86b16e84bf045e69f657986d38740d2~mv2.webp", "Mariana with long brown hair and glasses sitting on a black cushioned bench made from wooden pallets, smiling and holding a brown-and-gold football, with two colorful footballs behind her and abstract paintings on the wall."],
+  ["cidades-inteligentes-by-google-cloud-ends-in-cascais", "2026-03-25", "media/wix/69b615_c01a7d4dbeeb47a58cc101146088c3e3~mv2.png", "A professional presenting an urban intelligence platform on a large interactive screen to three attendees in a modern office setting, with a display board reading “Plataforma de Inteligência Urbana” in the background."],
+  ["virtual-venue-to-support-fiba-s-event-operations-for-basketball-world-cups-2026-and-2027", "2026-03-23", "media/wix/69b615_9f54c7044e9c4cb0a44eb12f7000d07b~mv2.jpg", "Crowded basketball stadium with teams playing on court and a large cheering crowd in the stands."],
+  ["the-journey-of-focus-bc-told-by-the-founders", "2026-03-23", "media/wix/eb9055_6c059456f2054f4a98dfd4a634a25028~mv2.png", "Nuno, Sandro and Vasco standing outdoors in bright sunlight beside a white wall and leafy green trees."],
+  ["kick-off-2020", "2026-03-24", "media/wix/d0f2e4_80c1f2d91fa9490ab94b8c1b8cd9f99d~mv2.jpg", ""],
+  ["from-university-to-real-world-problems-tomás-pedrosa-s-internship-at-focus-bc", "2026-03-23", "media/wix/eb9055_36760edd8f6f4cf38c9407b4c4b0b77a~mv2.jpg", "Tomás, with short dark hair and a trimmed beard smiling with arms crossed, wearing a white t-shirt and silver watch, standing in front of a wall with geometric green, black, and purple line graphics."],
+  ["focus-bc-speaks-at-cidades-inteligentes-by-google-cloud", "2026-03-25", "media/wix/69b615_b3d9bf446cfa477389e2d5f6465a5093~mv2.jpeg", ""],
+  ["focus-bc-at-smart-city-expo-world-congress-barcelona", "2026-03-24", "media/wix/69b615_d9b37b68cab84ce2adb0857ca032b8e3~mv2.png", ""],
+  ["focus-bc-opens-its-office-to-junitec-the-junior-enterprise-of-técnico", "2026-03-23", "media/wix/eb9055_d64334a630c547418221a7d4b0ec9861~mv2.png", "Group photo of Focus BC team members and Junitec students standing together and smiling inside the Focus BC office during a company open day visit."],
+  ["delta-cafes-salesforce-optimization", "2026-03-24", "media/wix/d0f2e4_fea0f72424ea4385889fab1030ca8781~mv2_d_3100_1550_s_2.jpg", "Close-up of an espresso being poured into a cup from a coffee machine."],
+  ["portugal-smartcities-summit-2019", "2026-03-24", "media/wix/d0f2e4_fe10507a68a34d2a99613a9423bfe96e~mv2.jpg", ""],
+  ["focus-bc-is-visiting-iot-solutions-world-congress-barcelona-2023", "2026-03-24", "media/wix/69b615_866ef843df4a46d1a2d761061fb3d7de~mv2.png", ""],
+  ["infralobo-smart-resort", "2026-03-24", "media/wix/d0f2e4_38381c480c4041f895a4042114db0ec3~mv2_d_4888_2951_s_4_2.jpg", "Scenic coastal golf course, with a golfer mid-swing overlooking the ocean."],
+  ["virtual-venue-and-arena-events-partnership-for-sports-competitions", "2026-02-25", "media/wix/eb9055_bd8bbcc6108f4c718a041703a5b72bbf~mv2.avif", "Sandro, Vasco, and Ana with partners at a conference booth, wearing event badges during a Virtual Venue and Arena Events partnership for sports competitions."],
+  ["location-intelligence-myths", "2026-03-23", "media/wix/eb9055_87d193b9a2dd459a964dc5c89d01ea49~mv2.jpg", "Four colleagues gathered around a table in an office, smiling and discussing a scale model of a sustainable city with wind turbines, buildings, trees, and a small green car."],
+  ["city-as-a-platform-wins-wsa-portugal-2025", "2025-12-02", "media/wix/eb9055_77f203c13e2649cf93f1a5f424e28ae5~mv2.webp", "City as a Platform wins the Government & Citizen Engagement Award by WSA Portugal 2025, developed by Focus BC and distinguished by APDC Digital Business Community."],
+  ["focus-bc-is-part-of-the-fifa-world-cup-2030-bid", "2026-03-23", "media/wix/69b615_0609d372b6c949a99cbed2f5eb5d05c9~mv2.jpg", "Sandro Batista and Vasco Pinheiro, Focus BC Managing Partners, present at the Yalla Vamos 2030 press conference."],
+  ["famalicao-hosts-cidades-inteligentes-by-google-cloud", "2026-03-25", "media/wix/69b615_49898539430143ec888f679f80ca9c36~mv2.jpg", "Speaker presenting Focus BC’s urban platform on stage, with a slide reading “focusbc – sentir, comunicar e gerir a sua cidade” projected behind him."],
+  ["inside-our-2025-kick-off-in-óbidos", "2026-03-23", "media/wix/eb9055_69bc2e4cdd97409bb5ca1fb96d104c7f~mv2.jpg", "Group photo of the Focus BC team during their 2025 Kick-Off event, taken outdoors by a beach with a scenic view of water, dunes, and a distant town. The team, dressed in casual and warm clothing, stands closely together smiling, with some members wearing branded red hoodies. The mood is cheerful and relaxed under a partly cloudy sky."],
+  ["11th-anniversary-of-focus-bc", "2026-03-24", "media/wix/69b615_565f288313fa4e338f297f9abd5a97c1~mv2.png", "Founders laughing while cutting a celebration cake on an office counter, with champagne bottles and plastic cups prepared for a toast."],
+  ["what-builds-our-culture-at-focus-bc", "2026-02-26", "media/wix/eb9055_bc1922c3dfa4424fbc223ad94240dd9b~mv2.webp", "Low-angle view of a small team standing in a close huddle outdoors, smiling and talking, with one member wearing a Mapify sweatshirt."],
+  ["geoestrela-cio-awards-2015", "2026-03-24", "media/wix/d0f2e4_a01b703465a647d88ecb367ccc4ebf69~mv2.png", "CIONET logo featuring a square grid mark with one orange square and the “CIONET” wordmark."],
+  ["kick-off-2023", "2026-03-24", "media/wix/69b615_0adb4291ed3f44e18c51d366cf5bd6d1~mv2.jpg", "Group of colleagues standing and chatting while enjoying refreshments during a networking break at a corporate event."],
+  ["focus-bc-is-coming-to-portugal-smart-cities-summit", "2026-03-25", "media/wix/69b615_ca05d84a1f0a4e56a25bd3fbe2bd31aa~mv2.jpeg", ""],
+  ["focusbc-present-in-the-tecnet", "2026-03-24", "media/wix/a2d517_06fb00ef7f5742dbbaab8b23bc8f7d14~mv2.jpg", "Focus BC was present at TecNet 2017 in Madeira (June 1–3), where Managing Partner Vasco Pinheiro shared his vision on smart cities, challenges and opportunities."],
+  ["renault-smart-factory", "2026-03-25", "media/wix/d0f2e4_83a79c09a8a8431882f422f076f04442~mv2_d_2356_1566_s_2.jpg", "Industrial factory interior with metal walkways, machinery, and warm overhead lighting."],
+  ["focus-bc-receives-pme-líder-status-once-again-in-2021", "2026-03-25", "media/wix/69b615_15069345597c4f549277c5c1915e8983~mv2.png", "Exterior of the Focus BC office with Google Cloud branding on a white wall, glass entrance doors, and a “PME Líder ’21” award badge displayed in the top corner."],
+  ["ai-at-focus-bc-insights-from-every-department", "2025-09-18", "media/wix/eb9055_2af866a5a76d4eff8a47c20878819904~mv2.png", "Focus BC team member working on a laptop at her desk, exploring custom ChatGPT tools on the screen."],
+  ["joining-focus-bc", "2026-02-25", "media/wix/eb9055_ae19c0a3466f447590c4eef246bdb112~mv2.png", "On the left, Joana Balhé smiles warmly, wearing a striped t-shirt, standing against a white wall with a purple geometric design. On the right, Filipe Santos is seated with a soccer ball in one hand and a \"Vamos 2030\" scarf draped over his shoulders, smiling as he poses in a bright, modern space."],
+  ["kick-off-2024-in-beja", "2026-03-23", "media/wix/69b615_f883ff2eebd44baa8653d890827196b4~mv2.jpg", "Large group of people posing together outdoors on a grassy area, with vineyards and open countryside in the background under a cloudy sky; some are standing while a few sit in front, dressed casually in jackets and sweaters."],
+  ["join-focus-bc-at-google-cloud-day-lisbon-2024", "2026-03-23", "media/wix/eb9055_083c5cf1b7694baeabe21976c57256bc~mv2.jpg", "Large “Google Cloud Day Lisbon” display with the slogan “The new way to cloud,” surrounded by colorful branding elements and plants inside a modern venue."],
+  ["christmas-at-focus-bc", "2026-02-25", "media/wix/eb9055_d9f96d9b95b4433fba4d3acc8457484a~mv2.webp", "Three founders of Focus BC - Vasco, Sandro, and Nuno — standing together and smiling during a Christmas celebration. Vasco and Sandro wear Santa hats, while Nuno wears festive Christmas glasses with decorations. They have their arms around each other in a cheerful holiday setting."],
+  ["b-smart-famalicao-case-study-smart-city-management-solution", "2026-03-24", "media/wix/69b615_471e7059a3d34592abc924df6b97aba6~mv2.png", "Famalicão city logo displayed over a view of a town square with historic buildings, leafless trees, and flowers in the foreground."],
+  ["geoestrela-incident-management", "2026-03-24", "media/wix/d0f2e4_cfac90e79aee4ccdb7d87d3117e6c11f~mv2_d_1806_1203_s_2.jpg", "Estrela parish logo overlaid on a Lisbon street scene with traditional tiled façades and colorful buildings."],
+  ["choicecar-routing-optimization", "2026-03-24", "media/wix/d0f2e4_6254484e8c7b40b2b10847f46f223ccd~mv2_d_1652_1238_s_2.jpg", "An aerial view of a highway interchange surrounded by green trees."],
+  ["being-a-new-dad-at-focus-bc", "2026-03-24", "media/wix/69b615_da6b22ab4b5d465f9d6838297b8b6287~mv2.png", "Smiling father sitting on the floor holding his baby in a cozy nursery, with a changing table, baby seat, and decorative items in the background."],
+  ["focus-bc-wins-google-cloud-solution-partner-of-the-year-2022", "2026-03-24", "media/wix/69b615_aea6ad139a9947579d49268430f0fdb1~mv2.jpg", "Focus BC and Google members posing for photo"],
+  ["focus-bc-speaks-about-smart-destinations-at-algarve-tech-hub-summit", "2026-03-25", "media/wix/69b615_71a2bc0f79fb4582a011dbcf49b1d877~mv2.jpg", "Event attendee wearing a red hoodie and Mapify T-shirt posing in front of an Algarve Tech Hub Summit backdrop with sponsor logos."],
+  ["we-help-ukraine-a-platform-to-gather-worldwide-help-for-ukraine-refugees", "2026-03-25", "media/wix/69b615_86b8df6ba0114877b3b4ac2e90936dfe~mv2.png", "WeHelpUkraine homepage banner with yellow background, “W-U We Help Ukraine” logo, and buttons labeled “I need help,” “I want to help,” and “Join our network.”"],
+  ["focus-bc-visits-coimbra-for-cidades-inteligentes-by-google-cloud", "2026-03-25", "media/wix/69b615_78f0c310587143599e0a3b76a7424057~mv2.jpg", "Close-up of a “Cidades Inteligentes by Google Cloud” notebook with a wooden pen placed on top."],
+  ["focus-bc-participated-in-geospatial-world-forum-2022", "2026-03-25", "media/wix/69b615_3f03b9ba7a4545eab7af88cf249d3832~mv2.jpeg", "Panel discussion at the Symposium on Digital Cities (May 2022), with six speakers seated on stage in front of a large screen displaying a smart city illustration and event sponsors."],
+];
+
+function titleFromSlug(slug) {
+  const ac = new Map([
+    ["ai", "AI"],
+    ["api", "API"],
+    ["cio", "CIO"],
+    ["fiba", "FIBA"],
+    ["fifa", "FIFA"],
+    ["iot", "IoT"],
+    ["pme", "PME"],
+    ["wsa", "WSA"],
+    ["emel", "EMEL"],
+    ["bc", "BC"],
+  ]);
+  return slug
+    .split("-")
+    .map((w) => {
+      const low = w.toLowerCase();
+      if (ac.has(low)) return ac.get(low);
+      if (/^\d+$/.test(w)) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    })
+    .join(" ");
+}
+
+function categoryFromSlug(slug) {
+  const s = slug.toLowerCase();
+  if (/^joining-focus-bc$/.test(s)) return "Product & Company";
+  if (/alumni|internship|junior-developer|dad|culture|christmas|kick-off|anniversary|workweek|hybrid|team|being-a-new|what-builds/.test(s))
+    return "Team & Culture";
+  if (/virtual-venue|fiba|arena|venue|partnership|summit|event|football|world-cup-bid/.test(s) && !/smart-city|google-cloud|cidades/.test(s))
+    return "Events & Partnerships";
+  if (/lisbon|city|cities|urban|smart|famalic|geoestrela|infralobo|wsa|pme|portugal|delta|chronopost|renault|choicecar|b-smart|planning|catalogue|floods|traffic|gira/.test(s))
+    return "Smart Cities";
+  if (/mapify|google|geospatial|location-intelligence|data-colab|iot|digital-transformation|ai-at/.test(s)) return "Data & operations";
+  return "Product & Company";
+}
+
+/** SEO / listing governance: not every migrated URL should be blog inventory. */
+const NO_PUBLISH_SLUGS = new Set([
+  "christmas-at-focus-bc",
+  "focusbc-7th-anniversary",
+  "11th-anniversary-of-focus-bc",
+  "14-years-of-focus-bc",
+  "kick-off-2020",
+  "kick-off-event-2022",
+  "kick-off-2023",
+  "kick-off-2024-in-beja",
+  "inside-our-2025-kick-off-in-óbidos",
+  "alumni-stories-joao-franco",
+  "alumni-stories-rita-martins",
+  "alumni-stories-guilherme-bernardo",
+  "inside-mariana-coelho-internship",
+  "from-university-to-real-world-problems-tomás-pedrosa-s-internship-at-focus-bc",
+  "being-a-junior-developer-at-focus-bc",
+  "4-and-a-half-day-workweek-at-focus-bc",
+  "a-hybrid-way-of-working-at-focus-bc",
+  "what-builds-our-culture-at-focus-bc",
+  "being-a-new-dad-at-focus-bc",
+  "mapify-web-summit-2018",
+  "focus-bc-at-google-cloud-day-lisbon-25",
+  "join-focus-bc-at-google-cloud-day-lisbon-2024",
+  "focus-bc-is-visiting-iot-solutions-world-congress-barcelona-2023",
+  "portugal-smartcities-summit-2019",
+  "focus-bc-is-coming-to-portugal-smart-cities-summit",
+  "focusbc-present-in-the-tecnet",
+  "focus-bc-opens-its-office-to-junitec-the-junior-enterprise-of-técnico",
+  "focus-bc-brings-mapify-to-junitec",
+]);
+
+/** Still built in JSON for URL parity / future archive pages, but do not allow indexing when `publish` is false. */
+const NO_INDEX_WHILE_PUBLISHED = new Set([
+  "geoestrela-cio-awards-2015",
+]);
+
+function pillarFromSlug(slug, category) {
+  const s = slug.toLowerCase();
+  if (
+    /virtual-venue|fiba|fifa-world-cup|arena-events-partnership|basketball-world-cup|world-football-summit/.test(s)
+  ) {
+    return "sports-events";
+  }
+  if (
+    /smart-city|cidades-inteligentes|famalic|portugal-smart-cities-summit-2022|speaks-at-cidades|speaks-about-smart|focus-bc-visits-coimbra|ends-in-cascais|location-intelligence|algarve-tech-hub|geospatial-world|we-help-ukraine|urban-planning/.test(s)
+  ) {
+    return "smart-cities";
+  }
+  if (category === "Smart Cities") return "smart-cities";
+  if (
+    category === "Events & Partnerships" &&
+    /virtual-venue|fifa|fiba|football|venue|arena|world-cup/.test(s)
+  ) {
+    return "sports-events";
+  }
+  return "company";
+}
+
+function publishFor(slug) {
+  return !NO_PUBLISH_SLUGS.has(slug);
+}
+
+function indexFor(slug, publish) {
+  if (!publish) return false;
+  return !NO_INDEX_WHILE_PUBLISHED.has(slug);
+}
+
+function excerptFrom(alt, title) {
+  const t = (alt || "").trim() || `Notes from Focus BC: ${title}.`;
+  return t.length > 200 ? `${t.slice(0, 197)}…` : t;
+}
+
+const posts = ROWS.filter(([slug]) => !CASE_STUDY_SLUGS.has(slug)).map(([slug, lastmod, image, imageAlt]) => {
+  const title = titleFromSlug(slug);
+  const category = categoryFromSlug(slug);
+  const publish = publishFor(slug);
+  const index = indexFor(slug, publish);
+  return {
+    slug,
+    title,
+    lastmod,
+    category,
+    pillar: pillarFromSlug(slug, category),
+    publish,
+    index,
+    image: image || null,
+    imageAlt: (imageAlt || "").trim() || title,
+    excerpt: excerptFrom(imageAlt, title),
+    readMinutes: 5 + (slug.length % 4),
+  };
+});
+
+fs.mkdirSync(path.dirname(out), { recursive: true });
+fs.writeFileSync(out, JSON.stringify({ generated: new Date().toISOString().slice(0, 10), posts }, null, 2));
+console.log(`Wrote ${posts.length} posts to ${out}`);

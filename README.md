@@ -48,7 +48,21 @@ Run `npm run build`. Generated files go under **`public/`** (gitignored):
 | `public/focusbc/` | Focus BC |
 | `public/caap/` | City as a Platform |
 
-- **Focus BC:** `node focusbc/build.mjs` — reads `focusbc/sources/`, writes `FOCUSBC_OUT` (default `public/focusbc`). Set `FOCUSBC_BASE_PATH=/focusbc` when using the hub layout.
+- **Focus BC:** `node focusbc/build.mjs` — reads `focusbc/sources/`, writes `FOCUSBC_OUT` (default `public/focusbc`). Set `FOCUSBC_BASE_PATH=/focusbc` when using the hub layout. **Do not** point `FOCUSBC_OUT` at a repo-root folder like `focusbc-output/`; nothing in this repo expects that path, and such folders are leftovers only.
+- **Blog index — featured slugs (optional):** `focusbc/data/blog-featured.json` with `{ "slugs": ["post-slug-1", "post-slug-2"] }` pins up to **two** curated posts for the “Featured stories” block. Empty or omitted slugs are filled deterministically so featured and “All articles” do not overlap; a future backoffice can write this file.
+
+### Focus BC: media URLs and the hub path (`/focusbc/`)
+
+The hub serves Focus BC under **`/focusbc/`**. Root-relative URLs like **`/media/...`** resolve to the **host** root (`https://example.com/media/...`), **not** under `/focusbc/`, so images break when you only prefix HTML with `<base>` or when the path is wrong.
+
+**Rules:**
+
+1. **`focusbc/build.mjs`** — For any **injected** HTML (blog index cards, case-study index cards, etc.), use **`blogAssetSrc()`** (or **`absUrl()`**) for `/media/` paths in `src`/`href`. Do not concatenate raw `"/media/" + path` in template strings without going through those helpers.
+2. **Second pass** — After replacing the featured/archive mounts, the build runs **`applyBasePrefix()`** again on the full page so any stray `/media/` attributes still get prefixed.
+3. **Unified build** — Prefer **`npm run build`** (see `scripts/build-pages.mjs`), which sets **`FOCUSBC_BASE_PATH=/focusbc`** and **`FOCUSBC_OUT`**. If you run `node focusbc/build.mjs` alone, the script still defaults `BASE` to `/focusbc` when the output dir is `public/focusbc`; custom `FOCUSBC_OUT` requires **`FOCUSBC_BASE_PATH`** to match your preview URL.
+4. **CSS `url(/media/...)`** — The build rewrites these in emitted `styles.css` when `BASE` is set.
+
+Changing list card markup without keeping (1)–(2) is the usual cause of “broken images” on `/focusbc/blog/` and similar routes.
 - **CAAP:** `node caap/build.mjs` — reads `caap/sources/`, copies `caap/media`, `caap/locales`, `caap/data`, writes `CAAP_OUT` (default `public/caap`). Set `CAAP_BASE_PATH=/caap` when using the hub layout (the unified `npm run build` sets both).
 
 Convenience scripts: `npm run build:focusbc`, `npm run build:caap` (same as `build:caap-public`).
@@ -57,4 +71,4 @@ Convenience scripts: `npm run build:focusbc`, `npm run build:caap` (same as `bui
 
 - `npm run serve:server` — serves `public/` when present; CAAP and Focus BC can fall back to unbuilt source trees for development (see `server.mjs`).
 
-Use `public/` as the deployable tree; there is no separate legacy output folder.
+Use **`public/`** as the only deployable tree. There is no second official output directory. If you see **`focusbc-output/`** at the repo root, it is not produced by `npm run build` or `scripts/build-pages.mjs` — remove it; it is listed in `.gitignore` so it cannot be committed by mistake.

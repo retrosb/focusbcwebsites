@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="__TW_DESC__" />
     <meta name="twitter:image" content="__TW_IMAGE__" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
     <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
@@ -51,29 +51,61 @@
       </div>
     </header>
 
-    <main id="main-content" class="case-study-static">
-      <article class="container" style="padding: 2rem 1rem 4rem; max-width: 48rem">
-        <p class="eyebrow"><a href="casestudies" class="link-plain" data-i18n="caseStudy.eyebrow">Case studies</a></p>
-        <h1 class="mt-4 h1" style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2">__H1__</h1>
-        <p class="text-muted text-sm-tight mt-2">__CATEGORY__ · __PRODUCT_AREA__ · __HERO_META_DETAIL__</p>
-        <p class="lead mt-6">__LEAD__</p>
-        <div class="mt-8">__MEDIA_BLOCK__</div>
-        <div class="prose prose--blog case-study-import-body mt-8">__BODY_HTML__</div>
-        <div class="mt-10">__RELATED_PRODUCT_BLOCK__</div>
-        <aside class="mt-12 card card--flush p-6">
-          <p class="eyebrow">Summary</p>
-          <ul class="mt-4 text-sm-tight text-muted plain-list">
-            <li><strong class="text-ink">Category:</strong> __ASIDE_CAT__</li>
-            <li class="mt-2"><strong class="text-ink">Client type:</strong> __CLIENT_TYPE__</li>
-            <li class="mt-2"><strong class="text-ink">Focus:</strong> __MAIN_FOCUS__</li>
-            <li class="mt-2"><strong class="text-ink">Related offer:</strong> __PRODUCT_AREA__</li>
-            <li class="mt-2"><strong class="text-ink">Angle:</strong> __ASIDE_FOCUS__</li>
-            <li class="mt-2"><strong class="text-ink">Read time:</strong> __READ_TIME_LABEL__</li>
-            <li class="mt-2"><strong class="text-ink">Updated:</strong> __DATE_STR__</li>
-          </ul>
-        </aside>
-        <div class="mt-10">__RELATED_BLOCK__</div>
-      </article>
+    <main id="main-content" class="case-study-page">
+      <header class="case-study-page-hero case-study-page-hero--proof">
+        <div class="case-study-page-hero__glow case-study-page-hero__glow--coral" aria-hidden="true"></div>
+        <div class="container case-study-page-hero__inner">
+          <p class="case-study-page-back">
+            <a href="casestudies" class="link-coral-underline" data-i18n="caseStudy.backLink">Back to case studies</a>
+          </p>
+          <div class="case-study-page-meta-row">
+            <span class="blog-post-meta-pill">__CATEGORY__</span>
+            <span class="case-study-meta-sep" aria-hidden="true">·</span>
+            <span data-i18n="caseStudy.pageKind">Case study</span>
+            <span class="case-study-meta-sep" aria-hidden="true">·</span>
+            <span>__PRODUCT_AREA__</span>
+          </div>
+          <h1 class="case-study-page-title">__H1__</h1>
+          <p class="lead case-study-page-lead">__LEAD__</p>
+        </div>
+      </header>
+
+      <section class="case-study-proof-summary" aria-label="At a glance">
+        <div class="container case-study-proof-summary__inner">
+          <div class="case-study-proof-grid">
+            <div class="case-study-proof-card">
+              <p class="eyebrow case-study-proof-card__label" data-i18n="caseStudy.summaryClient">Client</p>
+              <p class="case-study-proof-card__value">__CLIENT_TYPE__</p>
+            </div>
+            <div class="case-study-proof-card">
+              <p class="eyebrow case-study-proof-card__label" data-i18n="caseStudy.summaryProduct">Product</p>
+              <p class="case-study-proof-card__value">__PRODUCT_AREA__</p>
+            </div>
+            <div class="case-study-proof-card">
+              <p class="eyebrow case-study-proof-card__label" data-i18n="caseStudy.summaryFocus">Focus</p>
+              <p class="case-study-proof-card__value">__MAIN_FOCUS__</p>
+            </div>
+            <div class="case-study-proof-card">
+              <p class="eyebrow case-study-proof-card__label" data-i18n="caseStudy.summaryOutcome">Outcome</p>
+              <p class="case-study-proof-card__value">__OUTCOME__</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-study-page-shell" aria-label="Case study content">
+        <div class="container case-study-page-shell__grid">
+          <article class="case-study-page-shell__main">
+            <div class="case-study-page-media">__MEDIA_BLOCK__</div>
+            <div class="prose prose--blog case-study-import-body case-study-page-body">__BODY_HTML__</div>
+            <div class="case-study-page-related-product">__RELATED_PRODUCT_BLOCK__</div>
+            <p class="case-study-page-bottom-link">
+              <a href="casestudies" class="link-coral-underline" data-i18n="caseStudy.backToList">← All case studies</a>
+            </p>
+          </article>
+          __RELATED_ASIDE__
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -130,6 +162,6 @@
         </div>
       </div>
     </footer>
-    <script defer src="/js/i18n.js"></script>
+    <script defer src="js/i18n.js"></script>
   </body>
 </html>

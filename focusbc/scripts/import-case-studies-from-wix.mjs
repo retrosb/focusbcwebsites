@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { decodeHtmlEntities } from "../lib/decode-html-entities.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FOCUSBC = path.join(__dirname, "..");
@@ -34,7 +35,8 @@ function ensureDir(d) {
 }
 
 function escAttr(s) {
-  return String(s)
+  const t = decodeHtmlEntities(s == null ? "" : String(s));
+  return t
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")

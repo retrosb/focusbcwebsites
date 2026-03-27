@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="__TW_DESC__" />
     <meta name="twitter:image" content="__TW_IMAGE__" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
     <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
@@ -51,25 +51,47 @@
       </div>
     </header>
 
-    <main id="main-content" class="case-study-static">
-      <article class="container" style="padding: 2rem 1rem 4rem; max-width: 48rem">
-        <p class="eyebrow"><a href="blog" class="link-plain" data-i18n="blog.eyebrow">Blog</a></p>
-        <p class="text-muted text-sm-tight mt-2"><span class="pill-article">__CATEGORY__</span> · __FOCUS_TOPICS__</p>
-        <h1 class="mt-4 h1" style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2">__H1__</h1>
-        <p class="text-muted text-sm-tight mt-2">__DATE_STR__ · __READ_MIN__ min read</p>
-        <p class="lead mt-6">__LEAD__</p>
-        <div class="mt-8">__MEDIA_BLOCK__</div>
-        <div class="prose prose--blog case-study-import-body mt-8">__BODY_HTML__</div>
-        <aside class="mt-12 card card--flush p-6">
-          <p class="eyebrow">About this article</p>
-          <ul class="mt-4 text-sm-tight text-muted plain-list">
-            <li><strong class="text-ink">Category:</strong> __ASIDE_CAT__</li>
-            <li class="mt-2"><strong class="text-ink">Read time:</strong> __READ_TIME_LABEL__</li>
-          </ul>
-        </aside>
-        <div class="mt-10">__RELATED_BLOCK__</div>
-        <p class="mt-10"><a href="blog" class="link-coral-underline" data-i18n="blog.backToBlog">← All blog posts</a></p>
-      </article>
+    <main id="main-content" class="blog-post-page">
+      <header class="blog-post-page-hero blog-post-page-hero--reading">
+        <div class="blog-post-page-hero__glow" aria-hidden="true"></div>
+        <div class="container blog-post-page-hero__inner">
+          <p class="blog-post-page-back">
+            <a href="blog" class="link-coral-underline" data-i18n="blog.backLink">Back to blog</a>
+          </p>
+          <div class="blog-post-page-meta-row">
+            <span class="blog-post-meta-pill">__CATEGORY__</span>
+            <span class="blog-post-meta-sep" aria-hidden="true">·</span>
+            __DATE_HTML__
+            <span class="blog-post-meta-sep" aria-hidden="true">·</span>
+            <span>__READ_MIN__ <span data-i18n="blog.minRead">min read</span></span>
+          </div>
+          <h1 class="blog-post-page-title">__H1__</h1>
+          <p class="lead blog-post-page-lead">__LEAD__</p>
+        </div>
+      </header>
+
+      <section class="blog-post-page-shell" aria-label="Article">
+        <div class="container blog-post-page-shell__grid">
+          <div class="blog-post-page-shell__main">
+            __MEDIA_SECTION__
+            <div class="prose prose--blog case-study-import-body blog-post-page-body">__BODY_HTML__</div>
+            __RELATED_SECTION__
+            <p class="blog-post-page-bottom-link">
+              <a href="blog" class="link-coral-underline" data-i18n="blog.backToBlog">← All blog posts</a>
+            </p>
+          </div>
+          <aside class="blog-post-page-shell__aside" aria-label="Article details">
+            <div class="card card--flush p-5 blog-post-aside-card">
+              <p class="eyebrow" data-i18n="blog.aboutArticle">About this article</p>
+              <ul class="mt-4 text-sm-tight text-muted plain-list">
+                <li><strong class="text-ink" data-i18n="blog.asideCategory">Category:</strong> __ASIDE_CAT__</li>
+                <li class="mt-2"><strong class="text-ink" data-i18n="blog.asideReadTime">Read time:</strong> __READ_TIME_LABEL__</li>
+                __ASIDE_TOPICS_ROW__
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -126,6 +148,7 @@
         </div>
       </div>
     </footer>
-    <script defer src="/js/i18n.js"></script>
+    <script defer src="js/i18n.js"></script>
+    <script defer src="js/import-pro-gallery.js"></script>
   </body>
 </html>

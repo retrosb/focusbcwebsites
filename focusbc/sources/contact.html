@@ -61,33 +61,95 @@
     </header>
 
     <main id="main-content">
-      <section class="home-hero home-hero--white" aria-labelledby="page-title">
+      <section class="home-hero home-hero--contact" aria-labelledby="page-title">
         <div class="home-hero__ambient" aria-hidden="true">
           <div class="home-hero__orb home-hero__orb--1"></div>
           <div class="home-hero__orb home-hero__orb--2"></div>
           <div class="home-hero__orb home-hero__orb--3"></div>
         </div>
-        <div class="container home-hero__grid">
-          <div>
-            <p class="pill pill--hero-light" data-i18n="pages.contact.hero.pill">Contact Focus BC</p>
-            <h1 id="page-title" class="mt-5" data-i18n="pages.contact.hero.h1">Start the right product conversation</h1>
-            <p class="home-hero__lede mt-5 max-w-2xl" data-i18n="pages.contact.hero.lede1">
-              Talk to Focus BC about platforms for city operations, global sports events, or Google products.
-            </p>
-            <p class="home-hero__lede home-hero__lede--tight max-w-2xl" data-i18n="pages.contact.hero.lede2">
-              Tell us what you are trying to solve and we will route your message to the right team, product, or next step.
-            </p>
-          </div>
-          <div class="home-hero-visual home-hero-visual--single">
-            <figure class="home-figure home-figure--hero-main home-figure--on-white">
-              <div
-                class="home-figure__media home-figure__media--cover home-figure__media--contact-hero"
-                aria-hidden="true"
-              ></div>
-              <figcaption class="home-figure__cap" data-i18n="pages.contact.hero.cap">
-                Contact and discovery across Focus BC products and solutions
-              </figcaption>
-            </figure>
+        <div class="container">
+          <div class="home-hero__inner--contact">
+            <div>
+              <p class="pill pill--hero-light" data-i18n="pages.contact.hero.pill">Contact Focus BC</p>
+              <h1 id="page-title" class="mt-5" data-i18n="pages.contact.hero.h1">Start the right product conversation</h1>
+              <p class="home-hero__lede mt-5 max-w-2xl" data-i18n="pages.contact.hero.lede1">
+                Talk to Focus BC about platforms for city operations, global sports events, or Google products.
+              </p>
+              <p class="home-hero__lede home-hero__lede--tight max-w-2xl" data-i18n="pages.contact.hero.lede2">
+                Tell us what you are trying to solve and we will route your message to the right team, product, or next step.
+              </p>
+            </div>
+            <div class="card shadow-soft rounded-2xl home-hero__contact-form-card">
+              <p class="eyebrow" data-i18n="pages.contact.form.eyebrow">Contact form</p>
+              <h2 class="mt-3 h3" data-i18n="pages.contact.form.h2">Send us a message</h2>
+              <p class="text-muted mt-4 text-sm-loose" data-i18n="pages.contact.form.lead">
+                Whether you want to explore a product, discuss Google technologies, or start a partnership conversation, this is the best place to begin.
+              </p>
+              <form class="form-stack mt-8" action="#" method="post">
+                <div class="form-row">
+                  <div class="field">
+                    <label for="name" data-i18n="pages.contact.form.name">Name</label>
+                    <input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" data-i18n-attr="placeholder:pages.contact.form.namePh" />
+                  </div>
+                  <div class="field">
+                    <label for="company" data-i18n="pages.contact.form.company">Company</label>
+                    <input
+                      class="input"
+                      id="company"
+                      name="company"
+                      type="text"
+                      autocomplete="organization"
+                      placeholder="Your company"
+                      data-i18n-attr="placeholder:pages.contact.form.companyPh"
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="email" data-i18n="pages.contact.form.email">Email</label>
+                    <input
+                      class="input"
+                      id="email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      required
+                      placeholder="you@company.com"
+                      data-i18n-attr="placeholder:pages.contact.form.emailPh"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="topic" data-i18n="pages.contact.form.topic">Topic</label>
+                    <select class="select" id="topic" name="topic">
+                      <option value="" data-i18n="pages.contact.form.topicPlaceholder">Select a topic</option>
+                      <option value="city-as-a-platform" data-i18n="pages.contact.form.optCaap">City as a Platform</option>
+                      <option value="virtual-venue" data-i18n="pages.contact.form.optVv">Virtual Venue</option>
+                      <option value="google-cloud" data-i18n="pages.contact.form.optGcp">Google Cloud Platform</option>
+                      <option value="google-maps" data-i18n="pages.contact.form.optGmp">Google Maps Platform</option>
+                      <option value="partnership" data-i18n="pages.contact.form.optPartnership">Partnership</option>
+                      <option value="general" data-i18n="pages.contact.form.optGeneral">General enquiry</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="message" data-i18n="pages.contact.form.message">Message</label>
+                  <textarea
+                    class="textarea"
+                    id="message"
+                    name="message"
+                    rows="7"
+                    placeholder="Tell us a bit about what you are looking for."
+                    data-i18n-attr="placeholder:pages.contact.form.messagePh"
+                  ></textarea>
+                </div>
+                <div class="form-footer">
+                  <p class="form-hint" data-i18n="pages.contact.form.hint">
+                    By submitting this form, you allow Focus BC to contact you regarding your enquiry.
+                  </p>
+                  <button type="submit" class="btn btn--primary" data-i18n="pages.contact.form.submit">Send message</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -119,122 +181,48 @@
 
       <section class="section section--xl">
         <div class="container grid grid-2 gap-xl align-start">
-          <div class="flex flex-col gap-lg">
-            <div class="card card--ink shadow-soft rounded-2xl">
-              <p class="eyebrow" data-i18n="pages.contact.help.eyebrow">How can we help?</p>
-              <h2 class="mt-3" data-i18n="pages.contact.help.h2">Reach the right team faster</h2>
-              <p class="mt-5 lead-lg text-white-80" data-i18n="pages.contact.help.lead">
-                Use the form to tell us what you need. We will route your message to the right team and get back to you as soon as possible.
-              </p>
-              <ul class="contact-help-list">
-                <li class="card" data-i18n-html="pages.contact.help.li1">
-                  Explore <strong>City as a Platform</strong> for municipalities and urban operations
-                </li>
-                <li class="card" data-i18n-html="pages.contact.help.li2">
-                  Explore <strong>Virtual Venue</strong> for sports event planning and operations
-                </li>
-                <li class="card" data-i18n-html="pages.contact.help.li3">
-                  Discuss <strong>Google Cloud Platform</strong> or <strong>Google Maps Platform</strong>
-                </li>
-                <li class="card" data-i18n-html="pages.contact.help.li4">
-                  Talk about <strong>partnerships</strong>, implementation, or product fit
-                </li>
-              </ul>
-            </div>
-
-            <div class="card shadow-soft rounded-2xl">
-              <p class="eyebrow" data-i18n="pages.contact.details.eyebrow">Contact details</p>
-              <h2 class="mt-3 h3" data-i18n="pages.contact.details.h2">Other ways to reach us</h2>
-              <div class="mt-6 text-sm text-muted">
-                <div>
-                  <p><strong data-i18n="pages.contact.details.email">Email</strong></p>
-                  <a href="mailto:info@focus-bc.com" class="mt-1 inline-block">info@focus-bc.com</a>
-                </div>
-                <div class="mt-5">
-                  <p><strong data-i18n="pages.contact.details.website">Website</strong></p>
-                  <a href="https://www.focus-bc.com" class="mt-1 inline-block">www.focus-bc.com</a>
-                </div>
-                <div class="mt-5">
-                  <p><strong data-i18n="pages.contact.details.linkedin">LinkedIn</strong></p>
-                  <a href="https://www.linkedin.com" class="mt-1 inline-block" rel="noopener noreferrer" target="_blank"
-                    data-i18n="pages.contact.details.follow"
-                    >Follow Focus BC</a
-                  >
-                </div>
-              </div>
-            </div>
+          <div class="card card--ink shadow-soft rounded-2xl">
+            <p class="eyebrow" data-i18n="pages.contact.help.eyebrow">How can we help?</p>
+            <h2 class="mt-3" data-i18n="pages.contact.help.h2">Reach the right team faster</h2>
+            <p class="mt-5 lead-lg text-white-80" data-i18n="pages.contact.help.lead">
+              Use the form to tell us what you need. We will route your message to the right team and get back to you as soon as possible.
+            </p>
+            <ul class="contact-help-list">
+              <li class="card" data-i18n-html="pages.contact.help.li1">
+                Explore <strong>City as a Platform</strong> for municipalities and urban operations
+              </li>
+              <li class="card" data-i18n-html="pages.contact.help.li2">
+                Explore <strong>Virtual Venue</strong> for sports event planning and operations
+              </li>
+              <li class="card" data-i18n-html="pages.contact.help.li3">
+                Discuss <strong>Google Cloud Platform</strong> or <strong>Google Maps Platform</strong>
+              </li>
+              <li class="card" data-i18n-html="pages.contact.help.li4">
+                Talk about <strong>partnerships</strong>, implementation, or product fit
+              </li>
+            </ul>
           </div>
 
           <div class="card shadow-soft rounded-2xl">
-            <p class="eyebrow" data-i18n="pages.contact.form.eyebrow">Contact form</p>
-            <h2 class="mt-3" data-i18n="pages.contact.form.h2">Send us a message</h2>
-            <p class="text-muted mt-4 text-sm-loose" data-i18n="pages.contact.form.lead">
-              Whether you want to explore a product, discuss Google technologies, or start a partnership conversation, this is the best place to begin.
-            </p>
-            <form class="form-stack mt-8" action="#" method="post">
-              <div class="form-row">
-                <div class="field">
-                  <label for="name" data-i18n="pages.contact.form.name">Name</label>
-                  <input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" data-i18n-attr="placeholder:pages.contact.form.namePh" />
-                </div>
-                <div class="field">
-                  <label for="company" data-i18n="pages.contact.form.company">Company</label>
-                  <input
-                    class="input"
-                    id="company"
-                    name="company"
-                    type="text"
-                    autocomplete="organization"
-                    placeholder="Your company"
-                    data-i18n-attr="placeholder:pages.contact.form.companyPh"
-                  />
-                </div>
+            <p class="eyebrow" data-i18n="pages.contact.details.eyebrow">Contact details</p>
+            <h2 class="mt-3 h3" data-i18n="pages.contact.details.h2">Other ways to reach us</h2>
+            <div class="mt-6 text-sm text-muted">
+              <div>
+                <p><strong data-i18n="pages.contact.details.email">Email</strong></p>
+                <a href="mailto:info@focus-bc.com" class="mt-1 inline-block">info@focus-bc.com</a>
               </div>
-              <div class="form-row">
-                <div class="field">
-                  <label for="email" data-i18n="pages.contact.form.email">Email</label>
-                  <input
-                    class="input"
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                    placeholder="you@company.com"
-                    data-i18n-attr="placeholder:pages.contact.form.emailPh"
-                  />
-                </div>
-                <div class="field">
-                  <label for="topic" data-i18n="pages.contact.form.topic">Topic</label>
-                  <select class="select" id="topic" name="topic">
-                    <option value="" data-i18n="pages.contact.form.topicPlaceholder">Select a topic</option>
-                    <option value="city-as-a-platform" data-i18n="pages.contact.form.optCaap">City as a Platform</option>
-                    <option value="virtual-venue" data-i18n="pages.contact.form.optVv">Virtual Venue</option>
-                    <option value="google-cloud" data-i18n="pages.contact.form.optGcp">Google Cloud Platform</option>
-                    <option value="google-maps" data-i18n="pages.contact.form.optGmp">Google Maps Platform</option>
-                    <option value="partnership" data-i18n="pages.contact.form.optPartnership">Partnership</option>
-                    <option value="general" data-i18n="pages.contact.form.optGeneral">General enquiry</option>
-                  </select>
-                </div>
+              <div class="mt-5">
+                <p><strong data-i18n="pages.contact.details.website">Website</strong></p>
+                <a href="https://www.focus-bc.com" class="mt-1 inline-block">www.focus-bc.com</a>
               </div>
-              <div class="field">
-                <label for="message" data-i18n="pages.contact.form.message">Message</label>
-                <textarea
-                  class="textarea"
-                  id="message"
-                  name="message"
-                  rows="7"
-                  placeholder="Tell us a bit about what you are looking for."
-                  data-i18n-attr="placeholder:pages.contact.form.messagePh"
-                ></textarea>
+              <div class="mt-5">
+                <p><strong data-i18n="pages.contact.details.linkedin">LinkedIn</strong></p>
+                <a href="https://www.linkedin.com" class="mt-1 inline-block" rel="noopener noreferrer" target="_blank"
+                  data-i18n="pages.contact.details.follow"
+                  >Follow Focus BC</a
+                >
               </div>
-              <div class="form-footer">
-                <p class="form-hint" data-i18n="pages.contact.form.hint">
-                  By submitting this form, you allow Focus BC to contact you regarding your enquiry.
-                </p>
-                <button type="submit" class="btn btn--primary" data-i18n="pages.contact.form.submit">Send message</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </section>

@@ -30,7 +30,7 @@
     <script src="/js/blog-list.js" defer></script>
   </head>
   <body>
-        <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="site-header">
       <div class="container site-header__inner">
         <a href="./" class="site-logo"
@@ -62,88 +62,61 @@
     </header>
 
     <main id="main-content">
-      <section class="home-hero home-hero--white" aria-labelledby="page-title">
-        <div class="home-hero__ambient" aria-hidden="true">
-          <div class="home-hero__orb home-hero__orb--1"></div>
-          <div class="home-hero__orb home-hero__orb--2"></div>
-          <div class="home-hero__orb home-hero__orb--3"></div>
-        </div>
-        <div class="container home-hero__grid">
-          <div>
-            <p class="pill pill--hero-light" data-i18n="pages.blogPage.hero.pill">Focus BC Blog</p>
-            <h1 id="page-title" class="mt-5" data-i18n="pages.blogPage.hero.h1">Selected insights on products, operations, cities, and sports events</h1>
-            <p class="home-hero__lede mt-5 max-w-2xl" data-i18n="pages.blogPage.hero.lede1">
-              We share how we think about product development, operational platforms, geospatial workflows, and the environments where our software is used.
-            </p>
-            <p class="home-hero__lede home-hero__lede--tight max-w-2xl" data-i18n="pages.blogPage.hero.lede2">
-              The blog is designed to support useful conversations around platforms, operations, and practical implementation, not just publish content for the sake of it.
-            </p>
-          </div>
-          <div class="home-hero-visual home-hero-visual--single">
-            <figure class="home-figure home-figure--hero-main home-figure--on-white">
-              <div
-                class="home-figure__media home-figure__media--cover home-figure__media--blog-hero"
-                aria-hidden="true"
-              ></div>
-              <figcaption class="home-figure__cap" data-i18n="pages.blogPage.hero.cap">
-                Product thinking, operational platforms, and Focus BC insights
-              </figcaption>
-            </figure>
-          </div>
+      <section class="home-hero home-hero--blog-index blog-index-hero" aria-labelledby="page-title">
+        <div class="blog-index-hero__glow" aria-hidden="true"></div>
+        <div class="container home-hero__inner--blog-index max-w-5xl">
+          <p class="pill pill--hero-light" data-i18n="pages.blogPage.hero.pill">Focus BC Blog</p>
+          <h1 id="page-title" class="mt-5 blog-index-hero__title" data-i18n="pages.blogPage.hero.h1">
+            News, updates, and highlights from Focus BC
+          </h1>
+          <p class="home-hero__lede blog-index-hero__lede mt-5 max-w-3xl" data-i18n="pages.blogPage.hero.lede1">
+            Projects, partnerships, milestones, events, and life at Focus BC.
+          </p>
         </div>
       </section>
 
-      <section class="blog-filter-bar" aria-label="Article topics">
-        <div class="container blog-filter-bar__inner">
-          <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all" data-i18n="pages.blogPage.filterAll">All</button>
-          <button type="button" class="blog-filter-btn" data-filter="company" data-i18n="pages.blogPage.filterCompany">Product &amp; Company</button>
-          <button type="button" class="blog-filter-btn" data-filter="smart-cities" data-i18n="pages.blogPage.filterCities">Smart Cities</button>
-          <button type="button" class="blog-filter-btn" data-filter="geospatial" data-i18n="pages.blogPage.filterGeo">Geospatial &amp; Data</button>
-          <button type="button" class="blog-filter-btn" data-filter="sports-events" data-i18n="pages.blogPage.filterSports">Sports &amp; Events</button>
-          <button type="button" class="blog-filter-btn" data-filter="partnerships" data-i18n="pages.blogPage.filterPartners">Partnerships</button>
+      <section class="section section--tight container blog-index-featured" aria-labelledby="featured-heading">
+        <div class="blog-index-featured__intro">
+          <h2 id="featured-heading" class="h2 blog-index-featured__title" data-i18n="pages.blogPage.featured.h2">Featured posts</h2>
+          <p class="lead lead--relaxed blog-index-featured__lead" data-i18n="pages.blogPage.featured.lead">
+            Recent highlights from Focus BC.
+          </p>
         </div>
-      </section>
-
-      <section class="section section--tight container" aria-label="Featured articles">
-        <p class="sr-only" data-i18n="pages.blogPage.srFeatured">Featured and highlighted articles load from published entries in data/blog-posts.json.</p>
-        <div id="blog-featured-mount" class="blog-list-mount" data-blog-list="featured">
+        <p class="sr-only" data-i18n="pages.blogPage.srFeatured">
+          Featured posts are curated; the list below is the full archive.
+        </p>
+        <div id="blog-featured-mount" class="blog-list-mount blog-index-featured__grid" data-blog-list="featured">
           <p class="text-muted text-sm-tight" data-i18n="pages.blogPage.loading">Loading articles…</p>
         </div>
       </section>
 
-      <section class="section section--xl bg-white" aria-labelledby="latest-heading">
+      <section class="section section--xl bg-white blog-index-all" aria-labelledby="all-heading">
         <div class="container">
-          <div class="home-section-head">
-            <div class="max-w-3xl min-w-0">
-              <p class="eyebrow" data-i18n="pages.blogPage.latest.eyebrow">Latest articles</p>
-              <h2 id="latest-heading" class="mt-3" data-i18n="pages.blogPage.latest.h2">Selected content from across the Focus BC ecosystem</h2>
-              <p class="lead lead--relaxed mt-4" data-i18n="pages.blogPage.latest.lead">
-                The blog is designed to strengthen authority, support product positioning, and connect readers to the right next step.
-              </p>
-            </div>
-          </div>
-          <div id="blog-archive-grid" class="grid grid-3 gap-lg mt-10 blog-list-mount" data-blog-list="archive"></div>
-        </div>
-      </section>
-
-      <section class="section section--xl home-section--mist">
-        <div class="container home-trust-panel">
-          <div>
-            <p class="eyebrow" data-i18n="pages.blogPage.editorial.eyebrow">Editorial approach</p>
-            <h2 class="mt-3" data-i18n="pages.blogPage.editorial.h2">Content that supports products, operations, and useful conversations</h2>
-          </div>
-          <div>
-            <p class="lead lead--relaxed" data-i18n="pages.blogPage.editorial.p1">
-              The Focus BC blog is designed to explain how we think about products, operations, implementation, and the environments where our software is used.
-            </p>
-            <p class="lead lead--relaxed mt-6" data-i18n="pages.blogPage.editorial.p2">
-              The goal is to publish selected content that strengthens authority, supports product positioning, and creates useful context for clients, partners, and future team members.
+          <div class="blog-index-all__intro">
+            <h2 id="all-heading" class="h2 blog-index-all__title" data-i18n="pages.blogPage.all.h2">All posts</h2>
+            <p class="lead lead--relaxed blog-index-all__lead" data-i18n="pages.blogPage.all.lead">
+              Browse all posts from Focus BC.
             </p>
           </div>
         </div>
+
+        <div class="blog-filter-bar blog-filter-bar--archive" aria-label="Article topics">
+          <div class="container blog-filter-bar__inner">
+            <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all" data-i18n="pages.blogPage.filterAll">All</button>
+            <button type="button" class="blog-filter-btn" data-filter="company" data-i18n="pages.blogPage.filterCompany">Product &amp; Company</button>
+            <button type="button" class="blog-filter-btn" data-filter="smart-cities" data-i18n="pages.blogPage.filterCities">Smart Cities</button>
+            <button type="button" class="blog-filter-btn" data-filter="geospatial" data-i18n="pages.blogPage.filterGeo">Geospatial &amp; Data</button>
+            <button type="button" class="blog-filter-btn" data-filter="sports-events" data-i18n="pages.blogPage.filterSports">Sports &amp; Events</button>
+            <button type="button" class="blog-filter-btn" data-filter="partnerships" data-i18n="pages.blogPage.filterPartners">Partnerships</button>
+          </div>
+        </div>
+
+        <div class="container">
+          <div id="blog-archive-grid" class="blog-archive-grid blog-list-mount blog-index-all__grid" data-blog-list="archive"></div>
+        </div>
       </section>
 
-      <section class="home-cta-shell" aria-labelledby="blog-cta-heading">
+      <section class="home-cta-shell home-cta-shell--blog" aria-labelledby="blog-cta-heading">
         <div class="home-cta-final">
           <div class="max-w-2xl">
             <p class="eyebrow" data-i18n="pages.blogPage.cta.eyebrow">Next step</p>
@@ -160,7 +133,7 @@
       </section>
     </main>
 
-        <footer class="site-footer">
+    <footer class="site-footer">
       <div class="site-footer__strap">
         <div class="container site-footer__strap-inner">
           <div>

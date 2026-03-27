@@ -9,6 +9,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { decodeHtmlEntities } from "../lib/decode-html-entities.mjs";
 import { CASE_STUDY_SLUGS } from "./import-case-studies-from-wix.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -25,7 +26,8 @@ function ensureDir(d) {
 }
 
 function escAttr(s) {
-  return String(s)
+  const t = decodeHtmlEntities(s == null ? "" : String(s));
+  return t
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")

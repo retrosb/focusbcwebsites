@@ -2,6 +2,11 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { decodeHtmlEntities } from "./focusbc/lib/decode-html-entities.mjs";
+import {
+  extractImportedBlogBodyHtml,
+  renderFocusbcBlogPost,
+} from "./focusbc/lib/render-focusbc-blog-post.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 8888;
@@ -17,9 +22,7 @@ const CAAP_PAGES_ROOT = useCaapPublicBuild ? CAAP_PUBLIC : path.join(CAAP_REPO, 
 const CAAP_ASSET_ROOT = useCaapPublicBuild ? CAAP_PUBLIC : CAAP_REPO;
 const CAAP_SOURCE = CAAP_REPO;
 const BLOG_JSON = path.join(FOCUSBC, "data", "blog-posts.json");
-const BLOG_TEMPLATE = path.join(FOCUSBC, "blog-post.template.html");
 const DEFAULT_OG = "https://www.focus-bc.com/media/focusbc-logo.png";
-const BLOG_DEFAULT_OG = "https://www.focus-bc.com/media/og-blog-post.jpg";
 const CASE_STUDY_DEFAULT_OG = "https://www.focus-bc.com/media/og-case-study.jpg";
 
 function absoluteFocusbcAssetUrl(rel) {
@@ -29,16 +32,12 @@ function absoluteFocusbcAssetUrl(rel) {
   return `https://www.focus-bc.com/${s.replace(/^\/+/, "")}`;
 }
 
-function focusTopicsForPost(post) {
-  if (post.focusTopics && String(post.focusTopics).trim()) {
-    return String(post.focusTopics).trim();
-  }
-  const pillarHints = {
-    "smart-cities": "Smart cities, data, operations",
-    "sports-events": "Events, venues, partnerships",
-    company: "Company, culture, partnerships",
-  };
-  return pillarHints[post.pillar] || post.category || "";
+/** Root-relative path for <img src> so assets resolve under /blog/slug/ and /case-studies/slug/. */
+function focusbcAssetPath(rel) {
+  if (!rel) return "";
+  const s = String(rel).trim();
+  if (/^https?:\/\//i.test(s)) return s;
+  return `/${s.replace(/^\/+/, "")}`;
 }
 
 let blogPosts = [];
@@ -62,7 +61,8 @@ function loadBlogIndex() {
 loadBlogIndex();
 
 function escapeHtml(s) {
-  return String(s)
+  const t = decodeHtmlEntities(String(s));
+  return t
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -84,11 +84,11 @@ function formatBlogDate(iso) {
   });
 }
 
-function pickRelatedPosts(currentSlug, n = 2) {
-  return blogPosts
-    .filter((p) => p.slug !== currentSlug)
-    .sort((a, b) => String(b.lastmod).localeCompare(String(a.lastmod)))
-    .slice(0, n);
+/** YYYY-MM-DD for <time datetime> */
+function blogDateIso(iso) {
+  const s = String(iso || "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  return "";
 }
 
 function blogMediaBlock(post) {
@@ -103,70 +103,13 @@ function blogMediaBlock(post) {
 </figure>`;
   }
   const alt = post.imageAlt || post.title;
+  const src = escapeHtml(focusbcAssetPath(post.image));
   return `<figure class="blog-post-figure">
   <div class="blog-post-figure__media media-thumb-cover" role="img" aria-label="${escapeHtml(alt)}">
-    <img src="${escapeHtml(post.image)}" alt="${escapeHtml(alt)}" loading="lazy" width="1200" height="600" />
+    <img src="${src}" alt="${escapeHtml(alt)}" loading="lazy" width="1200" height="600" />
   </div>
   <figcaption class="blog-post-figure__caption">${caption}</figcaption>
 </figure>`;
-}
-
-function blogPlaceholderBody(post, dateStr, canonical) {
-  return `<p class="lead">This page is a <strong>placeholder</strong> while the full article is migrated from the previous Focus BC site.</p>
-<p><strong>${escapeHtml(post.title)}</strong> — last updated on the public site: <strong>${escapeHtml(dateStr)}</strong> <span class="text-muted">(${escapeHtml(post.lastmod)})</span>. Category: <strong>${escapeHtml(post.category)}</strong>.</p>
-<p>Original location: <a href="${escapeHtml(canonical)}" rel="noopener noreferrer">${escapeHtml(canonical)}</a>.</p>
-<h2>What goes here next</h2>
-<p>Drop in the long-form narrative, pull quotes, embedded video, and diagrams from your CMS or markdown source. The hero image above comes from the Wix sitemap entry for this post.</p>
-<h2>Why this structure exists</h2>
-<p>Each slug under <code>/focusbc/blog/&lt;slug&gt;</code> is backed by one object in <code>data/blog-posts.json</code>. Edit that JSON or re-run <code>node focusbc/scripts/build-blog-posts-json.mjs</code> after changing the seed list in <code>focusbc/scripts/build-blog-posts-json.mjs</code>.</p>`;
-}
-
-function blogRelatedBlock(related) {
-  return related
-    .map(
-      (r) =>
-        `<a href="blog/${encodeURIComponent(r.slug)}" class="blog-related-link"><h3 class="h3 blog-related-link__title">${escapeHtml(r.title)}</h3><p class="blog-related-link__excerpt text-muted mt-1 text-sm-tight">${escapeHtml(truncate(r.excerpt, 140))}</p></a>`
-    )
-    .join("");
-}
-
-function renderFocusbcBlogPost(post) {
-  const tpl = fs.readFileSync(BLOG_TEMPLATE, "utf8");
-  const canonical = `https://www.focus-bc.com/post/${post.slug}`;
-  const ogImage = post.image ? absoluteFocusbcAssetUrl(post.image) : BLOG_DEFAULT_OG;
-  const dateStr = formatBlogDate(post.lastmod);
-  const metaDesc = truncate(String(post.excerpt || post.title).replace(/\s+/g, " "), 155);
-  const related = pickRelatedPosts(post.slug, 2);
-  const robotsContent = post.index === false ? "noindex, follow" : "index, follow";
-  const map = {
-    __ROBOTS_CONTENT__: escapeHtml(robotsContent),
-    __META_TITLE__: escapeHtml(`${post.title} | Focus BC`),
-    __META_DESC__: escapeHtml(metaDesc),
-    __CANONICAL__: escapeHtml(canonical),
-    __OG_TITLE__: escapeHtml(`${post.title} | Focus BC`),
-    __OG_DESC__: escapeHtml(metaDesc),
-    __OG_URL__: escapeHtml(canonical),
-    __OG_IMAGE__: escapeHtml(ogImage),
-    __TW_TITLE__: escapeHtml(`${post.title} | Focus BC`),
-    __TW_DESC__: escapeHtml(metaDesc),
-    __TW_IMAGE__: escapeHtml(ogImage),
-    __FOCUS_TOPICS__: escapeHtml(focusTopicsForPost(post)),
-    __CATEGORY__: escapeHtml(post.category),
-    __DATE_STR__: escapeHtml(dateStr),
-    __READ_MIN__: escapeHtml(String(post.readMinutes ?? 5)),
-    __H1__: escapeHtml(post.title),
-    __LEAD__: escapeHtml(post.excerpt || metaDesc),
-    __MEDIA_BLOCK__: blogMediaBlock(post),
-    __BODY_HTML__: blogPlaceholderBody(post, dateStr, canonical),
-    __ASIDE_CAT__: escapeHtml(post.category),
-    __READ_TIME_LABEL__: escapeHtml(`${post.readMinutes ?? 5} minutes`),
-    __RELATED_BLOCK__: blogRelatedBlock(related),
-  };
-  let out = tpl;
-  for (const [k, v] of Object.entries(map)) {
-    out = out.split(k).join(v);
-  }
-  return out;
 }
 
 const CASE_STUDIES_JSON = path.join(FOCUSBC, "data", "case-studies.json");
@@ -228,17 +171,6 @@ function asideFocusForStudy(study) {
   return ch ? truncate(ch, 120) : "—";
 }
 
-function heroMetaDetailForStudy(study) {
-  const c = study.clientType && String(study.clientType).trim();
-  if (c) return truncate(c, 72);
-  const o = study.outcome && String(study.outcome).trim();
-  if (o) return truncate(o, 72);
-  const ch = String(study.challenge || "")
-    .replace(/\s+/g, " ")
-    .trim();
-  return ch ? truncate(ch, 72) : "—";
-}
-
 function caseStudyRelatedProductHtml(study) {
   const ro = study.relatedOffer;
   const talkBtn = `<a href="contact" class="btn btn--secondary-light btn--sm">Talk to Focus BC</a>`;
@@ -288,9 +220,10 @@ function caseStudyMediaBlock(study) {
 </figure>`;
   }
   const alt = study.imageAlt || study.headline || study.title;
+  const src = escapeHtml(focusbcAssetPath(study.image));
   return `<figure class="blog-post-figure">
   <div class="blog-post-figure__media media-thumb-cover" role="img" aria-label="${escapeHtml(alt)}">
-    <img src="${escapeHtml(study.image)}" alt="${escapeHtml(alt)}" loading="lazy" width="1200" height="600" />
+    <img src="${src}" alt="${escapeHtml(alt)}" loading="lazy" width="1200" height="600" />
   </div>
   <figcaption class="blog-post-figure__caption">${caption}</figcaption>
 </figure>`;
@@ -316,6 +249,22 @@ function caseStudyRelatedBlock(related) {
     .join("");
 }
 
+function caseStudyRelatedAsideHtml(related) {
+  if (!related.length) return "";
+  return `<aside class="case-study-page-shell__aside" aria-label="Related case studies">
+  <div class="card card--flush p-5 case-study-aside-card">
+    <p class="eyebrow" data-i18n="caseStudy.relatedHeading">Related case studies</p>
+    <div class="case-study-related-stack mt-4">${caseStudyRelatedBlock(related)}</div>
+  </div>
+</aside>`;
+}
+
+function outcomeForStudy(study) {
+  const o = study.outcome && String(study.outcome).trim();
+  if (o) return truncate(o, 220);
+  return "—";
+}
+
 function renderFocusbcCaseStudy(study) {
   const tpl = fs.readFileSync(CASE_STUDY_TEMPLATE, "utf8");
   const canonical = `https://www.focus-bc.com/post/${study.slug}`;
@@ -326,7 +275,6 @@ function renderFocusbcCaseStudy(study) {
   const related = pickRelatedCases(study.slug, 2);
   const robotsContent = study.index === false ? "noindex, follow" : "index, follow";
   const productArea = productAreaFromStudy(study);
-  const heroMetaTail = escapeHtml(heroMetaDetailForStudy(study));
   const readMin = study.readMinutes ?? 5;
   const map = {
     __ROBOTS_CONTENT__: escapeHtml(robotsContent),
@@ -346,12 +294,13 @@ function renderFocusbcCaseStudy(study) {
     __CLIENT_TYPE__: escapeHtml(study.clientType || "—"),
     __MAIN_FOCUS__: escapeHtml(mainFocusForStudy(study)),
     __PRODUCT_AREA__: escapeHtml(productArea),
+    __OUTCOME__: escapeHtml(outcomeForStudy(study)),
     __ASIDE_FOCUS__: escapeHtml(asideFocusForStudy(study)),
     __MEDIA_BLOCK__: caseStudyMediaBlock(study),
     __BODY_HTML__: caseStudyPlaceholderBody(study, dateStr, canonical),
     __RELATED_PRODUCT_BLOCK__: caseStudyRelatedProductHtml(study),
     __ASIDE_CAT__: escapeHtml(study.category),
-    __RELATED_BLOCK__: caseStudyRelatedBlock(related),
+    __RELATED_ASIDE__: caseStudyRelatedAsideHtml(related),
     __DATE_STR__: escapeHtml(dateStr),
     __READ_MIN__: escapeHtml(String(readMin)),
     __READ_TIME_LABEL__: escapeHtml(`${readMin} minutes`),
@@ -361,8 +310,6 @@ function renderFocusbcCaseStudy(study) {
   for (const k of keys) {
     out = out.split(k).join(map[k]);
   }
-  /* Hero meta tail: apply after other tokens so it cannot be skipped if the process had an older map shape; safe because placeholder is not used in JSON copy. */
-  out = out.split("__HERO_META_DETAIL__").join(heroMetaTail);
   return out;
 }
 
@@ -625,6 +572,19 @@ function resolveFocusbcFile(segments) {
   if (!underRoot(FOCUSBC_OUTPUT, candidate)) return null;
   if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
     return candidate;
+  }
+
+  /* Same idea as site-root /media/…: serve from focusbc/media when public/focusbc/media is stale or partial. */
+  if (segments[0] === "media") {
+    const focusMediaRoot = path.join(FOCUSBC, "media");
+    const srcCandidate = path.join(FOCUSBC, rel);
+    if (
+      underRoot(focusMediaRoot, srcCandidate) &&
+      fs.existsSync(srcCandidate) &&
+      fs.statSync(srcCandidate).isFile()
+    ) {
+      return srcCandidate;
+    }
   }
 
   return null;
@@ -943,6 +903,49 @@ function handler(req, res) {
         res.end();
         return;
       }
+      const post = blogBySlug.get(slug);
+      if (post) {
+        if (req.method === "HEAD") {
+          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+          res.end();
+          return;
+        }
+        try {
+          let bodyHtml = null;
+          const staticBlogDir = path.join(FOCUSBC_OUTPUT, "blog", slug, "index.html");
+          const staticBlogPath = path.join(
+            FOCUSBC_OUTPUT,
+            "blog",
+            slug.endsWith(".html") ? slug : `${slug}.html`
+          );
+          const builtSource = path.join(FOCUSBC, "blog-built", `${slug}.html`);
+          for (const p of [staticBlogDir, staticBlogPath, builtSource]) {
+            if (fs.existsSync(p)) {
+              try {
+                const raw = fs.readFileSync(p, "utf8");
+                bodyHtml = extractImportedBlogBodyHtml(raw);
+                if (bodyHtml) break;
+              } catch {
+                /* keep trying */
+              }
+            }
+          }
+          const html = renderFocusbcBlogPost(post, {
+            bodyHtml: bodyHtml || undefined,
+            allPosts: blogPosts,
+          });
+          const buf = Buffer.from(injectBase(html, "/focusbc/"), "utf8");
+          res.writeHead(200, {
+            "Content-Type": "text/html; charset=utf-8",
+            "Content-Length": buf.length,
+          });
+          res.end(buf);
+        } catch (e) {
+          res.writeHead(500);
+          res.end("Internal Server Error");
+        }
+        return;
+      }
       const staticBlogDir = path.join(FOCUSBC_OUTPUT, "blog", slug, "index.html");
       if (fs.existsSync(staticBlogDir)) {
         if (req.method === "HEAD") {
@@ -965,27 +968,6 @@ function handler(req, res) {
           return;
         }
         sendFile(res, staticBlogPath, { injectBaseHref: "/focusbc/" });
-        return;
-      }
-      const post = blogBySlug.get(slug);
-      if (post) {
-        if (req.method === "HEAD") {
-          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-          res.end();
-          return;
-        }
-        try {
-          const html = renderFocusbcBlogPost(post);
-          const body = Buffer.from(injectBase(html, "/focusbc/"), "utf8");
-          res.writeHead(200, {
-            "Content-Type": "text/html; charset=utf-8",
-            "Content-Length": body.length,
-          });
-          res.end(body);
-        } catch (e) {
-          res.writeHead(500);
-          res.end("Internal Server Error");
-        }
         return;
       }
       if (caseBySlug.has(slug)) {

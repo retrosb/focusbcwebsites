@@ -1,12 +1,13 @@
 /**
- * Blog index: filter articles by data-blog-filter to match .blog-filter-btn[data-filter].
+ * Blog index: filter archive grid only (featured is curated and not filtered).
  */
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.querySelector(".blog-filter-bar");
-  if (!bar) return;
+  const grid = document.getElementById("blog-archive-grid");
+  if (!bar || !grid) return;
 
   const buttons = bar.querySelectorAll(".blog-filter-btn[data-filter]");
-  const articles = document.querySelectorAll("[data-blog-filter]");
+  const articles = grid.querySelectorAll("[data-blog-filter]");
   if (!buttons.length || !articles.length) return;
 
   function setActive(filter) {

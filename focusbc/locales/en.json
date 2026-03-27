@@ -27,12 +27,27 @@
   },
   "blog": {
     "backToBlog": "← All blog posts",
+    "backLink": "Back to blog",
     "readArticle": "Read article",
-    "eyebrow": "Blog"
+    "eyebrow": "Blog",
+    "minRead": "min read",
+    "relatedArticles": "Related articles",
+    "aboutArticle": "About this article",
+    "asideCategory": "Category:",
+    "asideReadTime": "Read time:",
+    "asideTopics": "Topics:"
   },
   "caseStudy": {
     "eyebrow": "Case studies",
-    "readCaseStudy": "Read case study"
+    "readCaseStudy": "Read case study",
+    "backToList": "← All case studies",
+    "backLink": "Back to case studies",
+    "pageKind": "Case study",
+    "relatedHeading": "Related case studies",
+    "summaryClient": "Client type",
+    "summaryProduct": "Product",
+    "summaryFocus": "Focus",
+    "summaryOutcome": "Outcome"
   },
   "pages": {
     "index": {
@@ -521,10 +536,18 @@
     "blogPage": {
       "hero": {
         "pill": "Focus BC Blog",
-        "h1": "Selected insights on products, operations, cities, and sports events",
-        "lede1": "We share how we think about product development, operational platforms, geospatial workflows, and the environments where our software is used.",
+        "h1": "News, updates, and highlights from Focus BC",
+        "lede1": "Projects, partnerships, milestones, events, and life at Focus BC.",
         "lede2": "The blog is designed to support useful conversations around platforms, operations, and practical implementation, not just publish content for the sake of it.",
         "cap": "Product thinking, operational platforms, and Focus BC insights"
+      },
+      "featured": {
+        "h2": "Featured posts",
+        "lead": "Recent highlights from Focus BC."
+      },
+      "all": {
+        "h2": "All posts",
+        "lead": "Browse all posts from Focus BC."
       },
       "filterAll": "All",
       "filterCompany": "Product & Company",
@@ -532,19 +555,8 @@
       "filterGeo": "Geospatial & Data",
       "filterSports": "Sports & Events",
       "filterPartners": "Partnerships",
-      "srFeatured": "Featured and highlighted articles load from published entries in data/blog-posts.json.",
+      "srFeatured": "Featured posts are curated; the list below is the full archive.",
       "loading": "Loading articles…",
-      "latest": {
-        "eyebrow": "Latest articles",
-        "h2": "Selected content from across the Focus BC ecosystem",
-        "lead": "The blog is designed to strengthen authority, support product positioning, and connect readers to the right next step."
-      },
-      "editorial": {
-        "eyebrow": "Editorial approach",
-        "h2": "Content that supports products, operations, and useful conversations",
-        "p1": "The Focus BC blog is designed to explain how we think about products, operations, implementation, and the environments where our software is used.",
-        "p2": "The goal is to publish selected content that strengthens authority, supports product positioning, and creates useful context for clients, partners, and future team members."
-      },
       "cta": {
         "eyebrow": "Next step",
         "h2": "Want to explore the products behind these ideas?",
@@ -557,7 +569,7 @@
       "hero": {
         "pill": "Focus BC Case Studies",
         "h1": "Proof from real operational environments",
-        "lede1": "Explore how Focus BC products and solutions support city operations, geospatial workflows, and global sports event environments.",
+        "lede1": "Real examples showing how platforms, data, and workflows support better operational outcomes.",
         "lede2": "These case studies show how platforms, data, and operational design come together in practical contexts where teams need better visibility, coordination, and control.",
         "cap": "Focus BC proof across cities, operations, and sports environments"
       },

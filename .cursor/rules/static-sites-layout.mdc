@@ -26,13 +26,22 @@ Everything here is **intentionally outside** `sources/`: it is either **build to
 | **`blog-post.template.html`**, **`case-study.template.html`** | **Server-side HTML templates** only. `server.mjs` loads them, substitutes placeholders from JSON, injects `<base>`, and serves HTML for `/blog/:slug` and `/casestudies/:slug`. They are **not** the same as files in `sources/`; do not duplicate them into `sources/`. |
 | **`media/`** | Images and binary assets (large tree; not mixed into `sources/`). |
 | **`locales/`** | i18n JSON loaded by `sources/js/i18n.js`. |
-| **`data/`** | JSON (blog posts, case studies, manifests) used by builds, server, or client `fetch()`. |
+| **`data/`** | JSON (blog posts, case studies, manifests) used by builds, server, or client `fetch()`. **`blog-featured.json`** (optional): up to **two** blog slugs for the blog index “Featured insights” strip; build fills the rest if empty. |
 | **`scripts/`** | Maintenance scripts (import/sync JSON, media, one-off HTML patches). **Not** the same as repo-root `scripts/build-pages.mjs`. |
 | **Focus BC only** | `blog-built/`, `case-studies-built/` — optional pre-generated HTML merged by `focusbc/build.mjs`; `blog-post.template.html` / `case-study.template.html` at `focusbc/` for server-rendered slugs. |
 
 ## Repo root `scripts/`
 
 - **`scripts/build-pages.mjs`** — builds the hub `public/index.html`, runs **`focusbc/build.mjs`** and **`caap/build.mjs`**, writes `_redirects`.
+
+## Build output (single destination)
+
+- Focus BC and CAAP builds write only to **`public/focusbc/`** and **`public/caap/`** (via `FOCUSBC_OUT` / `CAAP_OUT` in `scripts/build-pages.mjs`, or each `build.mjs` default).
+- **Do not** introduce or rely on a repo-root folder such as **`focusbc-output/`** — it is not part of the pipeline; remove if present.
+
+## Focus BC: `/media/` URLs under `/focusbc/`
+
+Injected HTML in **`focusbc/build.mjs`** (blog index, case-study index cards) must use **`blogAssetSrc()`** or **`absUrl()`** for site media — never raw `src="/media/...` strings alone. The build runs **`applyBasePrefix()`** again after injecting those fragments. See repo **README** subsection *Focus BC: media URLs and the hub path*.
 
 ## Rules of thumb
 

@@ -8,5 +8,8 @@ node_modules/
 # Cloudflare Pages build output (run npm run build)
 public/
 
+# Obsolete local output path — not used by any script; only public/focusbc is canonical
+focusbc-output/
+
 caap/Archive.zip
 

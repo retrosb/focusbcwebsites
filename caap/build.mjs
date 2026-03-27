@@ -75,6 +75,8 @@ function injectBaseAllHtml(rootDir) {
       const p = path.join(dir, ent.name);
       if (ent.isDirectory()) walk(p);
       else if (ent.name.endsWith(".html")) {
+        /* promoteHtmlFiles may have renamed this path; readdir can still list stale names on some FS. */
+        if (!fs.existsSync(p)) continue;
         let html = fs.readFileSync(p, "utf8");
         html = injectBaseTag(html);
         fs.writeFileSync(p, html);
@@ -84,11 +86,20 @@ function injectBaseAllHtml(rootDir) {
   walk(rootDir);
 }
 
+/* Prefer shell rm on Unix (see focusbc/build.mjs): fs.rmSync can hang on APFS + duplicate dirs. */
 if (fs.existsSync(ROOT)) {
-  try {
-    fs.rmSync(ROOT, { recursive: true, force: true });
-  } catch {
-    execFileSync("/bin/rm", ["-rf", ROOT], { stdio: "inherit" });
+  if (process.platform === "win32") {
+    try {
+      fs.rmSync(ROOT, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+    } catch {
+      /* last resort */
+    }
+  } else {
+    try {
+      execFileSync("/bin/rm", ["-rf", ROOT], { stdio: "inherit" });
+    } catch {
+      fs.rmSync(ROOT, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
+    }
   }
 }
 ensureDir(ROOT);

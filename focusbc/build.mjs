@@ -5,9 +5,12 @@
  * Set FOCUSBC_BASE_PATH=/focusbc when the site is deployed under a subpath (Cloudflare Pages hub).
  * URLs use directory style (/blog/slug/, /case-studies/slug/) without *.html in navigation.
  */
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { decodeHtmlEntities } from "./lib/decode-html-entities.mjs";
+import { extractImportedBlogBodyHtml, renderFocusbcBlogPost } from "./lib/render-focusbc-blog-post.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.FOCUSBC_OUT
@@ -38,6 +41,21 @@ function applyBasePrefix(html) {
     if (/^https?:/i.test(p) || alreadyPrefixed(p)) return m;
     return `src="${prefix}${p}"`;
   });
+  return s;
+}
+
+/**
+ * Wix pro-gallery HTML references `/_serverless/pro-gallery-css-v4-server/layoutCss` and hides
+ * `.gallery-item-container` until that CSS loads. Strip scripts and neutralize hide rules for static hosting.
+ */
+function sanitizeWixProGalleryHtml(html) {
+  let s = html;
+  s = s.replace(/<div id="layout-fixer-[^"]*"[^>]*>\s*<link[^>]*\/>\s*<script>[\s\S]*?<\/script>\s*<\/div>/gi, "");
+  s = s.replace(
+    /#(pro-gallery-[a-zA-Z0-9_-]+-not-scoped)\s+\.gallery-item-container\s*\{\s*opacity:\s*0\s*\}/gs,
+    "#$1 .gallery-item-container { opacity: 1 }"
+  );
+  s = s.replace(/transition:opacity \.2s ease;opacity:0;display:none/g, "transition:opacity .2s ease;opacity:1;display:block");
   return s;
 }
 const SOURCES = path.join(__dirname, "sources");
@@ -192,8 +210,24 @@ function injectFocusBuiltI18n(html) {
   return html;
 }
 
+function injectImportProGalleryScript(html) {
+  if (!html.includes("pro-gallery") || html.includes("import-pro-gallery.js")) return html;
+  const scriptSrc = BASE ? `${BASE}/js/import-pro-gallery.js` : "/js/import-pro-gallery.js";
+  return html.replace(/<\/body>/i, `    <script defer src="${scriptSrc}"></script>\n  </body>`);
+}
+
+function normalizeImportedHtmlEntities(html) {
+  let s = html;
+  for (let i = 0; i < 4; i++) s = s.replace(/&amp;amp;/g, "&amp;");
+  s = s.replace(/&amp;#x([0-9a-fA-F]+);/gi, "&#x$1;");
+  s = s.replace(/&amp;#(\d+);/g, "&#$1;");
+  return s;
+}
+
 function writeHtmlWithNavRewrite(from, to) {
   let html = fs.readFileSync(from, "utf8");
+  html = sanitizeWixProGalleryHtml(html);
+  html = normalizeImportedHtmlEntities(html);
   html = rewriteNavToIndexHtml(html);
   if (!/<link\s+rel="icon"/i.test(html)) {
     html = html.replace(
@@ -203,12 +237,14 @@ function writeHtmlWithNavRewrite(from, to) {
   }
   html = applyBasePrefix(html);
   html = injectFocusBuiltI18n(html);
+  html = injectImportProGalleryScript(html);
   ensureDir(path.dirname(to));
   fs.writeFileSync(to, html);
 }
 
 function escAttr(s) {
-  return String(s)
+  const t = decodeHtmlEntities(s == null ? "" : String(s));
+  return t
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
@@ -221,9 +257,68 @@ function excerpt(s, n) {
   return `${t.slice(0, n - 1)}…`;
 }
 
+/**
+ * Root-relative URL for `/media/...` assets in **injected** list HTML (blog + case-study index cards).
+ * Must use `absUrl()` so paths work when the site is served under `/focusbc/` (hub). Do not emit raw
+ * `src="/media/...` in template strings without this — see README “Focus BC: media URLs and hub path”.
+ */
+function blogAssetSrc(rel) {
+  if (!rel) return "";
+  const s = String(rel).trim();
+  if (/^https?:\/\//i.test(s)) return s;
+  const path = `/${s.replace(/^\/+/, "")}`;
+  return absUrl(path);
+}
+
+function blogCardMediaHtml(heroImage, wide) {
+  const src = blogAssetSrc(heroImage);
+  if (!src) {
+    return `<div class="blog-card--editorial__placeholder${wide ? " blog-card--editorial__placeholder--wide" : ""}" aria-hidden="true"></div>`;
+  }
+  const box = wide
+    ? `<div class="media-16-9 media-thumb-cover blog-card--editorial__media"><img src="${escAttr(src)}" alt="" width="960" height="540" loading="lazy" /></div>`
+    : `<div class="media-16-10 media-thumb-cover blog-card--editorial__media"><img src="${escAttr(src)}" alt="" width="960" height="540" loading="lazy" /></div>`;
+  return box;
+}
+
+/** Publication-style blog index cards: hero image + text (use blogAssetSrc; final page gets applyBasePrefix after injection). */
+function blogPublicationCard(extraClass, p, excerptLen, headingTag) {
+  const H = headingTag || "h2";
+  const isLead = extraClass.includes("publication-lead");
+  const mediaHtml = blogCardMediaHtml(p.heroImage, isLead);
+  return `<article class="blog-card--publication ${extraClass}" data-blog-filter="${escAttr(p.filterKey)}">
+              <div class="blog-card--publication__media">${mediaHtml}</div>
+              <div class="blog-card--publication__body">
+                <p class="blog-card--text__cat">${escAttr(p.category || "Blog")}</p>
+                <${H} class="blog-card--publication__title"><a href="${escAttr(blogPostHref(p.slug))}">${escAttr(p.title)}</a></${H}>
+                <p class="blog-card--publication__excerpt">${escAttr(excerpt(p.excerpt, excerptLen))}</p>
+                <a href="${escAttr(blogPostHref(p.slug))}" class="link-blog-read mt-5 inline-block" data-i18n="blog.readArticle">Read article</a>
+              </div>
+            </article>`;
+}
+
 function categoryLabel(cs) {
   const c = (cs.categories || []).filter((x) => x && !/^case studies$/i.test(String(x).replace(/&amp;/g, "&")));
-  return c[0] ? String(c[0]).replace(/&amp;/g, "&") : "Case study";
+  if (c[0]) return String(c[0]).replace(/&amp;/g, "&");
+  if (cs.category) return String(cs.category).replace(/&amp;/g, "&");
+  return "Case study";
+}
+
+/** Short metadata chips for case study index cards (proof / outcomes). */
+function caseStudyCardTagsHtml(cs) {
+  const cat = categoryLabel(cs);
+  const blob = `${cs.slug || ""} ${cs.description || ""} ${cs.title || ""}`.toLowerCase();
+  const tags = [cat];
+  if (/virtual venue|fiba|fifa|venue|stadium|arena|sports|event|basketball|olympic|wsa|emel|gira|traffic|factory|renault/.test(blob)) {
+    tags.push("Virtual Venue");
+  } else {
+    tags.push("City as a Platform");
+  }
+  tags.push("Operations");
+  return tags
+    .slice(0, 3)
+    .map((t) => `<span class="case-study-card__tag">${escAttr(t)}</span>`)
+    .join("");
 }
 
 function blogCategoryLabel(p) {
@@ -297,6 +392,68 @@ function publishedTimeMs(p) {
   return Number.isFinite(t) ? t : null;
 }
 
+/** Stable seed from slug list (same input → same featured set until slugs change). */
+function hashStringToSeed(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
+
+function shuffleWithSeed(arr, seed) {
+  const a = [...arr];
+  let state = seed >>> 0;
+  const next = () => {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+    return state / 0x100000000;
+  };
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/**
+ * Up to 2 featured posts for the blog index. Optional `data/blog-featured.json`:
+ * `{ "slugs": ["a","b"] }` for backoffice/curation; missing slugs are filled with a
+ * deterministic shuffle of the remaining posts (no overlap with "All posts").
+ */
+function pickBlogFeaturedAndRest(sortedPosts) {
+  if (!sortedPosts.length) return { featured: [], rest: [] };
+  const featuredPath = path.join(__dirname, "data", "blog-featured.json");
+  let configured = [];
+  if (fs.existsSync(featuredPath)) {
+    try {
+      const j = JSON.parse(fs.readFileSync(featuredPath, "utf8"));
+      const raw = j.slugs ?? j.featured;
+      if (Array.isArray(raw) && raw.length) configured = raw.map(String);
+    } catch {
+      /* ignore */
+    }
+  }
+  const bySlug = new Map(sortedPosts.map((p) => [p.slug, p]));
+  const featured = [];
+  for (const s of configured) {
+    if (featured.length >= 2) break;
+    const p = bySlug.get(s);
+    if (p) featured.push(p);
+  }
+  const need = Math.min(2, sortedPosts.length);
+  if (featured.length < need) {
+    const used = new Set(featured.map((p) => p.slug));
+    const pool = sortedPosts.filter((p) => !used.has(p.slug));
+    const seed = hashStringToSeed(sortedPosts.map((p) => p.slug).sort().join("|"));
+    const shuffled = shuffleWithSeed(pool, seed);
+    for (const p of shuffled) {
+      if (featured.length >= 2) break;
+      featured.push(p);
+    }
+  }
+  const fset = new Set(featured.map((p) => p.slug));
+  const rest = sortedPosts.filter((p) => !fset.has(p.slug));
+  return { featured, rest };
+}
+
 /** Map case study to index filter bucket (matches case-studies.html filter buttons). */
 function deriveCaseStudyFilterKey(cs) {
   const cats = (cs.categories || []).map((x) => String(x).replace(/&amp;/g, "&").toLowerCase());
@@ -337,12 +494,13 @@ function caseStudyIndexBlocks(items) {
   const [a, b, ...restAll] = items;
   const stack = [b, ...restAll].filter(Boolean).slice(0, 2);
   const featuredInner = `<div class="grid-blog-featured case-studies-featured-grid">
-            <article class="blog-card--featured" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(a))}">
-              <div class="media-16-9 media-thumb-cover"><img src="${escAttr(a.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
+            <article class="case-study-card--featured" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(a))}">
+              <div class="media-16-9 media-thumb-cover"><img src="${escAttr(blogAssetSrc(a.heroImage || ""))}" alt="" width="960" height="540" loading="lazy" /></div>
               <div class="p-8 sm-p-10">
                 <p class="eyebrow">${escAttr(categoryLabel(a))}</p>
                 <h2 class="mt-3 h2"><a href="${escAttr(caseStudyHref(a.slug))}">${escAttr(a.title)}</a></h2>
                 <p class="text-muted mt-4 text-sm-tight">${escAttr(excerpt(a.description, 220))}</p>
+                <div class="case-study-card__tags">${caseStudyCardTagsHtml(a)}</div>
                 <a href="${escAttr(caseStudyHref(a.slug))}" class="link-coral-underline mt-8 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
               </div>
             </article>
@@ -353,6 +511,7 @@ function caseStudyIndexBlocks(items) {
                 <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
                 <h3 class="mt-3 h3"><a href="${escAttr(caseStudyHref(cs.slug))}">${escAttr(cs.title)}</a></h3>
                 <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(cs.description, 140))}</p>
+                <div class="case-study-card__tags case-study-card__tags--compact">${caseStudyCardTagsHtml(cs)}</div>
                 <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
               </article>`
                 )
@@ -362,12 +521,13 @@ function caseStudyIndexBlocks(items) {
   const featured = `<div id="case-studies-featured-mount" class="case-studies-list-mount">${featuredInner}</div>`;
   const archiveCards = items
     .map(
-      (cs) => `<article class="blog-card--archive card card--flush" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(cs))}">
-            <div class="media-16-10 media-thumb-cover"><img src="${escAttr(cs.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
+      (cs) => `<article class="case-study-card--archive card card--flush" data-case-study-filter="${escAttr(deriveCaseStudyFilterKey(cs))}">
+            <div class="media-16-10 media-thumb-cover"><img src="${escAttr(blogAssetSrc(cs.heroImage || ""))}" alt="" width="960" height="540" loading="lazy" /></div>
             <div class="p-6">
               <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
               <h3 class="mt-3 h3"><a href="${escAttr(caseStudyHref(cs.slug))}">${escAttr(cs.title)}</a></h3>
               <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(cs.description, 160))}</p>
+              <div class="case-study-card__tags">${caseStudyCardTagsHtml(cs)}</div>
               <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
             </div>
           </article>`
@@ -379,54 +539,27 @@ function caseStudyIndexBlocks(items) {
   return { featured, archive };
 }
 
-/** Featured + two compact + full grid; posts need slug, title, excerpt, category, heroImage, dates. */
-function blogIndexBlocks(posts) {
-  if (!posts.length) {
+/** Featured (1 lead + 1 compact) + archive grid; no slug appears in both. */
+function blogIndexBlocks(featuredPosts, archivePosts) {
+  if (!featuredPosts.length && !archivePosts.length) {
     return {
       featured: `<div id="blog-featured-mount" class="blog-list-mount"><p class="text-muted">No blog posts yet. Run <code>node focusbc/scripts/import-blog-from-wix.mjs</code>.</p></div>`,
-      archive: `<div id="blog-archive-grid" class="grid grid-3 gap-lg mt-10 blog-list-mount"></div>`,
+      archive: `<div id="blog-archive-grid" class="blog-archive-grid blog-list-mount mt-10"></div>`,
     };
   }
-  const [a, b, ...restAll] = posts;
-  const stack = [b, ...restAll].filter(Boolean).slice(0, 2);
-  const featuredInner = `<div class="grid-blog-featured">
-            <article class="blog-card--featured" data-blog-filter="${escAttr(a.filterKey)}">
-              <div class="media-16-9 media-thumb-cover"><img src="${escAttr(a.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
-              <div class="p-8 sm-p-10">
-                <p class="eyebrow">${escAttr(a.category || "Blog")}</p>
-                <h2 class="mt-3 h2"><a href="${escAttr(blogPostHref(a.slug))}">${escAttr(a.title)}</a></h2>
-                <p class="text-muted mt-4 text-sm-tight">${escAttr(excerpt(a.excerpt, 220))}</p>
-                <a href="${escAttr(blogPostHref(a.slug))}" class="link-arrow mt-8 inline-block" data-i18n="blog.readArticle">Read article</a>
-              </div>
-            </article>
-            <div class="grid gap-lg">
-              ${stack
-                .map(
-                  (p) => `<article class="case-study-card-compact" data-blog-filter="${escAttr(p.filterKey)}">
-                <p class="eyebrow eyebrow--small">${escAttr(p.category || "Blog")}</p>
-                <h3 class="mt-3 h3"><a href="${escAttr(blogPostHref(p.slug))}">${escAttr(p.title)}</a></h3>
-                <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(p.excerpt, 140))}</p>
-                <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block" data-i18n="blog.readArticle">Read article</a>
-              </article>`
-                )
-                .join("")}
+  const primary = featuredPosts[0];
+  const secondary = featuredPosts.slice(1, 2);
+  const featuredInner = `<div class="blog-featured--publication">
+            ${primary ? blogPublicationCard("blog-card--publication-lead", primary, 220, "h2") : ""}
+            <div class="blog-featured--publication-stack">
+              ${secondary.map((p) => blogPublicationCard("blog-card--publication-compact", p, 140, "h3")).join("")}
             </div>
           </div>`;
   const featured = `<div id="blog-featured-mount" class="blog-list-mount">${featuredInner}</div>`;
-  const archiveCards = posts
-    .map(
-      (p) => `<article class="blog-card--archive card card--flush" data-blog-filter="${escAttr(p.filterKey)}">
-            <div class="media-16-10 media-thumb-cover"><img src="${escAttr(p.heroImage || "")}" alt="" width="960" height="540" loading="lazy" /></div>
-            <div class="p-6">
-              <p class="eyebrow eyebrow--small">${escAttr(p.category || "Blog")}</p>
-              <h3 class="mt-3 h3"><a href="${escAttr(blogPostHref(p.slug))}">${escAttr(p.title)}</a></h3>
-              <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(p.excerpt, 160))}</p>
-              <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block" data-i18n="blog.readArticle">Read article</a>
-            </div>
-          </article>`
-    )
+  const archiveCards = archivePosts
+    .map((p) => blogPublicationCard("blog-card--publication-archive", p, 160, "h3"))
     .join("\n          ");
-  const archive = `<div id="blog-archive-grid" class="grid grid-3 gap-lg mt-10 blog-list-mount">
+  const archive = `<div id="blog-archive-grid" class="blog-archive-grid blog-list-mount mt-10">
           ${archiveCards}
         </div>`;
   return { featured, archive };
@@ -517,10 +650,22 @@ function transformHtml(html) {
 }
 
 /* Full replace of output tree so removed/renamed assets (e.g. PNG→WebP) never linger in public/.
-   Stale files can break hosts with per-file size limits (e.g. Cloudflare Pages 25 MiB). */
-if (fs.existsSync(ROOT)) {
-  fs.rmSync(ROOT, { recursive: true, force: true });
+   Stale files can break hosts with per-file size limits (e.g. Cloudflare Pages 25 MiB).
+   Use shell rm on Unix: fs.rmSync can hang or ENOTEMPTY on APFS with odd duplicate folders. */
+function removeBuildOutputDir(dir) {
+  if (!fs.existsSync(dir)) return;
+  if (process.platform === "win32") {
+    fs.rmSync(dir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+    return;
+  }
+  try {
+    execFileSync("/bin/rm", ["-rf", dir], { stdio: "inherit" });
+  } catch {
+    /* e.g. .DS_Store race while Finder is open — Node retry often succeeds */
+    fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
+  }
 }
+removeBuildOutputDir(ROOT);
 ensureDir(ROOT);
 ensureDir(path.join(ROOT, "styles"));
 ensureDir(path.join(ROOT, "js"));
@@ -535,6 +680,10 @@ if (fs.existsSync(caseStudiesListSrc)) {
 const i18nSrc = path.join(SOURCES, "js", "i18n.js");
 if (fs.existsSync(i18nSrc)) {
   copyFile(i18nSrc, path.join(ROOT, "js", "i18n.js"));
+}
+const importProGallerySrc = path.join(SOURCES, "js", "import-pro-gallery.js");
+if (fs.existsSync(importProGallerySrc)) {
+  copyFile(importProGallerySrc, path.join(ROOT, "js", "import-pro-gallery.js"));
 }
 const localesDir = path.join(__dirname, "locales");
 if (fs.existsSync(localesDir)) {
@@ -644,6 +793,34 @@ function promoteHtmlFilesToDirs(rootDir) {
 promoteHtmlFilesToDirs(path.join(ROOT, "blog"));
 promoteHtmlFilesToDirs(path.join(ROOT, "case-studies"));
 
+/** Overwrite npm-copied blog-built pages with JSON-driven template + imported body (matches dev server). */
+const BLOG_POSTS_JSON_FOR_TEMPLATE = path.join(__dirname, "data", "blog-posts.json");
+if (fs.existsSync(BLOG_POSTS_JSON_FOR_TEMPLATE) && fs.existsSync(BLOG_BUILT_DIR)) {
+  let postsFromJson = [];
+  try {
+    postsFromJson = JSON.parse(fs.readFileSync(BLOG_POSTS_JSON_FOR_TEMPLATE, "utf8")).posts || [];
+  } catch {
+    postsFromJson = [];
+  }
+  for (const post of postsFromJson) {
+    if (!post || !post.slug) continue;
+    const builtSrc = path.join(BLOG_BUILT_DIR, `${post.slug}.html`);
+    if (!fs.existsSync(builtSrc)) continue;
+    let raw = fs.readFileSync(builtSrc, "utf8");
+    raw = sanitizeWixProGalleryHtml(raw);
+    raw = normalizeImportedHtmlEntities(raw);
+    const bodyHtml = extractImportedBlogBodyHtml(raw);
+    if (!bodyHtml) continue;
+    let html = renderFocusbcBlogPost(post, { bodyHtml, allPosts: postsFromJson });
+    html = transformHtml(html);
+    html = injectFocusBuiltI18n(html);
+    html = injectImportProGalleryScript(html);
+    const dest = path.join(ROOT, "blog", post.slug, "index.html");
+    ensureDir(path.dirname(dest));
+    fs.writeFileSync(dest, html);
+  }
+}
+
 if (fs.existsSync(path.join(MEDIA_SRC, "focusbc-team.avif"))) {
   copyFile(path.join(MEDIA_SRC, "focusbc-team.avif"), path.join(ROOT, "media", "careers", "focus-bc-careers.avif"));
   copyFile(path.join(MEDIA_SRC, "focusbc-team.avif"), path.join(ROOT, "media", "contact", "focus-bc-contact.avif"));
@@ -701,6 +878,7 @@ if (fs.existsSync(path.join(SOURCES, "blog.html"))) {
   const blogRows = blogPosts.map((p) => {
     const category = blogCategoryLabel(p);
     const meta = metaBySlug.get(p.slug);
+    const heroImage = p.heroImage || meta?.image || "";
     return {
       slug: p.slug,
       title: p.title,
@@ -708,15 +886,18 @@ if (fs.existsSync(path.join(SOURCES, "blog.html"))) {
       category,
       lastmod: p.lastmod,
       publishedAt: p.publishedAt,
-      heroImage: p.heroImage || "",
+      heroImage,
       filterKey: deriveBlogFilterKey(p.slug, category, meta),
     };
   });
   const curated = filterBlogRowsByIndex(blogRows, metaBySlug);
   const sortedBlog = sortByDateDesc(curated);
-  const { featured: blogFeatured, archive: blogArchive } = blogIndexBlocks(sortedBlog);
+  const { featured: featPosts, rest: archivePosts } = pickBlogFeaturedAndRest(sortedBlog);
+  const { featured: blogFeatured, archive: blogArchive } = blogIndexBlocks(featPosts, archivePosts);
   blogHtml = blogHtml.replace(/<div id="blog-featured-mount"[^>]*>[\s\S]*?<\/div>/, blogFeatured);
   blogHtml = blogHtml.replace(/<div id="blog-archive-grid"[^>]*><\/div>/, blogArchive);
+  /* Second pass: injected fragments were not in the initial transformHtml(); normalize any remaining /media/ src|href for hub path. */
+  blogHtml = applyBasePrefix(blogHtml);
   ensureDir(path.join(ROOT, "blog"));
   fs.writeFileSync(path.join(ROOT, "blog", "index.html"), blogHtml);
 }
@@ -737,6 +918,7 @@ if (fs.existsSync(path.join(SOURCES, "case-studies.html"))) {
   const { featured, archive } = caseStudyIndexBlocks(items);
   cs = cs.replace(/<div id="case-studies-featured-mount"[^>]*>[\s\S]*?<\/div>/, featured);
   cs = cs.replace(/<div id="case-studies-archive-grid"[^>]*><\/div>/, archive);
+  cs = applyBasePrefix(cs);
   ensureDir(path.join(ROOT, "case-studies"));
   fs.writeFileSync(path.join(ROOT, "case-studies", "index.html"), cs);
 }

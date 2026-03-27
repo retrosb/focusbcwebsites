@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const out = path.join(__dirname, "../data/blog-posts.json");
+const blogImportPath = path.join(__dirname, "../data/blog-import.json");
 
 /** Slugs that live under /casestudies/ (see build-case-studies-json.mjs), not the blog. */
 const CASE_STUDY_SLUGS = new Set([
@@ -207,12 +208,33 @@ function excerptFrom(alt, title) {
   return t.length > 200 ? `${t.slice(0, 197)}…` : t;
 }
 
+function loadBlogImportBySlug() {
+  const map = new Map();
+  try {
+    const raw = JSON.parse(fs.readFileSync(blogImportPath, "utf8"));
+    for (const p of raw.posts || []) {
+      if (p && typeof p.slug === "string") map.set(p.slug, p);
+    }
+  } catch {
+    /* optional */
+  }
+  return map;
+}
+
+const importBySlug = loadBlogImportBySlug();
+
 const posts = ROWS.filter(([slug]) => !CASE_STUDY_SLUGS.has(slug)).map(([slug, lastmod, image, imageAlt]) => {
   const title = titleFromSlug(slug);
   const category = categoryFromSlug(slug);
   const publish = publishFor(slug);
   const index = indexFor(slug, publish);
-  return {
+  const imp = importBySlug.get(slug);
+  const editorial =
+    imp && typeof imp.description === "string" && imp.description.trim() ? imp.description.trim() : "";
+  const baseExcerpt = excerptFrom(imageAlt, title);
+  const excerpt =
+    editorial.length > 200 ? `${editorial.slice(0, 197)}…` : editorial || baseExcerpt;
+  const post = {
     slug,
     title,
     lastmod,
@@ -222,9 +244,11 @@ const posts = ROWS.filter(([slug]) => !CASE_STUDY_SLUGS.has(slug)).map(([slug, l
     index,
     image: image || null,
     imageAlt: (imageAlt || "").trim() || title,
-    excerpt: excerptFrom(imageAlt, title),
+    excerpt,
     readMinutes: 5 + (slug.length % 4),
   };
+  if (editorial) post.description = editorial;
+  return post;
 });
 
 fs.mkdirSync(path.dirname(out), { recursive: true });

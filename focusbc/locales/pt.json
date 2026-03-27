@@ -27,12 +27,27 @@
   },
   "blog": {
     "backToBlog": "← Todos os artigos do blog",
+    "backLink": "Voltar ao blog",
     "readArticle": "Ler artigo",
-    "eyebrow": "Blog"
+    "eyebrow": "Blog",
+    "minRead": "min de leitura",
+    "relatedArticles": "Artigos relacionados",
+    "aboutArticle": "Sobre este artigo",
+    "asideCategory": "Categoria:",
+    "asideReadTime": "Tempo de leitura:",
+    "asideTopics": "Tópicos:"
   },
   "caseStudy": {
     "eyebrow": "Estudos de caso",
-    "readCaseStudy": "Ler estudo de caso"
+    "readCaseStudy": "Ler estudo de caso",
+    "backToList": "← Todos os estudos de caso",
+    "backLink": "Voltar aos estudos de caso",
+    "pageKind": "Estudo de caso",
+    "relatedHeading": "Estudos de caso relacionados",
+    "summaryClient": "Tipo de cliente",
+    "summaryProduct": "Produto",
+    "summaryFocus": "Foco",
+    "summaryOutcome": "Resultado"
   },
   "pages": {
     "index": {
@@ -521,10 +536,18 @@
     "blogPage": {
       "hero": {
         "pill": "Blog Focus BC",
-        "h1": "Insights selecionados sobre produtos, operações, cidades e eventos desportivos",
-        "lede1": "Partilhamos como pensamos no desenvolvimento de produtos, plataformas operacionais, fluxos geoespaciais e os ambientes onde o nosso software é usado.",
+        "h1": "Notícias, atualizações e destaques da Focus BC",
+        "lede1": "Projetos, parcerias, marcos, eventos e o dia a dia na Focus BC.",
         "lede2": "O blog foi pensado para apoiar conversas úteis sobre plataformas, operações e implementação prática, não apenas para publicar conteúdo pelo conteúdo.",
         "cap": "Pensamento de produto, plataformas operacionais e insights Focus BC"
+      },
+      "featured": {
+        "h2": "Posts em destaque",
+        "lead": "Destaques recentes da Focus BC."
+      },
+      "all": {
+        "h2": "Todos os posts",
+        "lead": "Navegue por todos os posts da Focus BC."
       },
       "filterAll": "Todos",
       "filterCompany": "Produto e empresa",
@@ -532,19 +555,8 @@
       "filterGeo": "Geoespacial e dados",
       "filterSports": "Desporto e eventos",
       "filterPartners": "Parcerias",
-      "srFeatured": "Artigos em destaque e realces carregam a partir de entradas publicadas em data/blog-posts.json.",
+      "srFeatured": "Os destaques são curados; a lista abaixo é o arquivo completo.",
       "loading": "A carregar artigos…",
-      "latest": {
-        "eyebrow": "Artigos recentes",
-        "h2": "Conteúdo selecionado do ecossistema Focus BC",
-        "lead": "O blog foi pensado para reforçar autoridade, apoiar posicionamento de produto e ligar leitores ao próximo passo certo."
-      },
-      "editorial": {
-        "eyebrow": "Abordagem editorial",
-        "h2": "Conteúdo que apoia produtos, operações e conversas úteis",
-        "p1": "O blog Focus BC explica como pensamos em produtos, operações, implementação e os ambientes onde o nosso software é usado.",
-        "p2": "O objetivo é publicar conteúdo selecionado que reforça autoridade, apoia posicionamento de produto e cria contexto útil para clientes, parceiros e futuros membros da equipa."
-      },
       "cta": {
         "eyebrow": "Próximo passo",
         "h2": "Quer explorar os produtos por detrás destas ideias?",
@@ -557,7 +569,7 @@
       "hero": {
         "pill": "Estudos de caso Focus BC",
         "h1": "Prova de ambientes operacionais reais",
-        "lede1": "Explore como produtos e soluções Focus BC apoiam operações municipais, fluxos geoespaciais e grandes ambientes de eventos desportivos.",
+        "lede1": "Exemplos reais de como plataformas, dados e fluxos de trabalho suportam melhores resultados operacionais.",
         "lede2": "Estes estudos de caso mostram como plataformas, dados e desenho operacional se conjugam em contextos práticos onde as equipas precisam de melhor visibilidade, coordenação e controlo.",
         "cap": "Prova Focus BC em cidades, operações e ambientes desportivos"
       },

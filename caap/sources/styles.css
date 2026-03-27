@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+
 /* City as a Platform — civic / platform aesthetic */
 
 :root {
@@ -1411,9 +1413,14 @@ h3,
 }
 
 .diff-card__icon {
-  font-size: 1.5rem;
   line-height: 1;
   margin-bottom: 0.75rem;
+}
+
+.diff-card__icon.material-symbols-outlined {
+  font-size: 1.75rem;
+  color: var(--color-ink);
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .diff-card h3 {

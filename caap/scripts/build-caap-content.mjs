@@ -3,11 +3,16 @@
  * caap/data/blog-posts.json and caap/data/case-studies.json.
  * Case-study slugs are split into case-studies.json; blog JSON lists all posts.
  *
+ * For each sitemap image URL, downloads the asset and stores it under
+ * caap/media/wix/ as WebP (same approach as Focus BC Wix imports). Logos and
+ * hand-placed files in other folders are not touched.
+ *
  * Run: node caap/scripts/build-caap-content.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CAAP_ROOT = path.join(__dirname, "..");
@@ -122,6 +127,65 @@ function parseSitemapXml(xml) {
   return urls;
 }
 
+/** Map Wix CDN URL → stable filename under media/wix/*.webp */
+function wixWebpFilenameFromUrl(urlStr) {
+  try {
+    const u = new URL(urlStr);
+    const parts = u.pathname.split("/").filter(Boolean);
+    const i = parts.indexOf("media");
+    if (i >= 0 && parts[i + 1]) {
+      const base = parts[i + 1].replace(/\.(jpe?g|png|gif|webp|avif)$/i, "");
+      return `${base}.webp`;
+    }
+    const last = parts[parts.length - 1] || "asset";
+    return `${last.replace(/\.(jpe?g|png|gif|webp|avif)$/i, "")}.webp`;
+  } catch {
+    return "asset.webp";
+  }
+}
+
+async function downloadSitemapImageToWebp(absUrl, destAbs) {
+  fs.mkdirSync(path.dirname(destAbs), { recursive: true });
+  if (fs.existsSync(destAbs)) return;
+  const res = await fetch(absUrl, {
+    headers: { "User-Agent": "CAAP-static-build/1.0 (+https://www.city-platform.com)" },
+  });
+  if (!res.ok) throw new Error(`GET image ${absUrl} → ${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  const meta = await sharp(buf).metadata();
+  const pipeline =
+    meta.width && meta.width > 2400
+      ? sharp(buf).resize(2400, null, { withoutEnlargement: true, fit: "inside" })
+      : sharp(buf);
+  await pipeline.webp({ quality: 82, effort: 6, smartSubsample: true }).toFile(destAbs);
+}
+
+/** After parseSitemapXml: resolve remote image URLs to local media/wix/*.webp and download. */
+async function resolveWixImages(raw) {
+  const urlToRel = new Map();
+  const unique = new Set();
+  for (const row of raw) {
+    if (row.image && /^https?:\/\//i.test(String(row.image).trim())) {
+      unique.add(String(row.image).trim());
+    }
+  }
+  for (const absUrl of unique) {
+    const fname = wixWebpFilenameFromUrl(absUrl);
+    const rel = `media/wix/${fname}`;
+    const destAbs = path.join(CAAP_ROOT, rel);
+    await downloadSitemapImageToWebp(absUrl, destAbs);
+    urlToRel.set(absUrl, rel);
+  }
+  return raw.map((row) => {
+    const img = row.image && String(row.image).trim();
+    if (!img) return { ...row, image: "" };
+    if (/^https?:\/\//i.test(img)) {
+      return { ...row, image: urlToRel.get(img) || "" };
+    }
+    return row;
+  });
+}
+
 function enrich(row) {
   const { slug, lastmod, image, imageAlt } = row;
   const title = titleFromSlug(slug);
@@ -157,9 +221,10 @@ async function main() {
   const res = await fetch(SITEMAP_URL);
   if (!res.ok) throw new Error(`Sitemap HTTP ${res.status}`);
   const xml = await res.text();
-  const raw = parseSitemapXml(xml);
+  let raw = parseSitemapXml(xml);
   if (!raw.length) throw new Error("No post URLs parsed from sitemap");
 
+  raw = await resolveWixImages(raw);
   const posts = raw.map(enrich).sort((a, b) => b.lastmod.localeCompare(a.lastmod));
   const caseRows = posts.filter((p) => CASE_SLUGS.has(p.slug));
   if (caseRows.length !== CASE_SLUGS.size) {

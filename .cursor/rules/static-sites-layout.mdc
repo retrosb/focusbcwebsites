@@ -1,0 +1,41 @@
+---
+description: Where to put files in focusbc/ and caap/ — sources vs package root
+alwaysApply: true
+---
+
+# Static sites layout (Focus BC & CAAP)
+
+This repo hosts **two sibling sites** under `focusbc/` and `caap/`. **Use the same mental model for both.**
+
+## `sources/` — authoring tree (pages, CSS, client JS, favicon)
+
+- **`sources/*.html`**, **`sources/*/*.html`** — static pages that the site build copies into `public/{focusbc|caap}/` (then folder URLs, base tag, etc.).
+- **`sources/styles.css`** — main stylesheet; build emits `styles/styles.css` in `public/`.
+- **`sources/js/`** — client scripts (`i18n.js`, list loaders, …) copied to `public/.../js/`.
+- **`sources/favicon.png`** — tab icon; build copies it to `public/{site}/favicon.png` (same relative URL as today: `href="favicon.png"` with base `/focusbc/` or `/caap/`).
+
+Edit these when changing **visible** HTML, layout, browser behavior, or site icon. Paths are written for the built site (often resolved with `<base href="...">` under `/focusbc/` or `/caap/`).
+
+## Package root of each site — *not* under `sources/`
+
+Everything here is **intentionally outside** `sources/`: it is either **build tooling**, **data**, **assets**, or **templates the static build does not treat as normal pages**.
+
+| Kind | Role |
+|------|------|
+| **`build.mjs`** | Single build entry for that site. Reads `sources/`, copies `media/`, `locales/`, `data/`, etc., writes `public/{site}/`. |
+| **`blog-post.template.html`**, **`case-study.template.html`** | **Server-side HTML templates** only. `server.mjs` loads them, substitutes placeholders from JSON, injects `<base>`, and serves HTML for `/blog/:slug` and `/casestudies/:slug`. They are **not** the same as files in `sources/`; do not duplicate them into `sources/`. |
+| **`media/`** | Images and binary assets (large tree; not mixed into `sources/`). |
+| **`locales/`** | i18n JSON loaded by `sources/js/i18n.js`. |
+| **`data/`** | JSON (blog posts, case studies, manifests) used by builds, server, or client `fetch()`. |
+| **`scripts/`** | Maintenance scripts (import/sync JSON, media, one-off HTML patches). **Not** the same as repo-root `scripts/build-pages.mjs`. |
+| **Focus BC only** | `blog-built/`, `case-studies-built/` — optional pre-generated HTML merged by `focusbc/build.mjs`; `blog-post.template.html` / `case-study.template.html` at `focusbc/` for server-rendered slugs. |
+
+## Repo root `scripts/`
+
+- **`scripts/build-pages.mjs`** — builds the hub `public/index.html`, runs **`focusbc/build.mjs`** and **`caap/build.mjs`**, writes `_redirects`.
+
+## Rules of thumb
+
+1. **New static page** → add under **`focusbc/sources/`** or **`caap/sources/`** (and run build).
+2. **Template for a route generated from JSON** → keep **`*.template.html`** at **`focusbc/`** or **`caap/`** root; wire in `server.mjs` only.
+3. **Do not** move `build.mjs` or `*.template.html` into `sources/` — they are not authored like normal pages.

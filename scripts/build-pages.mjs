@@ -22,8 +22,13 @@ execFileSync(process.execPath, ["focusbc/build.mjs"], {
   stdio: "inherit",
 });
 
-execFileSync(process.execPath, ["scripts/build-caap-public.mjs"], {
+execFileSync(process.execPath, ["caap/build.mjs"], {
   cwd: ROOT,
+  env: {
+    ...process.env,
+    CAAP_OUT: path.join(PUBLIC, "caap"),
+    CAAP_BASE_PATH: "/caap",
+  },
   stdio: "inherit",
 });
 

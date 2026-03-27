@@ -9,11 +9,13 @@ const PORT = Number(process.env.PORT) || 8888;
 const FOCUSBC = path.join(__dirname, "focusbc");
 /** Built Focus BC static tree from `npm run build` → public/focusbc/. */
 const FOCUSBC_OUTPUT = path.join(__dirname, "public", "focusbc");
-/** CAAP templates & JSON stay in repo caap/; static HTML may be served from public/caap/ after build. */
-const CAAP_SOURCE = path.join(__dirname, "caap");
-const CAAP_STATIC = fs.existsSync(path.join(__dirname, "public", "caap", "index.html"))
-  ? path.join(__dirname, "public", "caap")
-  : CAAP_SOURCE;
+/** CAAP repo root: templates, data, media. Pages live in caap/sources/ (dev) or public/caap/ (after build). */
+const CAAP_REPO = path.join(__dirname, "caap");
+const CAAP_PUBLIC = path.join(__dirname, "public", "caap");
+const useCaapPublicBuild = fs.existsSync(path.join(CAAP_PUBLIC, "index.html"));
+const CAAP_PAGES_ROOT = useCaapPublicBuild ? CAAP_PUBLIC : path.join(CAAP_REPO, "sources");
+const CAAP_ASSET_ROOT = useCaapPublicBuild ? CAAP_PUBLIC : CAAP_REPO;
+const CAAP_SOURCE = CAAP_REPO;
 const BLOG_JSON = path.join(FOCUSBC, "data", "blog-posts.json");
 const BLOG_TEMPLATE = path.join(FOCUSBC, "blog-post.template.html");
 const DEFAULT_OG = "https://www.focus-bc.com/media/focusbc-logo.png";
@@ -459,7 +461,7 @@ function caapCaseRelatedBlock(related) {
 function renderCaapBlogPost(post) {
   const tpl = fs.readFileSync(CAAP_BLOG_TEMPLATE, "utf8");
   const canonical = `https://www.city-platform.com/post/${post.slug}`;
-  const ogImage = post.image || "media/caap-logo.png";
+  const ogImage = post.image || "media/caap-logo.webp";
   const dateStr = formatBlogDate(post.lastmod);
   const metaDesc = truncate(String(post.excerpt || post.title).replace(/\s+/g, " "), 155);
   const related = pickRelatedCaapPosts(post.slug, 2);
@@ -495,7 +497,7 @@ function renderCaapBlogPost(post) {
 function renderCaapCaseStudy(study) {
   const tpl = fs.readFileSync(CAAP_CASE_TEMPLATE, "utf8");
   const canonical = `https://www.city-platform.com/post/${study.slug}`;
-  const ogImage = study.image || "media/caap-logo.png";
+  const ogImage = study.image || "media/caap-logo.webp";
   const dateStr = formatBlogDate(study.lastmod);
   const headline = study.headline || study.title;
   const metaDesc = truncate(String(study.excerpt || headline).replace(/\s+/g, " "), 155);
@@ -630,20 +632,20 @@ function resolveFocusbcFile(segments) {
 
 function resolveCaapFile(segments) {
   if (segments.length === 0) {
-    return path.join(CAAP_STATIC, "index.html");
+    return path.join(CAAP_PAGES_ROOT, "index.html");
   }
   const [a] = segments;
   if (a === "blog" && segments.length === 1) {
-    const dirIdx = path.join(CAAP_STATIC, "blog", "index.html");
+    const dirIdx = path.join(CAAP_PAGES_ROOT, "blog", "index.html");
     if (fs.existsSync(dirIdx)) return dirIdx;
-    const legacy = path.join(CAAP_STATIC, "blog.html");
+    const legacy = path.join(CAAP_PAGES_ROOT, "blog.html");
     if (fs.existsSync(legacy)) return legacy;
     return null;
   }
   if ((a === "casestudies" || a === "case-studies") && segments.length === 1) {
-    const dirIdx = path.join(CAAP_STATIC, "case-studies", "index.html");
+    const dirIdx = path.join(CAAP_PAGES_ROOT, "case-studies", "index.html");
     if (fs.existsSync(dirIdx)) return dirIdx;
-    const legacy = path.join(CAAP_STATIC, "case-studies.html");
+    const legacy = path.join(CAAP_PAGES_ROOT, "case-studies.html");
     if (fs.existsSync(legacy)) return legacy;
     return null;
   }
@@ -652,14 +654,14 @@ function resolveCaapFile(segments) {
     partners: ["partners", "index.html"],
   };
   if (segments.length === 1 && caapSingle[a]) {
-    const idx = path.join(CAAP_STATIC, ...caapSingle[a]);
+    const idx = path.join(CAAP_PAGES_ROOT, ...caapSingle[a]);
     if (fs.existsSync(idx)) return idx;
-    const legacy = path.join(CAAP_STATIC, `${a}.html`);
+    const legacy = path.join(CAAP_PAGES_ROOT, `${a}.html`);
     if (fs.existsSync(legacy)) return legacy;
     return null;
   }
   /* Case-insensitive top-level folders (Linux servers); blog/casestudies slugs stay as-is. */
-  const caapFoldableRoots = new Set(["products", "solutions", "data", "media", "js"]);
+  const caapFoldableRoots = new Set(["products", "solutions", "data", "media", "js", "styles"]);
   let folded =
     segments[0] && caapFoldableRoots.has(segments[0].toLowerCase())
       ? [segments[0].toLowerCase(), ...segments.slice(1)]
@@ -669,8 +671,12 @@ function resolveCaapFile(segments) {
   }
   const rel = path.join(...folded);
   if (rel.includes("..")) return null;
-  const candidate = path.join(CAAP_STATIC, rel);
-  if (!underRoot(CAAP_STATIC, candidate)) return null;
+  const root =
+    folded[0] && ["media", "data", "locales"].includes(folded[0].toLowerCase())
+      ? CAAP_ASSET_ROOT
+      : CAAP_PAGES_ROOT;
+  const candidate = path.join(root, ...folded);
+  if (!underRoot(root, candidate)) return null;
   if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
     return candidate;
   }
@@ -768,7 +774,7 @@ function handler(req, res) {
     }
     const outMedia = path.join(FOCUSBC_OUTPUT, "media");
     const focusMedia = path.join(FOCUSBC, "media");
-    const caapMedia = path.join(CAAP_STATIC, "media");
+    const caapMedia = path.join(CAAP_ASSET_ROOT, "media");
     const fOut = path.join(outMedia, rel);
     const fFocus = path.join(focusMedia, rel);
     const fCaap = path.join(caapMedia, rel);
@@ -866,7 +872,7 @@ function handler(req, res) {
     if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
       /* Prefer npm-built HTML (case-studies-built → public/focusbc/case-studies/) over JSON
-         templates: templates use CAAP-relative assets (styles.css, caap-logo.png) and break
+         templates: templates use CAAP-relative assets (styles.css, caap-logo.webp) and break
          under /focusbc/ even with <base>. */
       const staticCaseDir = path.join(FOCUSBC_OUTPUT, "case-studies", slug, "index.html");
       if (fs.existsSync(staticCaseDir)) {

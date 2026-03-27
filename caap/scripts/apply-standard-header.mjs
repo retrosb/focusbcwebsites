@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>__META_TITLE__</title>
-    <meta name="description" content="__META_DESC__" />
-    <link rel="canonical" href="__CANONICAL__" />
-    <meta property="og:title" content="__OG_TITLE__" />
-    <meta property="og:description" content="__OG_DESC__" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="__OG_URL__" />
-    <meta property="og:image" content="__OG_IMAGE__" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="__TW_TITLE__" />
-    <meta name="twitter:description" content="__TW_DESC__" />
-    <meta name="twitter:image" content="__TW_IMAGE__" />
-    <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
+/**
+ * Replaces the caap-header block in every caap HTML file
+ * with the canonical site header (logo only, full primary nav).
+ *
+ * Run from repo root: node caap/scripts/apply-standard-header.mjs
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const CAAP_ROOT = path.join(__dirname, "..", "sources");
+
+const STANDARD_HEADER = `
     <header class="caap-header">
       <div class="container caap-header__inner">
         <a class="caap-brand" href="./">
@@ -91,92 +83,29 @@
         <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
         <a class="btn btn--ink btn--sm caap-header__cta" href="#contact" data-i18n="cta.contactUs">Contact us</a>
       </div>
-    </header>
+    </header>`;
 
-    <main id="main-content">
-      <section class="hero-caap hero-caap--article" aria-labelledby="study-title">
-        <div class="hero-caap__glow" aria-hidden="true"></div>
-        <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="max-w-3xl">
-            <a href="casestudies" class="link-arrow text-white-link">Back to case studies</a>
-            <div class="meta-row meta-row--light mt-8">
-              <span class="pill-article">__CATEGORY__</span>
-              <span>Case study</span>
-              <span aria-hidden="true">•</span>
-              <span>__READ_MIN__ min read</span>
-            </div>
-            <h1 id="study-title" class="mt-6 heading-on-ink">__H1__</h1>
-            <p class="lead lead--on-hero mt-6 max-w-3xl">__LEAD__</p>
-          </div>
-        </div>
-      </section>
+function walkHtmlFiles(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkHtmlFiles(p, out);
+    else if (ent.name.endsWith(".html")) out.push(p);
+  }
+  return out;
+}
 
-      <section class="section container">
-        <div class="grid-sidebar">
-          <article class="min-w-0">
-            __MEDIA_BLOCK__
-            <div class="prose mt-10">__BODY_HTML__</div>
-            <div class="caap-article-cta mt-12">
-              <p class="eyebrow eyebrow--on-dark">Next step</p>
-              <h2 class="mt-3 h2 h2--on-dark">Looking for a similar outcome?</h2>
-              <p class="mt-4 lead-lg text-white-85">
-                Talk to the team about incident management, mobility, planning, and data integration on one platform.
-              </p>
-              <div class="flex flex-col sm-flex-row gap-3 mt-8">
-                <a href="./#contact" class="btn btn--white">Request a demo</a>
-                <a href="blog" class="btn btn--ghost">Read the blog</a>
-              </div>
-            </div>
-          </article>
-          <aside class="flex flex-col gap-lg">
-            <div class="card">
-              <p class="eyebrow">Summary</p>
-              <ul class="mt-4 text-sm-tight text-muted plain-list">
-                <li><strong class="text-ink">Category:</strong> __ASIDE_CAT__</li>
-                <li class="mt-2"><strong class="text-ink">Read time:</strong> __READ_TIME_LABEL__</li>
-                <li class="mt-2"><strong class="text-ink">Updated:</strong> __DATE_STR__</li>
-              </ul>
-            </div>
-            <div class="card">
-              <p class="eyebrow">Related pages</p>
-              <div class="mt-4 flex flex-col gap-3">
-                <a href="./" class="aside-link">City as a Platform home</a>
-                <a href="blog" class="aside-link">Blog</a>
-                <a href="/focusbc/" class="aside-link">Focus BC</a>
-              </div>
-            </div>
-            <div class="card">
-              <p class="eyebrow">More case studies</p>
-              <div class="mt-4 flex flex-col gap-5">__RELATED_BLOCK__</div>
-            </div>
-          </aside>
-        </div>
-      </section>
-    </main>
+function main() {
+  const files = walkHtmlFiles(CAAP_ROOT).filter((p) => !p.includes(`${path.sep}scripts${path.sep}`));
+  const re = /\s*<header class="caap-header">[\s\S]*?<\/header>/;
+  let n = 0;
+  for (const filePath of files) {
+    let html = fs.readFileSync(filePath, "utf8");
+    if (!re.test(html)) continue;
+    html = html.replace(re, STANDARD_HEADER);
+    fs.writeFileSync(filePath, html);
+    n++;
+  }
+  console.log(`Updated ${n} HTML file(s) under caap/sources/`);
+}
 
-    <footer class="caap-footer">
-      <div class="container caap-footer__grid">
-        <div>
-          <a href="./"><img src="media/caap-logo.webp" alt="City as a Platform" width="48" height="48" /></a>
-          <p class="lead text-slate-600 mt-4">
-            City as a Platform is a Focus BC product for urban management and city operations.
-          </p>
-          <p class="text-slate-600 mt-3 text-sm-loose">
-            Parent company:
-            <a href="/focusbc/">Focus BC</a>
-          </p>
-        </div>
-        <div>
-          <h3 class="h3">Explore</h3>
-          <ul class="plain-list mt-4 text-slate-600 text-sm-loose">
-            <li class="mt-2"><a href="./#platform">Platform</a></li>
-            <li class="mt-2"><a href="casestudies">Case studies</a></li>
-            <li class="mt-2"><a href="blog">Blog</a></li>
-            <li class="mt-2"><a href="./#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-    <script defer src="js/i18n.js"></script>
-  </body>
-</html>
+main();

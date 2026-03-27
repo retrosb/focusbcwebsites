@@ -30,9 +30,12 @@ const globs = [
   path.join(ROOT, "focusbc", "data", "**", "*.json"),
   path.join(ROOT, "focusbc", "case-studies-built", "**", "*.html"),
   path.join(ROOT, "focusbc", "blog-built", "**", "*.html"),
-  path.join(ROOT, "caap", "**", "*.html"),
-  path.join(ROOT, "caap", "**", "*.css"),
+  path.join(ROOT, "caap", "sources", "**", "*"),
+  path.join(ROOT, "caap", "build.mjs"),
+  path.join(ROOT, "caap", "locales", "**", "*.json"),
+  path.join(ROOT, "caap", "data", "**", "*.json"),
   path.join(ROOT, "caap", "media", "**", "*"),
+  path.join(ROOT, "caap", "*.template.html"),
 ];
 
 chokidar

@@ -571,7 +571,7 @@ for (const [src, dest] of copies) {
 }
 
 {
-  const fav = path.join(__dirname, "favicon.png");
+  const fav = path.join(SOURCES, "favicon.png");
   if (fs.existsSync(fav)) copyFile(fav, path.join(ROOT, "favicon.png"));
 }
 

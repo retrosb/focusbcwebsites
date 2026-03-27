@@ -7,7 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CAAP = path.join(__dirname, "..");
+const CAAP_SOURCES = path.join(__dirname, "..", "sources");
 
 function walkHtmlFiles(dir, out = []) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -18,7 +18,7 @@ function walkHtmlFiles(dir, out = []) {
   return out;
 }
 
-for (const fp of walkHtmlFiles(CAAP)) {
+for (const fp of walkHtmlFiles(CAAP_SOURCES)) {
   let html = fs.readFileSync(fp, "utf8");
   if (html.includes("data-lang-switch")) continue;
 

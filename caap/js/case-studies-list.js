@@ -7,7 +7,7 @@
 
   function formatDate(iso) {
     const [y, m, d] = iso.split("-").map(Number);
-    return new Date(y, m - 1, d).toLocaleDateString("pt-PT", {
+    return new Date(y, m - 1, d).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -19,7 +19,7 @@
   }
 
   function slugHref(slug) {
-    return "casos-estudo/" + encodeURIComponent(slug);
+    return "casestudies/" + encodeURIComponent(slug);
   }
 
   function thumbBlock(s, aspectClass, gradBase) {
@@ -88,7 +88,7 @@
       data = await r.json();
     } catch {
       rootFeatured.innerHTML =
-        '<p class="text-muted">Could not load case studies. Open this site via the local server (e.g. <code class="caap-code">/caap/casos-estudo</code>).</p>';
+        '<p class="text-muted">Could not load case studies. Open this site via the local server (e.g. <code class="caap-code">/caap/casestudies</code>).</p>';
       return;
     }
 

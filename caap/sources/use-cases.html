@@ -3,18 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>__META_TITLE__</title>
-    <meta name="description" content="__META_DESC__" />
-    <link rel="canonical" href="__CANONICAL__" />
-    <meta property="og:title" content="__OG_TITLE__" />
-    <meta property="og:description" content="__OG_DESC__" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="__OG_URL__" />
-    <meta property="og:image" content="__OG_IMAGE__" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="__TW_TITLE__" />
-    <meta name="twitter:description" content="__TW_DESC__" />
-    <meta name="twitter:image" content="__TW_IMAGE__" />
+    <title>Use cases | City as a Platform</title>
+    <meta
+      name="description"
+      content="Traffic, waste, inspections, incidents, infrastructure, and public space—grouped by domain."
+    />
+    <link rel="canonical" href="https://www.city-platform.com/use-cases" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -130,62 +124,83 @@
     </header>
 
     <main id="main-content">
-      <section class="hero-caap hero-caap--article" aria-labelledby="article-title">
+      <section class="hero-caap hero-caap--article" aria-labelledby="page-title">
         <div class="hero-caap__glow" aria-hidden="true"></div>
         <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="max-w-3xl">
-            <a href="blog" class="link-arrow text-white-link">Voltar ao blog</a>
-            <div class="meta-row meta-row--light mt-8">
-              <span class="pill-article">__CATEGORY__</span>
-              <span>__DATE_STR__</span>
-              <span aria-hidden="true">•</span>
-              <span>__READ_MIN__ min de leitura</span>
-            </div>
-            <h1 id="article-title" class="mt-6 heading-on-ink">__H1__</h1>
-            <p class="lead lead--on-hero mt-6">__LEAD__</p>
+          <div class="page-hero-inner">
+            <p class="pill-light">Use cases</p>
+            <h1 id="page-title" class="mt-6 heading-on-ink">Operations by domain</h1>
+            <p class="lead lead--on-hero mt-6">
+              Examples of work running on CAAP today. Each links to related product or solution pages where relevant.
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="grid-sidebar">
-          <article class="min-w-0">
-            __MEDIA_BLOCK__
-            <div class="prose mt-10">__BODY_HTML__</div>
-            <div class="caap-article-cta mt-12">
-              <p class="eyebrow eyebrow--on-dark">Próximo passo</p>
-              <h2 class="mt-3 h2 h2--on-dark">Ver a plataforma em ação</h2>
+      <section class="section container prose" aria-labelledby="mobility-domain">
+        <h2 id="mobility-domain">Mobility &amp; traffic</h2>
+        <article id="traffic" class="mt-8">
+          <h3>Traffic management</h3>
+          <p>
+            Plan and publish restrictions for works, events, and licences. Coordinate with field teams and keep drivers informed with map-based
+            updates.
+          </p>
+          <p><a class="link-arrow" href="modulos/gestao-de-condicionamentos-de-transito">Traffic restrictions</a> · <a class="link-arrow" href="solucoes/mobilidade">Mobility</a></p>
+        </article>
+      </section>
+
+      <section class="section bg-white container prose" aria-labelledby="services-domain">
+        <h2 id="services-domain">Services &amp; environment</h2>
+        <article id="waste" class="mt-8">
+          <h3>Waste collection</h3>
+          <p>Routes, containers, and citizen requests on one map—dispatch and monitoring for collection teams.</p>
+          <p><a class="link-arrow" href="solucoes/manutencao-dos-espacos-publicos">Public space</a> · <a class="link-arrow" href="modulos/higiene-urbana">Urban hygiene</a></p>
+        </article>
+        <article id="public-space" class="mt-10">
+          <h3>Public space &amp; hygiene</h3>
+          <p>Cleaning schedules, work orders, and response to reports—linked to place and service level.</p>
+          <p><a class="link-arrow" href="solucoes/manutencao-dos-espacos-publicos">Public space maintenance</a></p>
+        </article>
+      </section>
+
+      <section class="section container prose" aria-labelledby="field-domain">
+        <h2 id="field-domain">Field operations</h2>
+        <article id="inspections" class="mt-8">
+          <h3>Urban inspections</h3>
+          <p>Structured checks with location, photos, and handoff to back-office or contractors.</p>
+          <p><a class="link-arrow" href="modulos/gestao-de-ocorrencias">Incident management</a> · <a class="link-arrow" href="solucoes/planeamento-urbano">Urban planning</a></p>
+        </article>
+        <article id="incidents" class="mt-10">
+          <h3>Incident reporting</h3>
+          <p>Citizen channels tied to triage, assignment, and closure—everyone sees status on the map.</p>
+          <p><a class="link-arrow" href="modulos/gestao-de-ocorrencias">Incident management</a></p>
+        </article>
+      </section>
+
+      <section class="section bg-white container prose" aria-labelledby="infra-domain">
+        <h2 id="infra-domain">Infrastructure &amp; assets</h2>
+        <article id="infrastructure" class="mt-8">
+          <h3>Infrastructure monitoring</h3>
+          <p>Assets, maintenance windows, and work orders with priority and history in one view.</p>
+          <p><a class="link-arrow" href="solucoes/sensores-e-monitorizacao">Sensors &amp; monitoring</a> · <a class="link-arrow" href="modulos/mapify">Mapify</a></p>
+        </article>
+      </section>
+
+      <section class="section section--bottom container">
+        <div class="cta-gradient">
+          <div class="cta-split">
+            <div class="max-w-2xl">
+              <p class="eyebrow text-white-80">Next step</p>
+              <h2 class="mt-3 heading-on-ink">See CAAP with your workflows</h2>
               <p class="mt-4 lead-lg text-white-85">
-                Peça uma demonstração para explorar como o CAAP pode apoiar o seu município.
+                Request a demo or talk to us about your city’s priorities.
               </p>
-              <div class="flex flex-col sm-flex-row gap-3 mt-8">
-                <a href="contactos" class="btn btn--white">Pedir demo</a>
-                <a href="casos-estudo" class="btn btn--ghost">Casos de estudo</a>
-              </div>
             </div>
-          </article>
-          <aside class="flex flex-col gap-lg">
-            <div class="card">
-              <p class="eyebrow">Sobre este artigo</p>
-              <ul class="mt-4 text-sm-tight text-muted plain-list">
-                <li><strong class="text-ink">Categoria:</strong> __ASIDE_CAT__</li>
-                <li class="mt-2"><strong class="text-ink">Tempo de leitura:</strong> __READ_TIME_LABEL__</li>
-                <li class="mt-2"><strong class="text-ink">Atualizado:</strong> __DATE_STR__</li>
-              </ul>
+            <div class="cta-split__actions mt-8 flex flex-col gap-3">
+              <a class="btn btn--white" href="mailto:joao.barata@focus-bc.com">Request demo</a>
+              <a class="btn btn--ghost" href="./">Home</a>
             </div>
-            <div class="card">
-              <p class="eyebrow">Páginas relacionadas</p>
-              <div class="mt-4 flex flex-col gap-3">
-                <a href="./" class="aside-link">Início CAAP</a>
-                <a href="casos-estudo" class="aside-link">Casos de estudo</a>
-                <a href="/focusbc/" class="aside-link">Focus BC</a>
-              </div>
-            </div>
-            <div class="card">
-              <p class="eyebrow">Mais no blog</p>
-              <div class="mt-4 flex flex-col gap-5">__RELATED_BLOCK__</div>
-            </div>
-          </aside>
+          </div>
         </div>
       </section>
     </main>

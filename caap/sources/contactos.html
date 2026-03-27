@@ -3,18 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>__META_TITLE__</title>
-    <meta name="description" content="__META_DESC__" />
-    <link rel="canonical" href="__CANONICAL__" />
-    <meta property="og:title" content="__OG_TITLE__" />
-    <meta property="og:description" content="__OG_DESC__" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="__OG_URL__" />
-    <meta property="og:image" content="__OG_IMAGE__" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="__TW_TITLE__" />
-    <meta name="twitter:description" content="__TW_DESC__" />
-    <meta name="twitter:image" content="__TW_IMAGE__" />
+    <title>Contactos | City as a Platform</title>
+    <meta
+      name="description"
+      content="Contacte a equipa City as a Platform — pedido de demonstração, questões comerciais e apoio."
+    />
+    <link rel="canonical" href="https://www.city-platform.com/contactos/" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -129,65 +123,67 @@
       </div>
     </header>
 
-    <main id="main-content">
-      <section class="hero-caap hero-caap--article" aria-labelledby="article-title">
-        <div class="hero-caap__glow" aria-hidden="true"></div>
-        <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="max-w-3xl">
-            <a href="blog" class="link-arrow text-white-link">Voltar ao blog</a>
-            <div class="meta-row meta-row--light mt-8">
-              <span class="pill-article">__CATEGORY__</span>
-              <span>__DATE_STR__</span>
-              <span aria-hidden="true">•</span>
-              <span>__READ_MIN__ min de leitura</span>
-            </div>
-            <h1 id="article-title" class="mt-6 heading-on-ink">__H1__</h1>
-            <p class="lead lead--on-hero mt-6">__LEAD__</p>
-          </div>
-        </div>
-      </section>
+    <main id="main-content" class="container section">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Contactos</p>
+        <h1 class="h2 mt-3">Fale connosco</h1>
+        <p class="lead text-slate-600 mt-4">
+          Envie uma mensagem para pedir uma demonstração, esclarecer dúvidas sobre o CAAP ou falar com a equipa comercial.
+        </p>
+      </div>
 
-      <section class="section container">
-        <div class="grid-sidebar">
-          <article class="min-w-0">
-            __MEDIA_BLOCK__
-            <div class="prose mt-10">__BODY_HTML__</div>
-            <div class="caap-article-cta mt-12">
-              <p class="eyebrow eyebrow--on-dark">Próximo passo</p>
-              <h2 class="mt-3 h2 h2--on-dark">Ver a plataforma em ação</h2>
-              <p class="mt-4 lead-lg text-white-85">
-                Peça uma demonstração para explorar como o CAAP pode apoiar o seu município.
-              </p>
-              <div class="flex flex-col sm-flex-row gap-3 mt-8">
-                <a href="contactos" class="btn btn--white">Pedir demo</a>
-                <a href="casos-estudo" class="btn btn--ghost">Casos de estudo</a>
-              </div>
+      <div class="mt-10 grid-sidebar max-w-5xl" style="grid-template-columns: 1fr; gap: 2rem">
+        <div class="card" style="padding: 1.75rem">
+          <form id="caap-contact-form" class="flex flex-col gap-4" novalidate>
+            <div>
+              <label class="block text-sm font-semibold text-ink" for="c-name">Nome</label>
+              <input
+                class="mt-1 w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                type="text"
+                id="c-name"
+                name="name"
+                autocomplete="name"
+                required
+              />
             </div>
-          </article>
-          <aside class="flex flex-col gap-lg">
-            <div class="card">
-              <p class="eyebrow">Sobre este artigo</p>
-              <ul class="mt-4 text-sm-tight text-muted plain-list">
-                <li><strong class="text-ink">Categoria:</strong> __ASIDE_CAT__</li>
-                <li class="mt-2"><strong class="text-ink">Tempo de leitura:</strong> __READ_TIME_LABEL__</li>
-                <li class="mt-2"><strong class="text-ink">Atualizado:</strong> __DATE_STR__</li>
-              </ul>
+            <div>
+              <label class="block text-sm font-semibold text-ink" for="c-email">Email</label>
+              <input
+                class="mt-1 w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                type="email"
+                id="c-email"
+                name="email"
+                autocomplete="email"
+                required
+              />
             </div>
-            <div class="card">
-              <p class="eyebrow">Páginas relacionadas</p>
-              <div class="mt-4 flex flex-col gap-3">
-                <a href="./" class="aside-link">Início CAAP</a>
-                <a href="casos-estudo" class="aside-link">Casos de estudo</a>
-                <a href="/focusbc/" class="aside-link">Focus BC</a>
-              </div>
+            <div>
+              <label class="block text-sm font-semibold text-ink" for="c-org">Organização</label>
+              <input
+                class="mt-1 w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                type="text"
+                id="c-org"
+                name="organization"
+                autocomplete="organization"
+              />
             </div>
-            <div class="card">
-              <p class="eyebrow">Mais no blog</p>
-              <div class="mt-4 flex flex-col gap-5">__RELATED_BLOCK__</div>
+            <div>
+              <label class="block text-sm font-semibold text-ink" for="c-msg">Mensagem</label>
+              <textarea
+                class="mt-1 w-full px-3 py-2 border border-slate-200 rounded-lg text-sm min-h-[8rem]"
+                id="c-msg"
+                name="message"
+                required
+              ></textarea>
             </div>
-          </aside>
+            <button type="submit" class="btn btn--ink self-start">Enviar por email</button>
+            <p class="text-sm text-slate-600">
+              Ao enviar, o seu cliente de email abre com a mensagem. Também pode escrever diretamente para
+              <a href="mailto:joao.barata@focus-bc.com">joao.barata@focus-bc.com</a>.
+            </p>
+          </form>
         </div>
-      </section>
+      </div>
     </main>
     <footer class="cv2-footer">
       <div class="cv2-footer__inner">
@@ -240,5 +236,30 @@
         </div>
       </div>
     </footer>
-</body>
+    <script>
+      (function () {
+        var form = document.getElementById("caap-contact-form");
+        if (!form) return;
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var name = (document.getElementById("c-name") || {}).value || "";
+          var email = (document.getElementById("c-email") || {}).value || "";
+          var org = (document.getElementById("c-org") || {}).value || "";
+          var msg = (document.getElementById("c-msg") || {}).value || "";
+          var body =
+            "Nome: " +
+            name +
+            "\nEmail: " +
+            email +
+            "\nOrganização: " +
+            org +
+            "\n\nMensagem:\n" +
+            msg;
+          var to = "joao.barata@focus-bc.com";
+          window.location.href =
+            "mailto:" + encodeURIComponent(to) + "?subject=" + encodeURIComponent("[CAAP] Contacto site") + "&body=" + encodeURIComponent(body);
+        });
+      })();
+    </script>
+  </body>
 </html>

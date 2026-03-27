@@ -1,8 +1,6 @@
 /**
- * Replaces the caap-header block in every caap HTML file
- * with the canonical site header (logo only, full primary nav).
- *
- * Run from repo root: node caap/scripts/apply-standard-header.mjs
+ * CAAP v2 chrome: sticky header (mega menus), 4-col footer, body.caap-theme-v2.
+ * Run: node caap/scripts/apply-standard-header.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -12,78 +10,188 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CAAP_ROOT = path.join(__dirname, "..", "sources");
 
 const STANDARD_HEADER = `
-    <header class="caap-header">
-      <div class="container caap-header__inner">
-        <a class="caap-brand" href="./">
-          <img src="media/caap-logo.webp" alt="City as a Platform" width="48" height="48" />
+    <header class="cv2-header">
+      <div class="cv2-header__inner">
+        <a class="cv2-header__brand" href="./">
+          <img src="media/caap-logo.png" alt="CAAP" width="44" height="44" />
         </a>
-        <details class="caap-nav-mobile">
-          <summary class="caap-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
-          <nav class="caap-nav-mobile__panel" aria-label="Primary navigation">
-            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
-            <p class="caap-nav-mobile__label" data-i18n="nav.solutions">Solutions</p>
-            <a href="solutions/public-space" data-i18n="nav.publicSpace">Public space maintenance</a>
-            <a href="solutions/mobility" data-i18n="nav.mobility">Mobility</a>
-            <a href="solutions/tourism" data-i18n="nav.tourism">Tourism</a>
-            <a href="solutions/environment" data-i18n="nav.environment">Environment &amp; sustainability</a>
-            <a href="solutions/urban-planning" data-i18n="nav.urbanPlanning">Urban planning</a>
-            <a href="solutions/governance" data-i18n="nav.governance">Governance &amp; digital transparency</a>
-            <a href="solutions/sensors" data-i18n="nav.sensors">Sensors &amp; monitoring</a>
-            <p class="caap-nav-mobile__label" data-i18n="nav.products">Products</p>
-            <a href="products/incident-management" data-i18n="nav.incidentManagement">Incident management</a>
-            <a href="products/urban-management" data-i18n="nav.urbanManagement">Urban management</a>
-            <a href="products/traffic-restrictions" data-i18n="nav.trafficRestrictions">Traffic restrictions</a>
-            <a href="products/urban-hygiene" data-i18n="nav.urbanHygiene">Urban hygiene</a>
-            <a href="products/app-builder" data-i18n="nav.appBuilder">App Builder</a>
-            <a href="products/mapify" data-i18n="nav.mapify">Mapify</a>
-            <p class="caap-nav-mobile__label" data-i18n="nav.company">Company</p>
-            <a href="casestudies" data-i18n="nav.clientsCaseStudies">Clients &amp; case studies</a>
-            <a href="partners" data-i18n="nav.partners">Partners</a>
-            <a href="blog" data-i18n="nav.blog">Blog</a>
-            <a href="about" data-i18n="nav.about">About us</a>
-            <a href="#contact" data-i18n="nav.contact">Contact</a>
-            <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Log in</a>
+        <details class="cv2-nav-mobile">
+          <summary class="cv2-nav-mobile__toggle">Menu</summary>
+          <nav class="cv2-nav-mobile__panel" aria-label="Navegação principal">
+            <p class="cv2-nav-mobile__label">Soluções</p>
+            <a href="solucoes/">Todas as soluções</a>
+            <a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a>
+            <a href="solucoes/mobilidade">Mobilidade</a>
+            <a href="solucoes/turismo">Turismo</a>
+            <a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a>
+            <a href="solucoes/planeamento-urbano">Planeamento Urbano</a>
+            <a href="solucoes/governanca-e-transparencia-digital">Governança e Transparência Digital</a>
+            <a href="solucoes/sensores-e-monitorizacao">Sensores e Monitorização</a>
+            <p class="cv2-nav-mobile__label">Módulos</p>
+            <a href="modulos/">Todos os módulos</a>
+            <a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a>
+            <a href="modulos/gestao-urbanistica">Gestão Urbanística</a>
+            <a href="modulos/gestao-de-condicionamentos-de-transito">Gestão de Condicionamentos de Trânsito</a>
+            <a href="modulos/higiene-urbana">Higiene Urbana</a>
+            <a href="modulos/appbuilder">AppBuilder</a>
+            <a href="modulos/mapify">Mapify</a>
+            <p class="cv2-nav-mobile__label">Empresa</p>
+            <a href="casos-estudo">Casos de Estudo</a>
+            <a href="sobre-nos">Sobre Nós</a>
+            <a href="contactos">Contactos</a>
+            <a href="parceiros">Parceiros</a>
+            <a href="blog">Blog</a>
+            <a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a>
           </nav>
         </details>
-        <nav class="caap-nav-desktop" aria-label="Primary navigation">
-          <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true" data-i18n="nav.solutions">
-              Solutions
-            </button>
-            <div class="caap-dropdown-panel" role="menu">
-              <a href="solutions/public-space" role="menuitem" data-i18n="nav.publicSpace">Public space maintenance</a>
-              <a href="solutions/mobility" role="menuitem" data-i18n="nav.mobility">Mobility</a>
-              <a href="solutions/tourism" role="menuitem" data-i18n="nav.tourism">Tourism</a>
-              <a href="solutions/environment" role="menuitem" data-i18n="nav.environment">Environment &amp; sustainability</a>
-              <a href="solutions/urban-planning" role="menuitem" data-i18n="nav.urbanPlanning">Urban planning</a>
-              <a href="solutions/governance" role="menuitem" data-i18n="nav.governance">Governance &amp; digital transparency</a>
-              <a href="solutions/sensors" role="menuitem" data-i18n="nav.sensors">Sensors &amp; monitoring</a>
+        <nav class="cv2-nav-desktop" aria-label="Navegação principal">
+          <div class="cv2-mega-wrap">
+            <a href="solucoes/" class="cv2-mega-trigger">Soluções</a>
+            <div class="cv2-mega-panel" role="region" aria-label="Soluções">
+              <div class="cv2-mega-grid">
+                <a href="solucoes/manutencao-dos-espacos-publicos" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 7l3-3 3 3-9 9H8v-3l6-6Z"/><path d="M5 19h14"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc">Gestão de ocorrências, reparação de infraestruturas, higiene urbana, dashboards, centro de operações</span></span>
+                </a>
+                <a href="solucoes/mobilidade" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-8h3"/><path d="M9 9h4"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Mobilidade</span><span class="cv2-mega-link__desc">Fiscalização, ocupação da via pública, bicicletas e trotinetes, transportes públicos, estacionamento, Waze</span></span>
+                </a>
+                <a href="solucoes/turismo" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.9L12 3Z"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Turismo</span><span class="cv2-mega-link__desc">Eventos, reparação de infraestruturas, higiene urbana</span></span>
+                </a>
+                <a href="solucoes/ambiente-e-sustentabilidade" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 15c0-5 4-9 9-9 0 5-4 9-9 9Z"/><path d="M7 18c0-3 2-5 5-5 0 3-2 5-5 5Z"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc">Prevenção de cheias, mobilidade suave, transportes públicos</span></span>
+                </a>
+                <a href="solucoes/planeamento-urbano" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M5 19V9l7-4 7 4v10"/><path d="M9 19v-5h6v5"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Planeamento Urbano</span><span class="cv2-mega-link__desc">Planos de ordenamento territorial, REN, ruído, alterações climáticas</span></span>
+                </a>
+                <a href="solucoes/governanca-e-transparencia-digital" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12h6"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc">Data governance, dashboards públicos, participação cidadã</span></span>
+                </a>
+                <a href="solucoes/sensores-e-monitorizacao" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 18a6 6 0 1 0-6-6"/><path d="M12 14a2 2 0 1 0-2-2"/><path d="M20 20l-4.5-4.5"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Sensores e Monitorização</span><span class="cv2-mega-link__desc">Integração de sensores, multidões, parques de estacionamento</span></span>
+                </a>
+              </div>
             </div>
           </div>
-          <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true" data-i18n="nav.products">
-              Products
-            </button>
-            <div class="caap-dropdown-panel" role="menu">
-              <a href="products/incident-management" role="menuitem" data-i18n="nav.incidentManagement">Incident management</a>
-              <a href="products/urban-management" role="menuitem" data-i18n="nav.urbanManagement">Urban management</a>
-              <a href="products/traffic-restrictions" role="menuitem" data-i18n="nav.trafficRestrictions">Traffic restrictions</a>
-              <a href="products/urban-hygiene" role="menuitem" data-i18n="nav.urbanHygiene">Urban hygiene</a>
-              <a href="products/app-builder" role="menuitem" data-i18n="nav.appBuilder">App Builder</a>
-              <a href="products/mapify" role="menuitem" data-i18n="nav.mapify">Mapify</a>
+          <div class="cv2-mega-wrap">
+            <a href="modulos/" class="cv2-mega-trigger">Módulos</a>
+            <div class="cv2-mega-panel" role="region" aria-label="Módulos">
+              <div class="cv2-mega-grid">
+                <a href="modulos/gestao-de-ocorrencias" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v3l2 2"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc">Registar, priorizar e resolver ocorrências com equipas, SLA e acompanhamento em tempo real.</span></span>
+                </a>
+                <a href="modulos/gestao-urbanistica" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M6 19V7h12v12"/><path d="M9 10h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Gestão Urbanística</span><span class="cv2-mega-link__desc">Território, processos e condicionantes num fluxo simples para equipas técnicas.</span></span>
+                </a>
+                <a href="modulos/gestao-de-condicionamentos-de-transito" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M8 7l4-4 4 4"/><path d="M8 17l4 4 4-4"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc">Cortes, desvios e impactos viários com visibilidade territorial e comunicação imediata.</span></span>
+                </a>
+                <a href="modulos/higiene-urbana" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7h8"/><path d="M9 7V5h6v2"/><path d="M7 7l1 12h8l1-12"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Higiene Urbana</span><span class="cv2-mega-link__desc">Planear rotinas, responder a pedidos e monitorizar equipas no terreno.</span></span>
+                </a>
+                <a href="modulos/appbuilder" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="M9 10h6m-6 4h4"/></svg></span>
+                  <span><span class="cv2-mega-link__title">AppBuilder</span><span class="cv2-mega-link__desc">Criar apps e formulários adaptados à operação sem ciclos pesados de desenvolvimento.</span></span>
+                </a>
+                <a href="modulos/mapify" class="cv2-mega-link">
+                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l-5 2V6l5-2m0 14 6-2m-6 2V4m6 12 5 2V4l-5-2m0 14V2"/></svg></span>
+                  <span><span class="cv2-mega-link__title">Mapify</span><span class="cv2-mega-link__desc">Sensores, regras, alertas e automação low-code numa camada operacional comum.</span></span>
+                </a>
+              </div>
             </div>
           </div>
-          <a href="casestudies" data-i18n="nav.clients">Clients</a>
-          <a href="partners" data-i18n="nav.partners">Partners</a>
-          <a href="blog" data-i18n="nav.blog">Blog</a>
-          <a href="about" data-i18n="nav.about">About us</a>
-          <a href="#contact" data-i18n="nav.contact">Contact</a>
-          <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Log in</a>
+          <a href="casos-estudo">Casos de Estudo</a>
+          <a href="sobre-nos">Sobre Nós</a>
+          <a href="contactos">Contactos</a>
         </nav>
-        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="#contact" data-i18n="cta.contactUs">Contact us</a>
+        <a class="cv2-header__cta" href="contactos">Pedir demo</a>
       </div>
     </header>`;
+
+const STANDARD_FOOTER = `
+    <footer class="cv2-footer">
+      <div class="cv2-footer__inner">
+        <div>
+          <a class="cv2-footer__brand" href="./"><img src="media/caap-logo.png" alt="CAAP" width="44" height="44" /></a>
+          <p class="cv2-footer__intro">
+            City as a Platform é um produto Focus BC — plataforma operacional para municípios e entidades públicas.
+          </p>
+          <p class="cv2-footer__intro" style="margin-top: 0.75rem">
+            <a href="/focusbc/">Focus BC</a>
+          </p>
+        </div>
+        <div>
+          <h3>Soluções</h3>
+          <ul>
+            <li><a href="solucoes/">Todas as soluções</a></li>
+            <li><a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a></li>
+            <li><a href="solucoes/mobilidade">Mobilidade</a></li>
+            <li><a href="solucoes/turismo">Turismo</a></li>
+            <li><a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a></li>
+            <li><a href="solucoes/planeamento-urbano">Planeamento Urbano</a></li>
+            <li><a href="solucoes/governanca-e-transparencia-digital">Governança Digital</a></li>
+            <li><a href="solucoes/sensores-e-monitorizacao">Sensores</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Módulos</h3>
+          <ul>
+            <li><a href="modulos/">Todos os módulos</a></li>
+            <li><a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a></li>
+            <li><a href="modulos/gestao-urbanistica">Gestão Urbanística</a></li>
+            <li><a href="modulos/gestao-de-condicionamentos-de-transito">Condicionamentos de Trânsito</a></li>
+            <li><a href="modulos/higiene-urbana">Higiene Urbana</a></li>
+            <li><a href="modulos/appbuilder">AppBuilder</a></li>
+            <li><a href="modulos/mapify">Mapify</a></li>
+          </ul>
+          <ul style="margin-top: 1.25rem">
+            <li><a href="blog">Blog</a></li>
+            <li><a href="parceiros">Parceiros</a></li>
+            <li><a href="casos-estudo">Casos de Estudo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contacto</h3>
+          <ul>
+            <li><a href="contactos">Contactos e demonstração</a></li>
+            <li><a href="mailto:joao.barata@focus-bc.com">joao.barata@focus-bc.com</a></li>
+            <li><a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>`;
+
+const reHeader = /\s*<header class="(?:caap-header|cv2-header)">[\s\S]*?<\/header>/;
+const reFooter = /\s*<footer class="(?:caap-footer|cv2-footer)">[\s\S]*?<\/footer>/;
+
+function ensureBodyTheme(html) {
+  if (/\bcaap-theme-v2\b/.test(html.slice(0, 2500))) return html;
+  return html.replace(/<body(\s[^>]*)?>/i, (full, attrs = "") => {
+    const a = attrs || "";
+    if (/\bcaap-theme-v2\b/.test(a)) return full;
+    const m = a.match(/class\s*=\s*"([^"]*)"/i);
+    if (m) {
+      return full.replace(/class\s*=\s*"([^"]*)"/i, (_, c) => `class="${c} caap-theme-v2"`);
+    }
+    const m2 = a.match(/class\s*=\s*'([^']*)'/i);
+    if (m2) {
+      return full.replace(/class\s*=\s*'([^']*)'/i, (_, c) => `class='${c} caap-theme-v2'`);
+    }
+    if (!a.trim()) return `<body class="caap-theme-v2">`;
+    return `<body class="caap-theme-v2"${a}>`;
+  });
+}
 
 function walkHtmlFiles(dir, out = []) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -96,16 +204,32 @@ function walkHtmlFiles(dir, out = []) {
 
 function main() {
   const files = walkHtmlFiles(CAAP_ROOT).filter((p) => !p.includes(`${path.sep}scripts${path.sep}`));
-  const re = /\s*<header class="caap-header">[\s\S]*?<\/header>/;
+  const caapDir = path.join(__dirname, "..");
+  const extraTemplates = ["blog-post.template.html", "case-study.template.html"].map((f) => path.join(caapDir, f));
   let n = 0;
-  for (const filePath of files) {
+  for (const filePath of [...files, ...extraTemplates]) {
+    if (!fs.existsSync(filePath)) continue;
     let html = fs.readFileSync(filePath, "utf8");
-    if (!re.test(html)) continue;
-    html = html.replace(re, STANDARD_HEADER);
-    fs.writeFileSync(filePath, html);
-    n++;
+    let changed = false;
+    if (reHeader.test(html)) {
+      html = html.replace(reHeader, STANDARD_HEADER);
+      changed = true;
+    }
+    if (reFooter.test(html)) {
+      html = html.replace(reFooter, STANDARD_FOOTER);
+      changed = true;
+    }
+    const next = ensureBodyTheme(html);
+    if (next !== html) {
+      html = next;
+      changed = true;
+    }
+    if (changed) {
+      fs.writeFileSync(filePath, html);
+      n++;
+    }
   }
-  console.log(`Updated ${n} HTML file(s) under caap/sources/`);
+  console.log(`Updated ${n} HTML file(s) (sources + templates).`);
 }
 
 main();

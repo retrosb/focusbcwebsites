@@ -7,7 +7,7 @@
 
   function formatDate(iso) {
     const [y, m, d] = iso.split("-").map(Number);
-    return new Date(y, m - 1, d).toLocaleDateString("pt-PT", {
+    return new Date(y, m - 1, d).toLocaleDateString("en-GB", {
       day: "numeric",
       month: "long",
       year: "numeric",

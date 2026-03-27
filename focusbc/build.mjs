@@ -709,9 +709,9 @@ const copies = [
   ["mapify-logo.png", "logos/mapify.png"],
   ["logos/google-partner-logo.png", "logos/google-partner-logo.png"],
   ["focusbc-team.avif", "about/focus-bc-team.avif"],
-  /* Home page (sources/index.html) uses WebP at media root; must be copied explicitly. */
+  /* Home page (sources/index.html): WebP brand marks at media root; CAAP PNG also at root for direct URLs. */
   ["focusbc-logo.webp", "focusbc-logo.webp"],
-  ["caap-logo.webp", "caap-logo.webp"],
+  ["caap-logo.png", "caap-logo.png"],
   ["virtualvenue_logo.webp", "virtualvenue_logo.webp"],
 ];
 for (const [src, dest] of copies) {

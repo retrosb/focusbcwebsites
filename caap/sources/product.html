@@ -3,18 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>__META_TITLE__</title>
-    <meta name="description" content="__META_DESC__" />
-    <link rel="canonical" href="__CANONICAL__" />
-    <meta property="og:title" content="__OG_TITLE__" />
-    <meta property="og:description" content="__OG_DESC__" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="__OG_URL__" />
-    <meta property="og:image" content="__OG_IMAGE__" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="__TW_TITLE__" />
-    <meta name="twitter:description" content="__TW_DESC__" />
-    <meta name="twitter:image" content="__TW_IMAGE__" />
+    <title>Platform | City as a Platform</title>
+    <meta
+      name="description"
+      content="Map & territory, operations, data integration, and dashboards—how CAAP modules fit together."
+    />
+    <link rel="canonical" href="https://www.city-platform.com/product" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -130,62 +124,115 @@
     </header>
 
     <main id="main-content">
-      <section class="hero-caap hero-caap--article" aria-labelledby="article-title">
+      <section class="hero-caap hero-caap--article" aria-labelledby="page-title">
         <div class="hero-caap__glow" aria-hidden="true"></div>
         <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="max-w-3xl">
-            <a href="blog" class="link-arrow text-white-link">Voltar ao blog</a>
-            <div class="meta-row meta-row--light mt-8">
-              <span class="pill-article">__CATEGORY__</span>
-              <span>__DATE_STR__</span>
-              <span aria-hidden="true">•</span>
-              <span>__READ_MIN__ min de leitura</span>
-            </div>
-            <h1 id="article-title" class="mt-6 heading-on-ink">__H1__</h1>
-            <p class="lead lead--on-hero mt-6">__LEAD__</p>
+          <div class="page-hero-inner">
+            <p class="pill-light">Platform</p>
+            <h1 id="page-title" class="mt-6 heading-on-ink">City operations in four modules</h1>
+            <p class="lead lead--on-hero mt-6">
+              CAAP is built as a system: each part connects to the same map and the same operational records.
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="grid-sidebar">
-          <article class="min-w-0">
-            __MEDIA_BLOCK__
-            <div class="prose mt-10">__BODY_HTML__</div>
-            <div class="caap-article-cta mt-12">
-              <p class="eyebrow eyebrow--on-dark">Próximo passo</p>
-              <h2 class="mt-3 h2 h2--on-dark">Ver a plataforma em ação</h2>
-              <p class="mt-4 lead-lg text-white-85">
-                Peça uma demonstração para explorar como o CAAP pode apoiar o seu município.
-              </p>
-              <div class="flex flex-col sm-flex-row gap-3 mt-8">
-                <a href="contactos" class="btn btn--white">Pedir demo</a>
-                <a href="casos-estudo" class="btn btn--ghost">Casos de estudo</a>
-              </div>
-            </div>
+      <section class="section container" aria-labelledby="modules-detail-heading">
+        <h2 id="modules-detail-heading" class="sr-only">Modules</h2>
+        <div class="caap-module-grid">
+          <article class="caap-module-card" id="map-territory">
+            <h3>Map &amp; territory</h3>
+            <p>Layers, assets, and spatial data in one workspace.</p>
+            <p class="caap-module-card__sub mt-4">
+              <a class="link-arrow" href="modulos/mapify">Mapify</a>
+              ·
+              <a class="link-arrow" href="modulos/appbuilder">App Builder</a>
+            </p>
           </article>
-          <aside class="flex flex-col gap-lg">
-            <div class="card">
-              <p class="eyebrow">Sobre este artigo</p>
-              <ul class="mt-4 text-sm-tight text-muted plain-list">
-                <li><strong class="text-ink">Categoria:</strong> __ASIDE_CAT__</li>
-                <li class="mt-2"><strong class="text-ink">Tempo de leitura:</strong> __READ_TIME_LABEL__</li>
-                <li class="mt-2"><strong class="text-ink">Atualizado:</strong> __DATE_STR__</li>
-              </ul>
+          <article class="caap-module-card" id="operations">
+            <h3>Operations &amp; workflows</h3>
+            <p>Tasks, inspections, incidents, and approvals.</p>
+            <p class="caap-module-card__sub mt-4">
+              <a class="link-arrow" href="modulos/gestao-de-ocorrencias">Incident management</a>
+              ·
+              <a class="link-arrow" href="modulos/higiene-urbana">Urban hygiene</a>
+              ·
+              <a class="link-arrow" href="modulos/gestao-de-condicionamentos-de-transito">Traffic restrictions</a>
+            </p>
+          </article>
+          <article class="caap-module-card" id="integration">
+            <h3>Data integration</h3>
+            <p>APIs and connectors to external systems and open data.</p>
+            <p class="caap-module-card__sub mt-4">Connectors and APIs keep asset and work records in sync with tools you already run.</p>
+          </article>
+          <article class="caap-module-card" id="dashboards">
+            <h3>Dashboards &amp; reporting</h3>
+            <p>KPIs, monitoring, and exports for management and compliance.</p>
+            <p class="caap-module-card__sub mt-4">Built on the same tasks and metrics your teams create in daily operations—not a separate reporting silo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section bg-white" aria-labelledby="arch-heading">
+        <div class="container max-w-3xl">
+          <p class="eyebrow">Architecture (overview)</p>
+          <h2 id="arch-heading" class="h2 mt-3">Data → platform → operations → decisions</h2>
+          <p class="lead text-slate-600 mt-4">
+            Data lands in the platform, flows into workflows and apps, and rolls up to dashboards your teams already use.
+          </p>
+          <div class="caap-flow mt-10 justify-start">
+            <div class="caap-flow__step">Data</div>
+            <span class="caap-flow__arrow" aria-hidden="true">→</span>
+            <div class="caap-flow__step">Platform</div>
+            <span class="caap-flow__arrow" aria-hidden="true">→</span>
+            <div class="caap-flow__step">Operations</div>
+            <span class="caap-flow__arrow" aria-hidden="true">→</span>
+            <div class="caap-flow__step">Decisions</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="caap-proof-strip" aria-labelledby="screens-heading">
+        <div class="container">
+          <div class="max-w-3xl">
+            <p class="eyebrow">Depth</p>
+            <h2 id="screens-heading" class="h2 mt-3">Screens &amp; detail</h2>
+            <p class="lead text-slate-600 mt-4">
+              Each capability below maps to product pages with more depth.
+            </p>
+          </div>
+          <div class="caap-proof-strip__grid mt-10">
+            <div class="caap-proof-frame">
+              <span class="caap-proof-frame__label">Map workspace</span>
+              <p class="caap-proof-frame__hint">Replace with a capture of layers and assets in your environment.</p>
             </div>
-            <div class="card">
-              <p class="eyebrow">Páginas relacionadas</p>
-              <div class="mt-4 flex flex-col gap-3">
-                <a href="./" class="aside-link">Início CAAP</a>
-                <a href="casos-estudo" class="aside-link">Casos de estudo</a>
-                <a href="/focusbc/" class="aside-link">Focus BC</a>
-              </div>
+            <div class="caap-proof-frame">
+              <span class="caap-proof-frame__label">Tasks &amp; queue</span>
+              <p class="caap-proof-frame__hint">Replace with incidents or work-order list and detail.</p>
             </div>
-            <div class="card">
-              <p class="eyebrow">Mais no blog</p>
-              <div class="mt-4 flex flex-col gap-5">__RELATED_BLOCK__</div>
+            <div class="caap-proof-frame">
+              <span class="caap-proof-frame__label">Dashboard</span>
+              <p class="caap-proof-frame__hint">Replace with KPIs your leadership recognises.</p>
             </div>
-          </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--bottom container">
+        <div class="cta-gradient">
+          <div class="cta-split">
+            <div class="max-w-2xl">
+              <p class="eyebrow text-white-80">Next step</p>
+              <h2 class="mt-3 heading-on-ink">Go deeper with your team</h2>
+              <p class="mt-4 lead-lg text-white-85">
+                We walk through modules against your priorities—traffic, waste, inspections, or infrastructure.
+              </p>
+            </div>
+            <div class="cta-split__actions mt-8 flex flex-col gap-3">
+              <a class="btn btn--white" href="mailto:joao.barata@focus-bc.com">Request demo</a>
+              <a class="btn btn--ghost" href="./">Home</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>

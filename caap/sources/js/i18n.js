@@ -1,5 +1,6 @@
 /**
- * Client-side i18n for City as a Platform (CAAP) static pages.
+ * Client-side i18n for CAAP (not loaded during the English-only PoC).
+ * Pages use plain English in HTML; re-add <script src="js/i18n.js" defer></script> when translating.
  */
 (function () {
   "use strict";

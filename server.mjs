@@ -400,7 +400,7 @@ function caapCaseRelatedBlock(related) {
   return related
     .map(
       (r) =>
-        `<a href="casestudies/${encodeURIComponent(r.slug)}"><h3 class="h3">${escapeHtml(r.headline || r.title)}</h3><p class="text-muted mt-1 text-sm-tight">${escapeHtml(truncate(r.excerpt, 140))}</p></a>`
+        `<a href="casos-estudo/${encodeURIComponent(r.slug)}"><h3 class="h3">${escapeHtml(r.headline || r.title)}</h3><p class="text-muted mt-1 text-sm-tight">${escapeHtml(truncate(r.excerpt, 140))}</p></a>`
     )
     .join("");
 }
@@ -408,7 +408,7 @@ function caapCaseRelatedBlock(related) {
 function renderCaapBlogPost(post) {
   const tpl = fs.readFileSync(CAAP_BLOG_TEMPLATE, "utf8");
   const canonical = `https://www.city-platform.com/post/${post.slug}`;
-  const ogImage = post.image || "media/caap-logo.webp";
+  const ogImage = post.image || "media/caap-logo.png";
   const dateStr = formatBlogDate(post.lastmod);
   const metaDesc = truncate(String(post.excerpt || post.title).replace(/\s+/g, " "), 155);
   const related = pickRelatedCaapPosts(post.slug, 2);
@@ -431,7 +431,7 @@ function renderCaapBlogPost(post) {
     __MEDIA_BLOCK__: blogMediaBlock(post),
     __BODY_HTML__: caapBlogPlaceholderBody(post, dateStr, canonical),
     __ASIDE_CAT__: escapeHtml(post.category),
-    __READ_TIME_LABEL__: escapeHtml(`${post.readMinutes ?? 5} minutes`),
+    __READ_TIME_LABEL__: escapeHtml(`${post.readMinutes ?? 5} minutos`),
     __RELATED_BLOCK__: caapBlogRelatedBlock(related),
   };
   let out = tpl;
@@ -443,8 +443,8 @@ function renderCaapBlogPost(post) {
 
 function renderCaapCaseStudy(study) {
   const tpl = fs.readFileSync(CAAP_CASE_TEMPLATE, "utf8");
-  const canonical = `https://www.city-platform.com/post/${study.slug}`;
-  const ogImage = study.image || "media/caap-logo.webp";
+  const canonical = `https://www.city-platform.com/casos-estudo/${study.slug}/`;
+  const ogImage = study.image || "media/caap-logo.png";
   const dateStr = formatBlogDate(study.lastmod);
   const headline = study.headline || study.title;
   const metaDesc = truncate(String(study.excerpt || headline).replace(/\s+/g, " "), 155);
@@ -468,7 +468,7 @@ function renderCaapCaseStudy(study) {
     __MEDIA_BLOCK__: caseStudyMediaBlock(study),
     __BODY_HTML__: caapCasePlaceholderBody(study, dateStr, canonical),
     __ASIDE_CAT__: escapeHtml(study.category),
-    __READ_TIME_LABEL__: escapeHtml(`${study.readMinutes ?? 5} minutes`),
+    __READ_TIME_LABEL__: escapeHtml(`${study.readMinutes ?? 5} minutos`),
     __RELATED_BLOCK__: caapCaseRelatedBlock(related),
   };
   let out = tpl;
@@ -590,6 +590,59 @@ function resolveFocusbcFile(segments) {
   return null;
 }
 
+/** Map legacy English CAAP URLs to PT-PT slugs (pathname without /caap prefix, no leading slash). */
+const CAAP_LEGACY_SOLUTION_SLUG = {
+  "public-space": "manutencao-dos-espacos-publicos",
+  mobility: "mobilidade",
+  tourism: "turismo",
+  environment: "ambiente-e-sustentabilidade",
+  "urban-planning": "planeamento-urbano",
+  governance: "governanca-e-transparencia-digital",
+  sensors: "sensores-e-monitorizacao",
+};
+const CAAP_LEGACY_PRODUCT_SLUG = {
+  "incident-management": "gestao-de-ocorrencias",
+  "urban-management": "gestao-urbanistica",
+  "traffic-restrictions": "gestao-de-condicionamentos-de-transito",
+  "urban-hygiene": "higiene-urbana",
+  "app-builder": "appbuilder",
+  mapify: "mapify",
+};
+
+/**
+ * Returns new location path (with leading slash, under /caap/) or null.
+ * @param {string} pathname
+ */
+function caapLegacyRedirect(pathname) {
+  if (!pathname.startsWith("/caap/")) return null;
+  const trimmed = pathname.replace(/\/+$/, "");
+  const rest = trimmed.slice("/caap".length).replace(/^\/+/, "");
+  const segments = rest.split("/").filter(Boolean);
+  if (segments.length === 0) return null;
+  const [head, ...tail] = segments;
+  const h = head.toLowerCase();
+
+  if (h === "casestudies" || h === "case-studies") {
+    const pathRest = tail.map((s) => encodeURIComponent(s)).join("/");
+    return "/caap/casos-estudo" + (pathRest ? "/" + pathRest : "") + "/";
+  }
+  if (h === "solutions" && tail[0] && CAAP_LEGACY_SOLUTION_SLUG[tail[0].toLowerCase()]) {
+    const slug = CAAP_LEGACY_SOLUTION_SLUG[tail[0].toLowerCase()];
+    const deeper = tail.slice(1).map((s) => encodeURIComponent(s)).join("/");
+    return "/caap/solucoes/" + encodeURIComponent(slug) + (deeper ? "/" + deeper : "") + "/";
+  }
+  if (h === "products" && tail[0] && CAAP_LEGACY_PRODUCT_SLUG[tail[0].toLowerCase()]) {
+    const slug = CAAP_LEGACY_PRODUCT_SLUG[tail[0].toLowerCase()];
+    const deeper = tail.slice(1).map((s) => encodeURIComponent(s)).join("/");
+    return "/caap/modulos/" + encodeURIComponent(slug) + (deeper ? "/" + deeper : "") + "/";
+  }
+  if (h === "about" && tail.length === 0) return "/caap/sobre-nos/";
+  if (h === "partners" && tail.length === 0) return "/caap/parceiros/";
+  if (h === "product" && tail.length === 0) return "/caap/";
+  if (h === "use-cases" && tail.length === 0) return "/caap/";
+  return null;
+}
+
 function resolveCaapFile(segments) {
   if (segments.length === 0) {
     return path.join(CAAP_PAGES_ROOT, "index.html");
@@ -602,16 +655,23 @@ function resolveCaapFile(segments) {
     if (fs.existsSync(legacy)) return legacy;
     return null;
   }
-  if ((a === "casestudies" || a === "case-studies") && segments.length === 1) {
-    const dirIdx = path.join(CAAP_PAGES_ROOT, "case-studies", "index.html");
+  if ((a === "casestudies" || a === "case-studies" || a === "casos-estudo") && segments.length === 1) {
+    const dirIdx = path.join(CAAP_PAGES_ROOT, "casos-estudo", "index.html");
     if (fs.existsSync(dirIdx)) return dirIdx;
-    const legacy = path.join(CAAP_PAGES_ROOT, "case-studies.html");
+    const legacy = path.join(CAAP_PAGES_ROOT, "casos-estudo.html");
     if (fs.existsSync(legacy)) return legacy;
+    const oldDir = path.join(CAAP_PAGES_ROOT, "case-studies", "index.html");
+    if (fs.existsSync(oldDir)) return oldDir;
+    const oldLegacy = path.join(CAAP_PAGES_ROOT, "case-studies.html");
+    if (fs.existsSync(oldLegacy)) return oldLegacy;
     return null;
   }
   const caapSingle = {
-    about: ["about", "index.html"],
-    partners: ["partners", "index.html"],
+    "sobre-nos": ["sobre-nos", "index.html"],
+    contactos: ["contactos", "index.html"],
+    parceiros: ["parceiros", "index.html"],
+    about: ["sobre-nos", "index.html"],
+    partners: ["parceiros", "index.html"],
   };
   if (segments.length === 1 && caapSingle[a]) {
     const idx = path.join(CAAP_PAGES_ROOT, ...caapSingle[a]);
@@ -621,12 +681,26 @@ function resolveCaapFile(segments) {
     return null;
   }
   /* Case-insensitive top-level folders (Linux servers); blog/casestudies slugs stay as-is. */
-  const caapFoldableRoots = new Set(["products", "solutions", "data", "media", "js", "styles"]);
+  const caapFoldableRoots = new Set([
+    "products",
+    "solutions",
+    "solucoes",
+    "modulos",
+    "data",
+    "media",
+    "js",
+    "styles",
+  ]);
   let folded =
     segments[0] && caapFoldableRoots.has(segments[0].toLowerCase())
       ? [segments[0].toLowerCase(), ...segments.slice(1)]
       : segments;
-  if (folded[0] === "products" || folded[0] === "solutions") {
+  if (
+    folded[0] === "products" ||
+    folded[0] === "solutions" ||
+    folded[0] === "solucoes" ||
+    folded[0] === "modulos"
+  ) {
     folded = [folded[0], ...folded.slice(1).map((s) => s.toLowerCase())];
   }
   const rel = path.join(...folded);
@@ -648,6 +722,25 @@ function resolveCaapFile(segments) {
     const withHtml = `${candidate}.html`;
     if (fs.existsSync(withHtml) && fs.statSync(withHtml).isFile()) {
       return withHtml;
+    }
+  }
+  /* When public/caap exists but styles/locales/js were not copied (partial build), serve from repo. */
+  if (folded[0] === "locales" && folded.length >= 2) {
+    const src = path.join(CAAP_REPO, "locales", ...folded.slice(1));
+    const localesRoot = path.join(CAAP_REPO, "locales");
+    if (underRoot(localesRoot, src) && fs.existsSync(src) && fs.statSync(src).isFile()) {
+      return src;
+    }
+  }
+  if (folded[0] === "styles" && folded[1] === "styles.css") {
+    const src = path.join(CAAP_REPO, "sources", "styles.css");
+    if (fs.existsSync(src) && fs.statSync(src).isFile()) return src;
+  }
+  if (folded[0] === "js" && folded.length >= 2) {
+    const src = path.join(CAAP_REPO, "sources", "js", ...folded.slice(1));
+    const jsRoot = path.join(CAAP_REPO, "sources", "js");
+    if (underRoot(jsRoot, src) && fs.existsSync(src) && fs.statSync(src).isFile()) {
+      return src;
     }
   }
   return null;
@@ -699,14 +792,23 @@ function handler(req, res) {
     pathname = "/caap/" + pathname.slice(6);
   }
 
+  {
+    const caapRedir = caapLegacyRedirect(pathname);
+    if (caapRedir) {
+      res.writeHead(302, { Location: caapRedir + url.search });
+      res.end();
+      return;
+    }
+  }
+
   // Friendly aliases (hyphenated filename vs extensionless route)
   if (pathname === "/caap/case-studies" || pathname === "/caap/case-studies/") {
-    res.writeHead(302, { Location: "/caap/casestudies" + url.search });
+    res.writeHead(302, { Location: "/caap/casos-estudo/" + url.search });
     res.end();
     return;
   }
   if (pathname === "/caap/blog.html" || pathname === "/caap/case-studies.html") {
-    const loc = pathname.includes("blog") ? "/caap/blog" : "/caap/casestudies";
+    const loc = pathname.includes("blog") ? "/caap/blog" : "/caap/casos-estudo/";
     res.writeHead(302, { Location: loc + url.search });
     res.end();
     return;
@@ -832,7 +934,7 @@ function handler(req, res) {
     if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
       /* Prefer npm-built HTML (case-studies-built → public/focusbc/case-studies/) over JSON
-         templates: templates use CAAP-relative assets (styles.css, caap-logo.webp) and break
+         templates: templates use CAAP-relative assets (styles.css, caap-logo.png) and break
          under /focusbc/ even with <base>. */
       const staticCaseDir = path.join(FOCUSBC_OUTPUT, "case-studies", slug, "index.html");
       if (fs.existsSync(staticCaseDir)) {
@@ -1011,7 +1113,7 @@ function handler(req, res) {
     }
     const segments = rest.split("/").filter(Boolean);
 
-    if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
+    if (segments[0] === "casos-estudo" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
       const study = caapCaseBySlug.get(slug);
       if (study) {
@@ -1043,7 +1145,7 @@ function handler(req, res) {
       const slug = segments[1];
       if (caapCaseBySlug.has(slug)) {
         res.writeHead(302, {
-          Location: "/caap/casestudies/" + encodeURIComponent(slug) + url.search,
+          Location: "/caap/casos-estudo/" + encodeURIComponent(slug) + url.search,
         });
         res.end();
         return;

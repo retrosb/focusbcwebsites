@@ -1,5 +1,6 @@
 /**
- * Add i18n hooks + lang switch + script to CAAP HTML sources.
+ * Legacy: add i18n hooks + lang switch + script to CAAP HTML.
+ * Not used while the site is English-only; run strip-i18n-html.mjs if this script is applied by mistake.
  * Run: node caap/scripts/patch-i18n-html.mjs
  */
 import fs from "node:fs";

@@ -1,0 +1,50 @@
+{
+  "brand": {
+    "tagline": "Smart urban management platform"
+  },
+  "skipLink": "Skip to main content",
+  "nav": {
+    "menu": "Menu",
+    "solutions": "Solutions",
+    "products": "Products",
+    "clients": "Clients",
+    "partners": "Partners",
+    "blog": "Blog",
+    "about": "About us",
+    "aboutShort": "About",
+    "contact": "Contact",
+    "login": "Log in",
+    "home": "Home",
+    "company": "Company",
+    "mobility": "Mobility",
+    "tourism": "Tourism",
+    "environment": "Environment & sustainability",
+    "urbanPlanning": "Urban planning",
+    "governance": "Governance & digital transparency",
+    "sensors": "Sensors & monitoring",
+    "publicSpace": "Public space maintenance",
+    "incidentManagement": "Incident management",
+    "urbanManagement": "Urban management",
+    "trafficRestrictions": "Traffic restrictions",
+    "urbanHygiene": "Urban hygiene",
+    "appBuilder": "App Builder",
+    "mapify": "Mapify",
+    "clientsCaseStudies": "Clients & case studies",
+    "caseStudies": "Case studies"
+  },
+  "cta": {
+    "contactUs": "Contact us"
+  },
+  "footer": {
+    "homeLink": "← Home",
+    "explore": "Explore",
+    "onThisPage": "On this page",
+    "lead": "City as a Platform is a Focus BC product — smart urban management on Google Cloud.",
+    "solutionsAnchor": "Solutions",
+    "productsAnchor": "Products",
+    "caseStudies": "Case studies",
+    "differentiators": "Differentiators",
+    "impact": "Impact",
+    "contact": "Contact"
+  }
+}

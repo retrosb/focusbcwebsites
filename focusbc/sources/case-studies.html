@@ -30,32 +30,34 @@
     <script src="/js/case-studies-list.js" defer></script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+        <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="site-header">
       <div class="container site-header__inner">
         <a href="./" class="site-logo"
           ><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40"
         /></a>
         <details class="site-nav-mobile">
-          <summary class="site-nav-mobile__toggle">Menu</summary>
+          <summary class="site-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
           <nav class="site-nav-mobile__panel" aria-label="Primary navigation">
-            <a href="about">About</a>
-            <a href="google">Google</a>
-            <a href="casestudies" aria-current="page">Case studies</a>
-            <a href="blog">Blog</a>
-            <a href="careers">Careers</a>
-            <a href="contact">Contact</a>
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <a href="about" data-i18n="nav.about">About</a>
+            <a href="google" data-i18n="nav.google">Google</a>
+            <a href="casestudies" aria-current="page" data-i18n="nav.caseStudies">Case studies</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="careers" data-i18n="nav.careers">Careers</a>
+            <a href="contact" data-i18n="nav.contact">Contact</a>
           </nav>
         </details>
         <nav class="site-nav-desktop" aria-label="Primary navigation">
-          <a href="about">About</a>
-          <a href="google">Google</a>
-          <a href="casestudies" class="is-active" aria-current="page">Case studies</a>
-          <a href="blog">Blog</a>
-          <a href="careers">Careers</a>
-          <a href="contact">Contact</a>
+          <a href="about" data-i18n="nav.about">About</a>
+          <a href="google" data-i18n="nav.google">Google</a>
+          <a href="casestudies" class="is-active" aria-current="page" data-i18n="nav.caseStudies">Case studies</a>
+          <a href="blog" data-i18n="nav.blog">Blog</a>
+          <a href="careers" data-i18n="nav.careers">Careers</a>
+          <a href="contact" data-i18n="nav.contact">Contact</a>
         </nav>
-        <a href="contact" class="btn btn--primary btn--sm btn--header">Talk to us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a href="contact" class="btn btn--primary btn--sm btn--header" data-i18n="cta.talkToUs">Talk to us</a>
       </div>
     </header>
 
@@ -69,22 +71,22 @@
         <div class="container hero__inner case-studies-hero__inner">
           <div class="case-studies-hero-grid">
             <div>
-              <p class="pill pill--hero-light">Focus BC Case Studies</p>
-              <h1 id="page-title" class="case-studies-hero-title mt-5">
+              <p class="pill pill--hero-light" data-i18n="pages.caseStudiesPage.hero.pill">Focus BC Case Studies</p>
+              <h1 id="page-title" class="case-studies-hero-title mt-5" data-i18n="pages.caseStudiesPage.hero.h1">
                 Proof from real operational environments
               </h1>
-              <p class="home-hero__lede home-hero__lede--tight mt-5 max-w-prose">
+              <p class="home-hero__lede home-hero__lede--tight mt-5 max-w-prose" data-i18n="pages.caseStudiesPage.hero.lede1">
                 Explore how Focus BC products and solutions support city operations, geospatial workflows, and global
                 sports event environments.
               </p>
-              <p class="home-hero__lede home-hero__lede--tight mt-3 max-w-prose">
+              <p class="home-hero__lede home-hero__lede--tight mt-3 max-w-prose" data-i18n="pages.caseStudiesPage.hero.lede2">
                 These case studies show how platforms, data, and operational design come together in practical contexts
                 where teams need better visibility, coordination, and control.
               </p>
             </div>
             <figure class="case-studies-hero-figure">
               <div class="case-studies-hero-visual" aria-hidden="true"></div>
-              <figcaption class="case-studies-hero-caption">
+              <figcaption class="case-studies-hero-caption" data-i18n="pages.caseStudiesPage.hero.cap">
                 Focus BC proof across cities, operations, and sports environments
               </figcaption>
             </figure>
@@ -94,17 +96,17 @@
 
       <section class="blog-filter-bar case-studies-filter-bar" aria-label="Case study categories">
         <div class="container blog-filter-bar__inner">
-          <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all">All</button>
-          <button type="button" class="blog-filter-btn" data-filter="smart-cities">Smart Cities</button>
-          <button type="button" class="blog-filter-btn" data-filter="sports-events">Sports Events</button>
+          <button type="button" class="blog-filter-btn blog-filter-btn--active" data-filter="all" data-i18n="pages.caseStudiesPage.filterAll">All</button>
+          <button type="button" class="blog-filter-btn" data-filter="smart-cities" data-i18n="pages.caseStudiesPage.filterCities">Smart Cities</button>
+          <button type="button" class="blog-filter-btn" data-filter="sports-events" data-i18n="pages.caseStudiesPage.filterSports">Sports Events</button>
         </div>
       </section>
 
       <section class="section section--tight case-studies-featured-wrap" aria-label="Featured case studies">
         <div class="container">
-          <p class="sr-only">Featured and secondary highlights load from published entries in data/case-studies.json.</p>
+          <p class="sr-only" data-i18n="pages.caseStudiesPage.srFeatured">Featured and secondary highlights load from published entries in data/case-studies.json.</p>
           <div id="case-studies-featured-mount" class="case-studies-list-mount">
-            <p class="text-muted text-sm-tight">Loading case studies…</p>
+            <p class="text-muted text-sm-tight" data-i18n="pages.caseStudiesPage.loading">Loading case studies…</p>
           </div>
         </div>
       </section>
@@ -112,11 +114,11 @@
       <section class="section bg-white case-studies-selected" aria-labelledby="case-studies-selected-heading">
         <div class="container">
           <div class="case-studies-selected-head">
-            <p class="eyebrow">Selected case studies</p>
-            <h2 id="case-studies-selected-heading" class="case-studies-selected-title mt-3">
+            <p class="eyebrow" data-i18n="pages.caseStudiesPage.selected.eyebrow">Selected case studies</p>
+            <h2 id="case-studies-selected-heading" class="case-studies-selected-title mt-3" data-i18n="pages.caseStudiesPage.selected.h2">
               Practical proof across products, operations, and environments
             </h2>
-            <p class="case-studies-selected-lede mt-4">
+            <p class="case-studies-selected-lede mt-4" data-i18n="pages.caseStudiesPage.selected.lead">
               Use this page to understand where Focus BC creates value, which problems its products help solve, and how
               those products work in practice.
             </p>
@@ -128,15 +130,15 @@
       <section class="section case-studies-readout">
         <div class="container case-studies-readout-grid">
           <div>
-            <p class="eyebrow">How to read these examples</p>
-            <h2 class="case-studies-readout-title mt-3">Case studies that connect products, context, and outcomes</h2>
+            <p class="eyebrow" data-i18n="pages.caseStudiesPage.readout.eyebrow">How to read these examples</p>
+            <h2 class="case-studies-readout-title mt-3" data-i18n="pages.caseStudiesPage.readout.h2">Case studies that connect products, context, and outcomes</h2>
           </div>
           <div class="case-studies-readout-copy">
-            <p>
+            <p data-i18n="pages.caseStudiesPage.readout.p1">
               This page is designed to show where Focus BC creates value, which environments its products support, and
               what kind of operational problems the company is good at solving.
             </p>
-            <p>
+            <p data-i18n="pages.caseStudiesPage.readout.p2">
               Each case study should connect clearly to one of the Focus BC products or to a practical operational
               challenge where data, workflows, and visibility need to work together.
             </p>
@@ -147,74 +149,75 @@
       <section class="section section--bottom container case-studies-bottom-cta">
         <div class="case-studies-cta-band">
           <div class="case-studies-cta-band__copy">
-            <p class="eyebrow eyebrow--on-dark">Next step</p>
-            <h2 class="mt-3 h2">Want to understand how these examples connect to your environment?</h2>
-            <p class="mt-4 lead-lg text-on-coral max-w-prose">
+            <p class="eyebrow eyebrow--on-dark" data-i18n="pages.caseStudiesPage.cta.eyebrow">Next step</p>
+            <h2 class="mt-3 h2" data-i18n="pages.caseStudiesPage.cta.h2">Want to understand how these examples connect to your environment?</h2>
+            <p class="mt-4 lead-lg text-on-coral max-w-prose" data-i18n="pages.caseStudiesPage.cta.lead">
               If you want to explore one of our products, discuss a similar challenge, or understand whether Focus BC is
               the right fit, start a conversation with our team.
             </p>
           </div>
           <div class="case-studies-cta-band__actions">
-            <a href="contact" class="btn btn--white">Contact us</a>
-            <a href="about" class="btn btn--ghost-light">Learn more about Focus BC</a>
+            <a href="contact" class="btn btn--white" data-i18n="pages.caseStudiesPage.cta.b1">Contact us</a>
+            <a href="about" class="btn btn--ghost-light" data-i18n="pages.caseStudiesPage.cta.b2">Learn more about Focus BC</a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
+        <footer class="site-footer">
       <div class="site-footer__strap">
         <div class="container site-footer__strap-inner">
           <div>
-            <p class="site-footer__strap-tagline">
+            <p class="site-footer__strap-tagline" data-i18n-html="footer.strapTagline">
               Operational platforms for cities and global sports events.<br />
               Built as products. Delivered for operations.
             </p>
-            <p class="site-footer__strap-note">Focus BC · Google Premier Partner · Lisbon</p>
+            <p class="site-footer__strap-note" data-i18n="footer.strapNote">Focus BC · Google Premier Partner · Lisbon</p>
           </div>
-          <a href="contact" class="btn btn--white btn--sm shrink-0">Talk to us</a>
+          <a href="contact" class="btn btn--white btn--sm shrink-0" data-i18n="cta.talkToUs">Talk to us</a>
         </div>
       </div>
       <div class="site-footer__body">
         <div class="container site-footer__grid">
           <div>
             <a href="./"><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40" /></a>
-            <p class="footer-tagline">
+            <p class="footer-tagline" data-i18n-html="footer.tagline">
               Operational platforms for cities and global sports events.<br />
               Built as products. Delivered for operations.
             </p>
           </div>
           <div>
-            <h3>Company</h3>
+            <h3 data-i18n="footer.companyHeading">Company</h3>
             <ul>
-              <li><a href="about">About</a></li>
-              <li><a href="casestudies">Case studies</a></li>
-              <li><a href="blog">Blog</a></li>
-              <li><a href="careers">Careers</a></li>
+              <li><a href="about" data-i18n="nav.about">About</a></li>
+              <li><a href="casestudies" data-i18n="nav.caseStudies">Case studies</a></li>
+              <li><a href="blog" data-i18n="nav.blog">Blog</a></li>
+              <li><a href="careers" data-i18n="nav.careers">Careers</a></li>
             </ul>
           </div>
           <div>
-            <h3>Offers</h3>
+            <h3 data-i18n="footer.offersHeading">Offers</h3>
             <ul>
               <li><a href="https://www.virtualvenue-events.com/" target="_blank" rel="noopener noreferrer">Virtual Venue</a></li>
               <li><a href="https://www.city-platform.com/" target="_blank" rel="noopener noreferrer">City as a Platform</a></li>
-              <li><a href="google">Google partnership</a></li>
+              <li><a href="google" data-i18n="footer.googlePartnership">Google partnership</a></li>
             </ul>
-            <p class="footer-note">
+            <p class="footer-note" data-i18n-html="footer.mapifyNote">
               Mapify powers geospatial and integration capability <strong>inside</strong> City as a Platform.
               <a href="https://www.mapify.ai/" rel="noopener noreferrer">Mapify</a>
             </p>
           </div>
           <div>
-            <h3>Contact</h3>
+            <h3 data-i18n="footer.contactHeading">Contact</h3>
             <ul>
-              <li><a href="contact">Get in touch</a></li>
+              <li><a href="contact" data-i18n="footer.getInTouch">Get in touch</a></li>
               <li><a href="mailto:info@focus-bc.com">info@focus-bc.com</a></li>
-              <li><a href="https://www.linkedin.com" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com" rel="noopener noreferrer" data-i18n="footer.linkedin">LinkedIn</a></li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
+    <script defer src="/js/i18n.js"></script>
   </body>
 </html>

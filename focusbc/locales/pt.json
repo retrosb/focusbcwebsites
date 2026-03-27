@@ -1,0 +1,589 @@
+{
+  "skipLink": "Saltar para o conteúdo principal",
+  "nav": {
+    "menu": "Menu",
+    "about": "Sobre",
+    "google": "Google",
+    "caseStudies": "Estudos de caso",
+    "blog": "Blog",
+    "careers": "Carreiras",
+    "contact": "Contacto"
+  },
+  "cta": {
+    "talkToUs": "Fale connosco"
+  },
+  "footer": {
+    "strapTagline": "Plataformas operacionais para cidades e grandes eventos desportivos.<br />Construídas como produtos. Entregues para operações.",
+    "strapNote": "Focus BC · Google Premier Partner · Lisboa",
+    "tagline": "Plataformas operacionais para cidades e grandes eventos desportivos.<br />Construídas como produtos. Entregues para operações.",
+    "taglineCompact": "Plataformas operacionais para cidades e grandes eventos desportivos. Construídas como produtos. Entregues para operações.",
+    "companyHeading": "Empresa",
+    "offersHeading": "Ofertas",
+    "contactHeading": "Contacto",
+    "googlePartnership": "Parceria Google",
+    "mapifyNote": "Mapify oferece capacidade geoespacial e de integração <strong>em</strong> City as a Platform. <a href=\"https://www.mapify.ai/\" rel=\"noopener noreferrer\">Mapify</a>",
+    "getInTouch": "Contacte-nos",
+    "linkedin": "LinkedIn"
+  },
+  "blog": {
+    "backToBlog": "← Todos os artigos do blog",
+    "readArticle": "Ler artigo",
+    "eyebrow": "Blog"
+  },
+  "caseStudy": {
+    "eyebrow": "Estudos de caso",
+    "readCaseStudy": "Ler estudo de caso"
+  },
+  "pages": {
+    "index": {
+      "hero": {
+        "pill": "Empresa de produtos · Google Premier Partner",
+        "h1": "Plataformas operacionais para cidades e grandes eventos desportivos",
+        "lede1": "Cidades e eventos desportivos exigem visibilidade, coordenação e controlo claros.",
+        "lede2": "A Focus BC constrói plataformas de software que apoiam equipas em municípios e em grandes ambientes desportivos.",
+        "ctaAreas": "Ver as duas áreas de foco",
+        "ctaConversation": "Iniciar uma conversa",
+        "cap1": "Visão geral das plataformas Focus BC em contextos urbanos e desportivos",
+        "cap2": "Vista das operações municipais",
+        "cap3": "Fluxo de operações desportivas"
+      },
+      "metrics": {
+        "m1k": "Mercados",
+        "m1d": "Cidades inteligentes e eventos desportivos",
+        "m2k": "Produtos",
+        "m2d": "City as a Platform e Virtual Venue",
+        "m3k": "Tecnologia",
+        "m3d": "Competência em Google Cloud e Google Maps",
+        "m4k": "Contexto de entrega",
+        "m4n": "Real",
+        "m4d": "Implementações em cidades e ambientes de eventos"
+      },
+      "focus": {
+        "eyebrow": "Áreas de foco",
+        "h2": "Dois ambientes. Uma abordagem às operações.",
+        "lead": "Construímos plataformas operacionais para municípios e organizações desportivas.",
+        "caapCat": "Cidades inteligentes",
+        "caapTitle": "City as a Platform",
+        "caapDesc": "Uma plataforma para municípios que precisam de visibilidade em tempo real, dados integrados e operações coordenadas entre equipas e serviços.",
+        "caapB1": "• Gerir território e operações diárias num só lugar",
+        "caapB2": "• Ligar departamentos, sistemas e parceiros",
+        "caapB3": "• Apoiar decisões com dados e fluxos de trabalho em tempo real",
+        "caapCta": "Explorar City as a Platform",
+        "vvCat": "Desporto e eventos",
+        "vvTitle": "Virtual Venue",
+        "vvDesc": "Uma plataforma para planear, monitorizar e gerir operações em recintos, competições e grandes programas desportivos.",
+        "vvB1": "• Coordenar a prontidão entre locais e cronogramas",
+        "vvB2": "• Monitorizar incidentes e estado operacional",
+        "vvB3": "• Estruturar relatórios entre equipas e stakeholders",
+        "vvCta": "Visitar Virtual Venue"
+      },
+      "trust": {
+        "eyebrow": "Porque as equipas confiam na Focus BC",
+        "h2": "Construídas como produtos. Usadas em operações reais.",
+        "lead": "A Focus BC atua em ambientes onde o software faz parte das operações diárias.",
+        "t1h": "Abordagem orientada a produto",
+        "t1p": "Plataformas pensadas para evoluir e escalar em diferentes contextos.",
+        "t2h": "Utilização no terreno",
+        "t2p": "Software aplicado em ambientes operacionais reais.",
+        "t3h": "Comprovado em vários setores",
+        "t3p": "Cidades, mobilidade, operações geoespaciais e eventos desportivos.",
+        "t4h": "Fundação tecnológica sólida",
+        "t4p": "Construído em Google Cloud e Google Maps Platform."
+      },
+      "visuals": {
+        "eyebrow": "Visuais de produto",
+        "h2": "Plataformas reais a apoiar operações reais",
+        "l1": "Os produtos Focus BC dão às equipas uma visão clara do que está a acontecer e as ferramentas para agir.",
+        "l2": "Dos mapas e painéis aos fluxos de trabalho e relatórios, tudo é pensado para apoiar decisões operacionais.",
+        "c1": "Vista de território e mapa",
+        "c2": "Painel operacional",
+        "c3": "Fluxo de recintos e relatórios"
+      },
+      "caseSec": {
+        "eyebrow": "Estudos de caso",
+        "h2": "Prova antes de promessas",
+        "lead": "A melhor forma de compreender a Focus BC é através de contextos operacionais reais, não de afirmações genéricas.",
+        "viewAll": "Ver todos os estudos de caso"
+      },
+      "case1": {
+        "e": "Cidades inteligentes",
+        "t": "Melhorar as operações municipais com uma plataforma ligada",
+        "x": "Como dados e fluxos integrados apoiam as operações municipais diárias.",
+        "cta": "Ler estudo de caso"
+      },
+      "case2": {
+        "e": "Geoespacial e operações",
+        "t": "Tornar dados geoespaciais úteis para equipas operacionais",
+        "x": "Transformar cartografia e dados em informação acionável.",
+        "cta": "Ler estudo de caso"
+      },
+      "case3": {
+        "e": "Eventos desportivos",
+        "t": "Apoiar operações complexas de eventos desportivos",
+        "x": "Planeamento, coordenação e relatórios em ambientes de alta pressão.",
+        "cta": "Ler artigo"
+      },
+      "blogSec": {
+        "eyebrow": "Blog",
+        "h2": "Insights selecionados da Focus BC",
+        "lead": "Partilhamos a nossa abordagem ao desenvolvimento de produtos, plataformas operacionais e ambientes complexos.",
+        "readBlog": "Ler o blog"
+      },
+      "blog1": {
+        "e": "Produto e empresa",
+        "t": "Como o pensamento de produto altera a entrega em ambientes complexos",
+        "x": "Uma visão prática de como produtos mais fortes melhoram a entrega e o valor a longo prazo.",
+        "cta": "Ler artigo"
+      },
+      "blog2": {
+        "e": "Cidades inteligentes",
+        "t": "De sistemas fragmentados a operações municipais ligadas",
+        "x": "Porque a integração operacional importa mais do que narrativas genéricas de cidade inteligente.",
+        "cta": "Ler artigo"
+      },
+      "blog3": {
+        "e": "Parcerias",
+        "t": "O que as parcerias devem permitir numa empresa de produto",
+        "x": "Uma visão prática sobre parcerias, crescimento de produto e implementação.",
+        "cta": "Ler artigo"
+      },
+      "google": {
+        "eyebrow": "Parceria Google",
+        "h2": "Construído em fundações cloud e geoespaciais de confiança",
+        "badge": "Google Premier Partner com competência em Google Cloud e Google Maps Platform",
+        "lead": "A Focus BC é Google Premier Partner com competência em Google Cloud e Google Maps Platform. Estas tecnologias apoiam como construímos e escalamos produtos, mantendo o foco em plataformas operacionais.",
+        "p1": "Google Cloud",
+        "p2": "Google Maps Platform",
+        "p3": "Operações geoespaciais",
+        "p4": "Infraestrutura escalável",
+        "btn": "Saber mais sobre a nossa parceria Google"
+      },
+      "careers": {
+        "eyebrow": "Carreiras",
+        "h2": "Trabalhe em plataformas que importam",
+        "lead": "Junte-se a uma equipa que desenvolve software usado em cidades, operações geoespaciais e ambientes de eventos desportivos.",
+        "btn": "Ver carreiras"
+      },
+      "cta": {
+        "eyebrow": "Iniciar a conversa",
+        "h2": "Veja como isto funcionaria na sua cidade ou programa de eventos",
+        "lead": "Quer operações municipais, uma rede de recintos ou um grande programa desportivo, podemos encaminhá-lo para a conversa de produto certa.",
+        "b1": "Marcar uma conversa",
+        "b2": "Ler a prova primeiro"
+      }
+    },
+    "about": {
+      "hero": {
+        "pill": "Sobre a Focus BC",
+        "h1": "Uma empresa de produtos focada em cidades e grandes eventos desportivos",
+        "lede1": "A Focus BC constrói plataformas de software que apoiam equipas operacionais em municípios e ambientes desportivos.",
+        "lede2": "O nosso trabalho centra-se em visibilidade, coordenação e controlo em contextos complexos onde o software tem de apoiar decisões e operações reais.",
+        "cap": "Focus BC em operações em contextos urbanos e desportivos"
+      },
+      "metrics": {
+        "m1k": "Mercados",
+        "m1d": "Cidades inteligentes e eventos desportivos",
+        "m2k": "Produtos",
+        "m2d": "City as a Platform e Virtual Venue",
+        "m3k": "Tecnologia",
+        "m3d": "Competência em Google Cloud e Google Maps",
+        "m4k": "Contexto de entrega",
+        "m4n": "Real",
+        "m4d": "Implementações operacionais e evolução de produto a longo prazo"
+      },
+      "who": {
+        "eyebrow": "Quem somos",
+        "h2": "Construímos software para equipas operacionais, não para apresentações",
+        "p1": "A Focus BC desenvolve plataformas para equipas que precisam de perceber o que se passa, coordenar pessoas e sistemas e agir com confiança.",
+        "p2": "O nosso trabalho concentra-se em dois ambientes exigentes: municípios e grandes eventos desportivos. Em ambos, as operações dependem de informação atempada, visibilidade partilhada e software que suporte decisões no mundo real.",
+        "p3": "Construímos produtos pensados para evoluir ao longo do tempo, suportar uso repetido e manter-se coerentes à medida que as necessidades se tornam mais complexas."
+      },
+      "build": {
+        "eyebrow": "O que construímos",
+        "h2": "Dois produtos para dois ambientes operacionais",
+        "lead": "A Focus BC assenta em dois produtos, cada um desenhado para um contexto operacional claro.",
+        "caapCat": "Cidades inteligentes",
+        "caapTitle": "City as a Platform",
+        "caapDesc": "Uma plataforma para municípios que precisam de dados integrados, visibilidade em tempo real e operações coordenadas entre equipas e serviços.",
+        "caapCta": "Explorar City as a Platform",
+        "vvCat": "Desporto e eventos",
+        "vvTitle": "Virtual Venue",
+        "vvDesc": "Uma plataforma para planear, monitorizar e gerir operações em recintos, competições e grandes programas desportivos.",
+        "vvCta": "Visitar Virtual Venue"
+      },
+      "howWork": {
+        "eyebrow": "Como trabalhamos",
+        "h2": "Pensamento de produto com disciplina de entrega",
+        "p": "Construímos plataformas para apoiar valor operacional a longo prazo. Isso significa produtos que se mantêm coerentes, escaláveis e úteis à medida que equipas, fluxos de trabalho e ambientes evoluem."
+      },
+      "howScale": {
+        "eyebrow": "Como escalamos",
+        "h2": "Produtos sólidos apoiados nas parcerias certas",
+        "p": "A Focus BC continua a apoiar implementação e evolução de produto, trabalhando com parceiros quando isso alarga alcance e capacidade de entrega da forma certa."
+      },
+      "why": {
+        "eyebrow": "Porque as organizações trabalham connosco",
+        "h2": "Construído para ambientes onde o software tem de apoiar decisões reais",
+        "c1h": "Foco operacional",
+        "c1p": "Produtos pensados para equipas que precisam de visibilidade, coordenação e fluxos de trabalho estruturados.",
+        "c2h": "Disciplina de produto",
+        "c2p": "Plataformas pensadas para evoluir e escalar em vários casos de uso e clientes.",
+        "c3h": "Contextos comprovados",
+        "c3p": "Trabalho em municípios, mobilidade, operações geoespaciais e eventos desportivos.",
+        "c4h": "Tecnologia de confiança",
+        "c4p": "Competência em Google Cloud e Google Maps a apoiar entrega e escalabilidade."
+      },
+      "tech": {
+        "eyebrow": "Fundação tecnológica",
+        "h2": "Construído em fundações cloud e geoespaciais de confiança",
+        "lead": "A Focus BC é Google Premier Partner com competência em Google Cloud e Google Maps Platform. Estas tecnologias apoiam como construímos e escalamos produtos em municípios e ambientes desportivos.",
+        "p1": "Google Cloud",
+        "p2": "Google Maps Platform",
+        "p3": "Operações geoespaciais",
+        "p4": "Infraestrutura escalável",
+        "btn": "Saber mais sobre a nossa parceria Google"
+      },
+      "links": {
+        "caseH": "Estudos de caso",
+        "caseP": "Explore exemplos de como os produtos Focus BC apoiam ambientes operacionais reais.",
+        "blogH": "Blog",
+        "blogP": "Leia insights sobre pensamento de produto, operações, cidades e ambientes desportivos.",
+        "contactH": "Contacto",
+        "contactP": "Fale com a Focus BC sobre plataforma, produto ou necessidades de parceria."
+      },
+      "cta": {
+        "eyebrow": "Iniciar a conversa",
+        "h2": "Quer saber mais sobre a Focus BC ou sobre um dos nossos produtos?",
+        "lead": "Se quiser perceber como trabalhamos, como os nossos produtos se enquadram no seu ambiente ou como podemos apoiar os seus objetivos operacionais, teremos todo o gosto em falar consigo.",
+        "btn": "Contacte-nos"
+      }
+    },
+    "contact": {
+      "hero": {
+        "pill": "Contactar a Focus BC",
+        "h1": "Inicie a conversa de produto certa",
+        "lede1": "Fale com a Focus BC sobre plataformas para operações municipais, grandes eventos desportivos ou produtos Google.",
+        "lede2": "Diga-nos o que pretende resolver e encaminharemos a sua mensagem para a equipa, produto ou próximo passo certos.",
+        "cap": "Contacto e descoberta nos produtos e soluções Focus BC"
+      },
+      "metrics": {
+        "m1k": "Conversas",
+        "m1n": "Produtos",
+        "m1d": "City as a Platform e Virtual Venue",
+        "m2k": "Tecnologia",
+        "m2n": "Google",
+        "m2d": "Google Cloud Platform e Google Maps Platform",
+        "m3k": "Tópicos",
+        "m3n": "Estratégia",
+        "m3d": "Produtos, entrega, implementação e parcerias",
+        "m4k": "Resposta",
+        "m4n": "Clara",
+        "m4d": "Encaminhamos cada pedido rapidamente para a equipa certa"
+      },
+      "help": {
+        "eyebrow": "Como podemos ajudar?",
+        "h2": "Chegue mais depressa à equipa certa",
+        "lead": "Use o formulário para nos dizer o que precisa. Encaminharemos a sua mensagem para a equipa certa e responderemos o mais breve possível.",
+        "li1": "Explorar <strong>City as a Platform</strong> para municípios e operações urbanas",
+        "li2": "Explorar <strong>Virtual Venue</strong> para planeamento e operações de eventos desportivos",
+        "li3": "Discutir <strong>Google Cloud Platform</strong> ou <strong>Google Maps Platform</strong>",
+        "li4": "Falar sobre <strong>parcerias</strong>, implementação ou adequação de produto"
+      },
+      "details": {
+        "eyebrow": "Dados de contacto",
+        "h2": "Outras formas de nos alcançar",
+        "email": "Email",
+        "website": "Website",
+        "linkedin": "LinkedIn",
+        "follow": "Seguir a Focus BC"
+      },
+      "form": {
+        "eyebrow": "Formulário de contacto",
+        "h2": "Envie-nos uma mensagem",
+        "lead": "Quer explorar um produto, discutir tecnologias Google ou iniciar uma conversa de parceria, este é o melhor ponto de partida.",
+        "name": "Nome",
+        "company": "Empresa",
+        "email": "Email",
+        "topic": "Tópico",
+        "message": "Mensagem",
+        "namePh": "O seu nome",
+        "companyPh": "A sua empresa",
+        "emailPh": "voce@empresa.com",
+        "messagePh": "Conte-nos um pouco do que procura.",
+        "topicPlaceholder": "Selecione um tópico",
+        "optCaap": "City as a Platform",
+        "optVv": "Virtual Venue",
+        "optGcp": "Google Cloud Platform",
+        "optGmp": "Google Maps Platform",
+        "optPartnership": "Parceria",
+        "optGeneral": "Pedido geral",
+        "hint": "Ao enviar este formulário, autoriza a Focus BC a contactá-lo relativamente ao seu pedido.",
+        "submit": "Enviar mensagem"
+      },
+      "explore": {
+        "eyebrow": "Explore antes de nos contactar",
+        "h2": "Um caminho rápido para o sítio certo",
+        "lead": "Se já sabe o que procura, estas páginas ajudam a chegar lá mais depressa.",
+        "c1h": "City as a Platform",
+        "c2h": "Virtual Venue",
+        "c1p": "Operações municipais, inteligência urbana e fluxos de trabalho integrados.",
+        "c2p": "Planeamento de eventos desportivos, prontidão de recintos, incidentes e relatórios.",
+        "c3h": "Parceria Google",
+        "c3p": "Competência e capacidade de revenda em Google Cloud Platform e Google Maps Platform.",
+        "c4h": "Estudos de caso",
+        "c4p": "Veja como produtos e soluções Focus BC apoiam contextos operacionais reais."
+      },
+      "cta": {
+        "eyebrow": "Iniciar a conversa",
+        "h2": "Procura a plataforma certa ou a conversa tecnológica certa?",
+        "lead": "Diga-nos o que pretende resolver e ajudamo-lo a encontrar o caminho certo, quer comece por um produto, uma discussão sobre tecnologia Google ou uma conversa operacional mais ampla.",
+        "btn": "Envie-nos email diretamente"
+      }
+    },
+    "careers": {
+      "hero": {
+        "pill": "Carreiras na Focus BC",
+        "h1": "Construa produtos que importam em ambientes operacionais reais",
+        "lede1": "Junte-se a uma equipa que constrói plataformas para operações municipais e grandes eventos desportivos.",
+        "lede2": "A Focus BC cria software usado por equipas que precisam de visibilidade, coordenação e controlo em ambientes exigentes. Se gosta de trabalho prático, pensamento de produto e impacto real, vai sentir-se em casa.",
+        "cap": "Equipa, colaboração e trabalho de produto na Focus BC"
+      },
+      "metrics": {
+        "m1k": "Modelo de trabalho",
+        "m1n": "Flexível",
+        "m1d": "Colaboração à volta das necessidades de produto e entrega",
+        "m2k": "Áreas de foco",
+        "m2n": "2",
+        "m2d": "Operações municipais e ambientes de eventos desportivos",
+        "m3k": "Tipo de trabalho",
+        "m3n": "Produto",
+        "m3d": "Plataformas pensadas para evoluir e escalar ao longo do tempo",
+        "m4k": "Estilo de equipa",
+        "m4n": "Prático",
+        "m4d": "Pensamento claro, colaboração real e resultados úteis"
+      },
+      "why": {
+        "eyebrow": "Porque se juntar à Focus BC",
+        "h2": "Trabalhe em software usado no mundo real",
+        "p1": "A Focus BC trabalha em produtos que apoiam municípios, ambientes desportivos e equipas operacionais que precisam de software fiável, não apenas de ideias.",
+        "p2": "Isso significa trabalhar em plataformas onde a qualidade de design, código, fluxos de trabalho e entrega importa de facto. O objetivo não é criar mais ruído digital. O objetivo é construir software que ajude as pessoas a operar melhor.",
+        "p3": "Valorizamos pessoas que pensam com clareza, colaboram e ligam-se a construir produtos úteis que podem continuar a melhorar."
+      },
+      "expect": {
+        "eyebrow": "O que pode esperar",
+        "h2": "Um ambiente de equipa centrado na contribuição útil",
+        "c1h": "Trabalho multifuncional",
+        "c1p": "Colabore entre produto, engenharia, design, entrega e equipas comerciais.",
+        "c2h": "Propriedade real de produto",
+        "c2p": "Contribua para produtos pensados para evoluir, escalar e gerar valor a longo prazo.",
+        "c3h": "Contextos com significado",
+        "c3p": "Trabalhe em software usado em cidades, operações geoespaciais e grandes ambientes desportivos.",
+        "c4h": "Espaço para crescer",
+        "c4p": "Desenvolva as suas competências numa equipa que valoriza iniciativa, clareza e impacto prático."
+      },
+      "howWork": {
+        "eyebrow": "Como trabalhamos",
+        "h2": "Mentalidade de produto com disciplina de entrega",
+        "p": "Construímos produtos para se manterem coerentes, escaláveis e úteis em ambientes operacionais reais. Isso exige bom design, implementação sólida e colaboração clara entre equipas."
+      },
+      "howGrow": {
+        "eyebrow": "Como crescemos",
+        "h2": "Uma empresa centrada no valor de produto a longo prazo",
+        "p": "A Focus BC centra-se no desenvolvimento e evolução de produto. Continuamos a apoiar implementação e melhoria, mantendo a qualidade do produto no centro do nosso trabalho."
+      },
+      "roles": {
+        "eyebrow": "Vagas abertas",
+        "h2": "Oportunidades atuais",
+        "lead": "Adicione aqui as vagas atuais e mantenha a estrutura clara, prática e fácil de manter.",
+        "exampleLabel": "Exemplo de função",
+        "role1Title": "Programador full stack",
+        "role1Desc": "Ajude a construir e evoluir plataformas Focus BC em municípios, ambientes geoespaciais e operações desportivas. Ideal para quem gosta de engenharia prática e colaboração orientada a produto.",
+        "role2Title": "Designer UI/UX",
+        "role2Desc": "Ajude a moldar experiências de produto que tornam fluxos operacionais complexos mais claros, rápidos e fáceis de usar nas plataformas Focus BC.",
+        "team": "Equipa:",
+        "location": "Local:",
+        "type": "Tipo:",
+        "teamEng": "Produto e Engenharia",
+        "teamDesign": "Design de produto",
+        "locHybrid": "Híbrido / Flexível",
+        "fullTime": "Tempo integral",
+        "viewRole": "Ver função"
+      },
+      "tech": {
+        "eyebrow": "Tecnologia e contexto",
+        "h2": "Construa produtos em fundações de confiança",
+        "lead": "A Focus BC constrói sobre fundações tecnológicas sólidas, incluindo Google Cloud e Google Maps Platform, mantendo o foco no valor de produto prático e relevância operacional.",
+        "btn": "Saber mais sobre a nossa parceria Google"
+      },
+      "links": {
+        "aboutH": "Sobre a Focus BC",
+        "aboutP": "Saiba mais sobre a empresa, produtos e ambientes por detrás da Focus BC.",
+        "blogH": "Blog",
+        "blogP": "Leia como pensamos em produtos, operações, cidades e ambientes desportivos.",
+        "touchH": "Contacte-nos",
+        "touchP": "Não vê a função certa? Contacte-nos e fale um pouco sobre si."
+      },
+      "cta": {
+        "eyebrow": "Iniciar a conversa",
+        "h2": "Interessado em trabalhar connosco?",
+        "lead": "Se acha que a Focus BC pode ser o sítio certo para o seu próximo passo, teremos todo o gosto em ouvi-lo.",
+        "btn": "Contacte-nos"
+      }
+    },
+    "googlePage": {
+      "hero": {
+        "pill": "Parceria Google",
+        "h1": "Competência Google de confiança por detrás de plataformas operacionais e soluções para clientes",
+        "lede1": "A Focus BC é Google Premier Partner e revendedora de Google Cloud Platform e Google Maps Platform.",
+        "lede2": "Google Cloud e Google Maps são infraestrutura que usamos para executar e escalar software. Apoiam City as a Platform e Virtual Venue—não são uma linha de produto separada da Focus BC.",
+        "recognition": "Reconhecimento",
+        "partnerTitle": "Google Premier Partner",
+        "reseller": "Revendedor"
+      },
+      "metrics": {
+        "m1k": "Nível de parceria",
+        "m1n": "Premier",
+        "m1d": "Competência Google reconhecida",
+        "m2k": "Produtos centrais",
+        "m2n": "2",
+        "m2d": "Google Cloud Platform e Google Maps Platform",
+        "m3k": "Casos de uso",
+        "m3n": "Reais",
+        "m3d": "Plataformas operacionais para cidades e eventos desportivos",
+        "m4k": "Papel",
+        "m4n": "Construir + Revender",
+        "m4d": "Parceiro tecnológico e construtor de plataformas de software"
+      },
+      "means": {
+        "eyebrow": "O que isto significa",
+        "h2": "Uma parceria tecnológica forte com valor de negócio prático",
+        "p1": "A nossa parceria Google importa porque combina experiência de entrega com acesso direto a infraestrutura cloud e de cartografia de topo. Essa fundação apoia as nossas plataformas; não é por si só a oferta ao cliente.",
+        "p2": "Para os clientes, isso significa trabalhar com uma equipa que pode aconselhar sobre tecnologias Google e transformá-las em plataformas de software, fluxos de dados e ambientes operacionais que criam valor real.",
+        "p3": "Não abordamos produtos Google como commodities isoladas. Usamo-los onde faz sentido, quer como parte das plataformas Focus BC quer como soluções diretas para clientes apoiadas pela nossa capacidade de revenda e implementação."
+      },
+      "core": {
+        "eyebrow": "Áreas centrais",
+        "h2": "Onde as tecnologias Google se encaixam no nosso trabalho",
+        "lead": "Usamos produtos Google quer como ofertas de revenda quer como fundações tecnológicas por detrás das plataformas que desenhamos e entregamos.",
+        "c1h": "Google Cloud Platform",
+        "c1p": "Infraestrutura cloud, escalabilidade e serviços de dados a apoiar entrega fiável de produto e soluções para clientes.",
+        "c2h": "Google Maps Platform",
+        "c2p": "Cartografia, serviços geoespaciais, encaminhamento, visualização e experiências baseadas em localização para casos operacionais.",
+        "c3h": "Capacitação de plataforma",
+        "c3p": "Tecnologias Google a apoiar produtos Focus BC para municípios e organizações desportivas.",
+        "c4h": "Soluções para clientes",
+        "c4p": "Capacidade de revenda combinada com apoio à implementação para clientes que precisam de tecnologia Google de confiança na prática."
+      },
+      "context": {
+        "eyebrow": "Produtos Google em contexto",
+        "h2": "A apoiar cidades, fluxos geoespaciais e ambientes desportivos",
+        "lead": "As tecnologias Google desempenham um papel importante em como produtos e soluções Focus BC funcionam na prática, especialmente onde fiabilidade cloud, cartografia e inteligência de localização importam.",
+        "cap1": "Vista geoespacial e operacional com tecnologia Google",
+        "cap2": "Dados e painéis na cloud",
+        "cap3": "Cartografia e operações de campo"
+      },
+      "products": {
+        "eyebrow": "Como isto se liga aos nossos produtos",
+        "h2": "Competência Google dentro das plataformas Focus BC e projetos de clientes",
+        "caapCat": "Cidades inteligentes",
+        "caapTitle": "City as a Platform",
+        "caapDesc": "Google Cloud Platform e Google Maps Platform apoiam capacidades geoespaciais, operacionais e de integração de dados em ambientes municipais.",
+        "caapCta": "Explorar City as a Platform",
+        "vvCat": "Desporto e eventos",
+        "vvTitle": "Virtual Venue",
+        "vvDesc": "As tecnologias Google apoiam cartografia, escalabilidade e operações baseadas em dados em recintos, programas desportivos e ambientes de eventos.",
+        "vvCta": "Visitar Virtual Venue"
+      },
+      "reseller": {
+        "eyebrow": "Capacidade de revenda",
+        "h2": "Produtos Google, com competência de implementação e operacional",
+        "lead": "A Focus BC pode apoiar organizações não só através das suas próprias plataformas, mas também como revendedora de Google Cloud Platform e Google Maps Platform. Isto permite aos clientes combinar aquisição tecnológica, apoio à implementação e competência operacional num só parceiro.",
+        "p1": "Google Cloud Platform",
+        "p2": "Google Maps Platform",
+        "p3": "Apoio à implementação",
+        "p4": "Competência operacional"
+      },
+      "links": {
+        "caseH": "Estudos de caso",
+        "caseP": "Explore como tecnologia e produtos se conjugam em contextos operacionais reais.",
+        "aboutH": "Sobre a Focus BC",
+        "aboutP": "Saiba mais sobre a empresa, produtos e foco operacional por detrás da Focus BC.",
+        "contactH": "Contacto",
+        "contactP": "Fale connosco sobre produtos Google, parcerias ou como se enquadram nas suas necessidades de plataforma."
+      },
+      "cta": {
+        "eyebrow": "Iniciar a conversa",
+        "h2": "Procura produtos Google, competência em plataforma, ou ambos?",
+        "lead": "Quer explorar Google Cloud Platform, Google Maps Platform, ou perceber como estas tecnologias apoiam produtos Focus BC e as suas próprias operações, teremos todo o gosto em falar consigo.",
+        "btn": "Contacte-nos"
+      }
+    },
+    "blogPage": {
+      "hero": {
+        "pill": "Blog Focus BC",
+        "h1": "Insights selecionados sobre produtos, operações, cidades e eventos desportivos",
+        "lede1": "Partilhamos como pensamos no desenvolvimento de produtos, plataformas operacionais, fluxos geoespaciais e os ambientes onde o nosso software é usado.",
+        "lede2": "O blog foi pensado para apoiar conversas úteis sobre plataformas, operações e implementação prática, não apenas para publicar conteúdo pelo conteúdo.",
+        "cap": "Pensamento de produto, plataformas operacionais e insights Focus BC"
+      },
+      "filterAll": "Todos",
+      "filterCompany": "Produto e empresa",
+      "filterCities": "Cidades inteligentes",
+      "filterGeo": "Geoespacial e dados",
+      "filterSports": "Desporto e eventos",
+      "filterPartners": "Parcerias",
+      "srFeatured": "Artigos em destaque e realces carregam a partir de entradas publicadas em data/blog-posts.json.",
+      "loading": "A carregar artigos…",
+      "latest": {
+        "eyebrow": "Artigos recentes",
+        "h2": "Conteúdo selecionado do ecossistema Focus BC",
+        "lead": "O blog foi pensado para reforçar autoridade, apoiar posicionamento de produto e ligar leitores ao próximo passo certo."
+      },
+      "editorial": {
+        "eyebrow": "Abordagem editorial",
+        "h2": "Conteúdo que apoia produtos, operações e conversas úteis",
+        "p1": "O blog Focus BC explica como pensamos em produtos, operações, implementação e os ambientes onde o nosso software é usado.",
+        "p2": "O objetivo é publicar conteúdo selecionado que reforça autoridade, apoia posicionamento de produto e cria contexto útil para clientes, parceiros e futuros membros da equipa."
+      },
+      "cta": {
+        "eyebrow": "Próximo passo",
+        "h2": "Quer explorar os produtos por detrás destas ideias?",
+        "lead": "Se quer perceber como os produtos Focus BC funcionam na prática, o melhor próximo passo é explorar o portefólio ou iniciar uma conversa com a nossa equipa.",
+        "b1": "Contacte-nos",
+        "b2": "Ver estudos de caso"
+      }
+    },
+    "caseStudiesPage": {
+      "hero": {
+        "pill": "Estudos de caso Focus BC",
+        "h1": "Prova de ambientes operacionais reais",
+        "lede1": "Explore como produtos e soluções Focus BC apoiam operações municipais, fluxos geoespaciais e grandes ambientes de eventos desportivos.",
+        "lede2": "Estes estudos de caso mostram como plataformas, dados e desenho operacional se conjugam em contextos práticos onde as equipas precisam de melhor visibilidade, coordenação e controlo.",
+        "cap": "Prova Focus BC em cidades, operações e ambientes desportivos"
+      },
+      "filterAll": "Todos",
+      "filterCities": "Cidades inteligentes",
+      "filterSports": "Eventos desportivos",
+      "srFeatured": "Destaques principais e secundários carregam a partir de entradas publicadas em data/case-studies.json.",
+      "loading": "A carregar estudos de caso…",
+      "selected": {
+        "eyebrow": "Estudos de caso selecionados",
+        "h2": "Prova prática em produtos, operações e ambientes",
+        "lead": "Use esta página para perceber onde a Focus BC cria valor, que problemas os produtos ajudam a resolver e como funcionam na prática."
+      },
+      "readout": {
+        "eyebrow": "Como ler estes exemplos",
+        "h2": "Estudos de caso que ligam produtos, contexto e resultados",
+        "p1": "Esta página mostra onde a Focus BC cria valor, que ambientes os produtos suportam e que tipo de problemas operacionais a empresa sabe resolver.",
+        "p2": "Cada estudo de caso deve ligar-se claramente a um dos produtos Focus BC ou a um desafio operacional prático onde dados, fluxos de trabalho e visibilidade têm de funcionar em conjunto."
+      },
+      "cta": {
+        "eyebrow": "Próximo passo",
+        "h2": "Quer perceber como estes exemplos se ligam ao seu ambiente?",
+        "lead": "Se quer explorar um dos nossos produtos, discutir um desafio semelhante ou perceber se a Focus BC é a parceira certa, inicie uma conversa com a nossa equipa.",
+        "b1": "Contacte-nos",
+        "b2": "Saber mais sobre a Focus BC"
+      }
+    }
+  }
+}

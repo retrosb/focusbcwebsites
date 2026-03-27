@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="caap-header">
       <div class="container caap-header__inner">
         <a class="caap-brand" href="./">
@@ -25,7 +25,8 @@
           <a href="casestudies">Case studies</a>
           <a href="./#contact">Contact</a>
         </nav>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="./#contact">Contact us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a class="btn btn--ink btn--sm caap-header__cta" data-i18n="cta.contactUs" href="./#contact">Contact us</a>
       </div>
     </header>
 
@@ -116,5 +117,6 @@
         <a href="solutions/public-space">Public space solution</a>
       </div>
     </footer>
+      <script defer src="js/i18n.js"></script>
   </body>
 </html>

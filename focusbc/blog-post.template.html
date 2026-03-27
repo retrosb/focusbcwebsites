@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="__ROBOTS_CONTENT__" />
     <title>__META_TITLE__</title>
     <meta name="description" content="__META_DESC__" />
     <link rel="canonical" href="__CANONICAL__" />
@@ -19,145 +20,112 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <header class="caap-header">
-      <div class="container caap-header__inner">
-        <a class="caap-brand" href="./">
-          <img src="media/caap-logo.png" alt="City as a Platform" width="48" height="48" />
-          <span class="caap-brand__text">
-            <span class="caap-brand__name">City as a Platform</span>
-            <span class="caap-brand__tag">Plataforma de Gestão Urbana Inteligente</span>
-          </span>
-        </a>
-        <details class="caap-nav-mobile">
-          <summary class="caap-nav-mobile__toggle">Menu</summary>
-          <nav class="caap-nav-mobile__panel" aria-label="Primary navigation">
-            <a href="./">Home</a>
-            <a href="solutions/public-space">Solutions</a>
-            <a href="products/incident-management">Products</a>
-            <a href="casestudies">Clients</a>
-            <a href="blog" aria-current="page">Blog</a>
-            <a href="about">About</a>
-            <a href="./#contact">Contact</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="./" class="site-logo"
+          ><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40"
+        /></a>
+        <details class="site-nav-mobile">
+          <summary class="site-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
+          <nav class="site-nav-mobile__panel" aria-label="Primary navigation">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <a href="about" data-i18n="nav.about">About</a>
+            <a href="google" data-i18n="nav.google">Google</a>
+            <a href="casestudies" data-i18n="nav.caseStudies">Case studies</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="careers" data-i18n="nav.careers">Careers</a>
+            <a href="contact" data-i18n="nav.contact">Contact</a>
           </nav>
         </details>
-        <nav class="caap-nav-desktop" aria-label="Primary navigation">
-          <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger">Solutions</button>
-            <div class="caap-dropdown-panel" role="menu">
-              <a href="solutions/public-space">Public space</a>
-              <a href="solutions/mobility">Mobility</a>
-              <a href="solutions/tourism">Tourism</a>
-              <a href="solutions/environment">Environment</a>
-              <a href="solutions/urban-planning">Urban planning</a>
-              <a href="solutions/governance">Governance</a>
-              <a href="solutions/sensors">Sensors</a>
-            </div>
-          </div>
-          <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger">Products</button>
-            <div class="caap-dropdown-panel" role="menu">
-              <a href="products/incident-management">Incident management</a>
-              <a href="products/urban-management">Urban management</a>
-              <a href="products/traffic-restrictions">Traffic restrictions</a>
-              <a href="products/urban-hygiene">Urban hygiene</a>
-              <a href="products/app-builder">App Builder</a>
-              <a href="products/mapify">Mapify</a>
-            </div>
-          </div>
-          <a href="casestudies">Clients</a>
-          <a href="partners">Partners</a>
-          <a href="blog" class="is-active" aria-current="page">Blog</a>
-          <a href="about">About</a>
-          <a href="./#contact">Contact</a>
+        <nav class="site-nav-desktop" aria-label="Primary navigation">
+          <a href="about" data-i18n="nav.about">About</a>
+          <a href="google" data-i18n="nav.google">Google</a>
+          <a href="casestudies" data-i18n="nav.caseStudies">Case studies</a>
+          <a href="blog" data-i18n="nav.blog">Blog</a>
+          <a href="careers" data-i18n="nav.careers">Careers</a>
+          <a href="contact" data-i18n="nav.contact">Contact</a>
         </nav>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="./#contact">Contact us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a href="contact" class="btn btn--primary btn--sm btn--header" data-i18n="cta.talkToUs">Talk to us</a>
       </div>
     </header>
 
-    <main id="main-content">
-      <section class="hero-caap hero-caap--article" aria-labelledby="article-title">
-        <div class="hero-caap__glow" aria-hidden="true"></div>
-        <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="max-w-3xl">
-            <a href="blog" class="link-arrow text-white-link">Back to blog</a>
-            <div class="meta-row meta-row--light mt-8">
-              <span class="pill-article">__CATEGORY__</span>
-              <span>__DATE_STR__</span>
-              <span aria-hidden="true">•</span>
-              <span>__READ_MIN__ min read</span>
-            </div>
-            <h1 id="article-title" class="mt-6 heading-on-ink">__H1__</h1>
-            <p class="lead lead--on-hero mt-6">__LEAD__</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section container">
-        <div class="grid-sidebar">
-          <article class="min-w-0">
-            __MEDIA_BLOCK__
-            <div class="prose mt-10">__BODY_HTML__</div>
-            <div class="caap-article-cta mt-12">
-              <p class="eyebrow eyebrow--on-dark">Next step</p>
-              <h2 class="mt-3 h2 h2--on-dark">See the platform in action</h2>
-              <p class="mt-4 lead-lg text-white-85">
-                Book a demo to explore how City as a Platform can support your municipality.
-              </p>
-              <div class="flex flex-col sm-flex-row gap-3 mt-8">
-                <a href="./#contact" class="btn btn--white">Request a demo</a>
-                <a href="casestudies" class="btn btn--ghost">Case studies</a>
-              </div>
-            </div>
-          </article>
-          <aside class="flex flex-col gap-lg">
-            <div class="card">
-              <p class="eyebrow">About this article</p>
-              <ul class="mt-4 text-sm-tight text-muted plain-list">
-                <li><strong class="text-ink">Category:</strong> __ASIDE_CAT__</li>
-                <li class="mt-2"><strong class="text-ink">Read time:</strong> __READ_TIME_LABEL__</li>
-                <li class="mt-2"><strong class="text-ink">Updated:</strong> __DATE_STR__</li>
-              </ul>
-            </div>
-            <div class="card">
-              <p class="eyebrow">Related pages</p>
-              <div class="mt-4 flex flex-col gap-3">
-                <a href="./" class="aside-link">City as a Platform home</a>
-                <a href="casestudies" class="aside-link">Case studies</a>
-                <a href="/focusbc/" class="aside-link">Focus BC</a>
-              </div>
-            </div>
-            <div class="card">
-              <p class="eyebrow">More from the blog</p>
-              <div class="mt-4 flex flex-col gap-5">__RELATED_BLOCK__</div>
-            </div>
-          </aside>
-        </div>
-      </section>
+    <main id="main-content" class="case-study-static">
+      <article class="container" style="padding: 2rem 1rem 4rem; max-width: 48rem">
+        <p class="eyebrow"><a href="blog" class="link-plain" data-i18n="blog.eyebrow">Blog</a></p>
+        <p class="text-muted text-sm-tight mt-2"><span class="pill-article">__CATEGORY__</span> · __FOCUS_TOPICS__</p>
+        <h1 class="mt-4 h1" style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2">__H1__</h1>
+        <p class="text-muted text-sm-tight mt-2">__DATE_STR__ · __READ_MIN__ min read</p>
+        <p class="lead mt-6">__LEAD__</p>
+        <div class="mt-8">__MEDIA_BLOCK__</div>
+        <div class="prose prose--blog case-study-import-body mt-8">__BODY_HTML__</div>
+        <aside class="mt-12 card card--flush p-6">
+          <p class="eyebrow">About this article</p>
+          <ul class="mt-4 text-sm-tight text-muted plain-list">
+            <li><strong class="text-ink">Category:</strong> __ASIDE_CAT__</li>
+            <li class="mt-2"><strong class="text-ink">Read time:</strong> __READ_TIME_LABEL__</li>
+          </ul>
+        </aside>
+        <div class="mt-10">__RELATED_BLOCK__</div>
+        <p class="mt-10"><a href="blog" class="link-coral-underline" data-i18n="blog.backToBlog">← All blog posts</a></p>
+      </article>
     </main>
 
-    <footer class="caap-footer">
-      <div class="container caap-footer__grid">
-        <div>
-          <a href="./"><img src="media/caap-logo.png" alt="City as a Platform" width="48" height="48" /></a>
-          <p class="lead text-slate-600 mt-4">
-            City as a Platform is a Focus BC product for urban management and city operations.
-          </p>
-          <p class="text-slate-600 mt-3 text-sm-loose">
-            Parent company:
-            <a href="/focusbc/">Focus BC</a>
-          </p>
+    <footer class="site-footer">
+      <div class="site-footer__strap">
+        <div class="container site-footer__strap-inner">
+          <div>
+            <p class="site-footer__strap-tagline" data-i18n-html="footer.strapTagline">
+              Operational platforms for cities and global sports events.<br />
+              Built as products. Delivered for operations.
+            </p>
+            <p class="site-footer__strap-note" data-i18n="footer.strapNote">Focus BC · Google Premier Partner · Lisbon</p>
+          </div>
+          <a href="contact" class="btn btn--white btn--sm shrink-0" data-i18n="cta.talkToUs">Talk to us</a>
         </div>
-        <div>
-          <h3 class="h3">Explore</h3>
-          <ul class="plain-list mt-4 text-slate-600 text-sm-loose">
-            <li class="mt-2"><a href="./#platform">Platform</a></li>
-            <li class="mt-2"><a href="casestudies">Case studies</a></li>
-            <li class="mt-2"><a href="blog">Blog</a></li>
-            <li class="mt-2"><a href="./#contact">Contact</a></li>
-          </ul>
+      </div>
+      <div class="site-footer__body">
+        <div class="container site-footer__grid">
+          <div>
+            <a href="./"><img src="/media/focusbc-logo.png" alt="Focus BC" width="160" height="40" /></a>
+            <p class="footer-tagline" data-i18n-html="footer.tagline">
+              Operational platforms for cities and global sports events.<br />
+              Built as products. Delivered for operations.
+            </p>
+          </div>
+          <div>
+            <h3 data-i18n="footer.companyHeading">Company</h3>
+            <ul>
+              <li><a href="about" data-i18n="nav.about">About</a></li>
+              <li><a href="casestudies" data-i18n="nav.caseStudies">Case studies</a></li>
+              <li><a href="blog" data-i18n="nav.blog">Blog</a></li>
+              <li><a href="careers" data-i18n="nav.careers">Careers</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 data-i18n="footer.offersHeading">Offers</h3>
+            <ul>
+              <li><a href="https://www.virtualvenue-events.com/" target="_blank" rel="noopener noreferrer">Virtual Venue</a></li>
+              <li><a href="https://www.city-platform.com/" target="_blank" rel="noopener noreferrer">City as a Platform</a></li>
+              <li><a href="google" data-i18n="footer.googlePartnership">Google partnership</a></li>
+            </ul>
+            <p class="footer-note" data-i18n-html="footer.mapifyNote">
+              Mapify powers geospatial and integration capability <strong>inside</strong> City as a Platform.
+              <a href="https://www.mapify.ai/" rel="noopener noreferrer">Mapify</a>
+            </p>
+          </div>
+          <div>
+            <h3 data-i18n="footer.contactHeading">Contact</h3>
+            <ul>
+              <li><a href="contact" data-i18n="footer.getInTouch">Get in touch</a></li>
+              <li><a href="mailto:info@focus-bc.com">info@focus-bc.com</a></li>
+              <li><a href="https://www.linkedin.com" rel="noopener noreferrer" data-i18n="footer.linkedin">LinkedIn</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
+    <script defer src="/js/i18n.js"></script>
   </body>
 </html>

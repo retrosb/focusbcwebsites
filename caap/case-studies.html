@@ -23,19 +23,20 @@
     <script src="js/case-studies-list.js" defer></script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="caap-header">
       <div class="container caap-header__inner">
         <a class="caap-brand" href="./">
           <img src="media/caap-logo.webp" alt="City as a Platform" width="48" height="48" />
           <span class="caap-brand__text">
             <span class="caap-brand__name">City as a Platform</span>
-            <span class="caap-brand__tag">Plataforma de Gestão Urbana Inteligente</span>
+            <span class="caap-brand__tag" data-i18n="brand.tagline">Plataforma de Gestão Urbana Inteligente</span>
           </span>
         </a>
         <details class="caap-nav-mobile">
-          <summary class="caap-nav-mobile__toggle">Menu</summary>
+          <summary class="caap-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
           <nav class="caap-nav-mobile__panel" aria-label="Primary navigation">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
             <a href="./">Home</a>
             <p class="caap-nav-mobile__label">Solutions</p>
             <a href="solutions/public-space">Public space</a>
@@ -79,7 +80,8 @@
           <a href="about">About</a>
           <a href="./#contact">Contact</a>
         </nav>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="./#contact">Contact us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a class="btn btn--ink btn--sm caap-header__cta" data-i18n="cta.contactUs" href="./#contact">Contact us</a>
       </div>
     </header>
 
@@ -141,5 +143,6 @@
         </div>
       </div>
     </footer>
+      <script defer src="js/i18n.js"></script>
   </body>
 </html>

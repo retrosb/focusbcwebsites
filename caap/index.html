@@ -25,79 +25,81 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="caap-header">
       <div class="container caap-header__inner">
         <a class="caap-brand" href="./">
           <img src="media/caap-logo.webp" alt="City as a Platform" width="48" height="48" />
           <span class="caap-brand__text">
             <span class="caap-brand__name">City as a Platform</span>
-            <span class="caap-brand__tag">Plataforma de Gestão Urbana Inteligente</span>
+            <span class="caap-brand__tag" data-i18n="brand.tagline">Plataforma de Gestão Urbana Inteligente</span>
           </span>
         </a>
         <details class="caap-nav-mobile">
-          <summary class="caap-nav-mobile__toggle">Menu</summary>
+          <summary class="caap-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
           <nav class="caap-nav-mobile__panel" aria-label="Primary navigation">
-            <p class="caap-nav-mobile__label">Solutions</p>
-            <a href="solutions/public-space">Public space maintenance</a>
-            <a href="solutions/mobility">Mobility</a>
-            <a href="solutions/tourism">Tourism</a>
-            <a href="solutions/environment">Environment &amp; sustainability</a>
-            <a href="solutions/urban-planning">Urban planning</a>
-            <a href="solutions/governance">Governance &amp; digital transparency</a>
-            <a href="solutions/sensors">Sensors &amp; monitoring</a>
-            <p class="caap-nav-mobile__label">Products</p>
-            <a href="products/incident-management">Incident management</a>
-            <a href="products/urban-management">Urban management</a>
-            <a href="products/traffic-restrictions">Traffic restrictions</a>
-            <a href="products/urban-hygiene">Urban hygiene</a>
-            <a href="products/app-builder">App Builder</a>
-            <a href="products/mapify">Mapify</a>
-            <p class="caap-nav-mobile__label">Company</p>
-            <a href="casestudies">Clients &amp; case studies</a>
-            <a href="partners">Partners</a>
-            <a href="blog">Blog</a>
-            <a href="about">About us</a>
-            <a href="#contact">Contact</a>
-            <a href="https://www.city-platform.com" rel="noopener noreferrer">Log in</a>
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <p class="caap-nav-mobile__label" data-i18n="nav.solutions">Solutions</p>
+            <a href="solutions/public-space" data-i18n="nav.publicSpace">Public space maintenance</a>
+            <a href="solutions/mobility" data-i18n="nav.mobility">Mobility</a>
+            <a href="solutions/tourism" data-i18n="nav.tourism">Tourism</a>
+            <a href="solutions/environment" data-i18n="nav.environment">Environment &amp; sustainability</a>
+            <a href="solutions/urban-planning" data-i18n="nav.urbanPlanning">Urban planning</a>
+            <a href="solutions/governance" data-i18n="nav.governance">Governance &amp; digital transparency</a>
+            <a href="solutions/sensors" data-i18n="nav.sensors">Sensors &amp; monitoring</a>
+            <p class="caap-nav-mobile__label" data-i18n="nav.products">Products</p>
+            <a href="products/incident-management" data-i18n="nav.incidentManagement">Incident management</a>
+            <a href="products/urban-management" data-i18n="nav.urbanManagement">Urban management</a>
+            <a href="products/traffic-restrictions" data-i18n="nav.trafficRestrictions">Traffic restrictions</a>
+            <a href="products/urban-hygiene" data-i18n="nav.urbanHygiene">Urban hygiene</a>
+            <a href="products/app-builder" data-i18n="nav.appBuilder">App Builder</a>
+            <a href="products/mapify" data-i18n="nav.mapify">Mapify</a>
+            <p class="caap-nav-mobile__label" data-i18n="nav.company">Company</p>
+            <a href="casestudies" data-i18n="nav.clientsCaseStudies">Clients &amp; case studies</a>
+            <a href="partners" data-i18n="nav.partners">Partners</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="about" data-i18n="nav.about">About us</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+            <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Log in</a>
           </nav>
         </details>
         <nav class="caap-nav-desktop" aria-label="Primary navigation">
           <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true" data-i18n="nav.solutions">
               Solutions
             </button>
             <div class="caap-dropdown-panel" role="menu">
-              <a href="solutions/public-space" role="menuitem">Public space maintenance</a>
-              <a href="solutions/mobility" role="menuitem">Mobility</a>
-              <a href="solutions/tourism" role="menuitem">Tourism</a>
-              <a href="solutions/environment" role="menuitem">Environment &amp; sustainability</a>
-              <a href="solutions/urban-planning" role="menuitem">Urban planning</a>
-              <a href="solutions/governance" role="menuitem">Governance &amp; digital transparency</a>
-              <a href="solutions/sensors" role="menuitem">Sensors &amp; monitoring</a>
+              <a href="solutions/public-space" role="menuitem" data-i18n="nav.publicSpace">Public space maintenance</a>
+              <a href="solutions/mobility" role="menuitem" data-i18n="nav.mobility">Mobility</a>
+              <a href="solutions/tourism" role="menuitem" data-i18n="nav.tourism">Tourism</a>
+              <a href="solutions/environment" role="menuitem" data-i18n="nav.environment">Environment &amp; sustainability</a>
+              <a href="solutions/urban-planning" role="menuitem" data-i18n="nav.urbanPlanning">Urban planning</a>
+              <a href="solutions/governance" role="menuitem" data-i18n="nav.governance">Governance &amp; digital transparency</a>
+              <a href="solutions/sensors" role="menuitem" data-i18n="nav.sensors">Sensors &amp; monitoring</a>
             </div>
           </div>
           <div class="caap-dropdown-wrap">
-            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="caap-nav-trigger" aria-expanded="false" aria-haspopup="true" data-i18n="nav.products">
               Products
             </button>
             <div class="caap-dropdown-panel" role="menu">
-              <a href="products/incident-management" role="menuitem">Incident management</a>
-              <a href="products/urban-management" role="menuitem">Urban management</a>
-              <a href="products/traffic-restrictions" role="menuitem">Traffic restrictions</a>
-              <a href="products/urban-hygiene" role="menuitem">Urban hygiene</a>
-              <a href="products/app-builder" role="menuitem">App Builder</a>
-              <a href="products/mapify" role="menuitem">Mapify</a>
+              <a href="products/incident-management" role="menuitem" data-i18n="nav.incidentManagement">Incident management</a>
+              <a href="products/urban-management" role="menuitem" data-i18n="nav.urbanManagement">Urban management</a>
+              <a href="products/traffic-restrictions" role="menuitem" data-i18n="nav.trafficRestrictions">Traffic restrictions</a>
+              <a href="products/urban-hygiene" role="menuitem" data-i18n="nav.urbanHygiene">Urban hygiene</a>
+              <a href="products/app-builder" role="menuitem" data-i18n="nav.appBuilder">App Builder</a>
+              <a href="products/mapify" role="menuitem" data-i18n="nav.mapify">Mapify</a>
             </div>
           </div>
-          <a href="casestudies">Clients</a>
-          <a href="partners">Partners</a>
-          <a href="blog">Blog</a>
-          <a href="about">About us</a>
-          <a href="#contact">Contact</a>
-          <a href="https://www.city-platform.com" rel="noopener noreferrer">Log in</a>
+          <a href="casestudies" data-i18n="nav.clients">Clients</a>
+          <a href="partners" data-i18n="nav.partners">Partners</a>
+          <a href="blog" data-i18n="nav.blog">Blog</a>
+          <a href="about" data-i18n="nav.about">About us</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+          <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Log in</a>
         </nav>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="#contact">Contact us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a class="btn btn--ink btn--sm caap-header__cta" href="#contact" data-i18n="cta.contactUs">Contact us</a>
       </div>
     </header>
 
@@ -608,34 +610,35 @@
       <div class="container caap-footer__grid caap-footer__grid--wide">
         <div>
           <a href="./"><img src="media/caap-logo.webp" alt="City as a Platform" width="48" height="48" /></a>
-          <p class="lead text-slate-600 mt-4">
+          <p class="lead text-slate-600 mt-4" data-i18n="footer.lead">
             City as a Platform is a Focus BC product — smart urban management on Google Cloud.
           </p>
           <p class="text-slate-600 mt-3 text-sm-loose">
             <a href="/focusbc/">Focus BC</a>
             ·
-            <a href="about">About</a>
+            <a href="about" data-i18n="nav.aboutShort">About</a>
           </p>
         </div>
         <div>
-          <h3 class="h3">Explore</h3>
+          <h3 class="h3" data-i18n="footer.explore">Explore</h3>
           <ul class="plain-list mt-4 text-slate-600 text-sm-loose">
-            <li class="mt-2"><a href="#solutions-areas">Solutions</a></li>
-            <li class="mt-2"><a href="#products">Products</a></li>
-            <li class="mt-2"><a href="casestudies">Case studies</a></li>
-            <li class="mt-2"><a href="partners">Partners</a></li>
-            <li class="mt-2"><a href="blog">Blog</a></li>
+            <li class="mt-2"><a href="#solutions-areas" data-i18n="footer.solutionsAnchor">Solutions</a></li>
+            <li class="mt-2"><a href="#products" data-i18n="footer.productsAnchor">Products</a></li>
+            <li class="mt-2"><a href="casestudies" data-i18n="footer.caseStudies">Case studies</a></li>
+            <li class="mt-2"><a href="partners" data-i18n="nav.partners">Partners</a></li>
+            <li class="mt-2"><a href="blog" data-i18n="nav.blog">Blog</a></li>
           </ul>
         </div>
         <div>
-          <h3 class="h3">On this page</h3>
+          <h3 class="h3" data-i18n="footer.onThisPage">On this page</h3>
           <ul class="plain-list mt-4 text-slate-600 text-sm-loose">
-            <li class="mt-2"><a href="#differentiators">Differentiators</a></li>
-            <li class="mt-2"><a href="#results">Impact</a></li>
-            <li class="mt-2"><a href="#contact">Contact</a></li>
+            <li class="mt-2"><a href="#differentiators" data-i18n="footer.differentiators">Differentiators</a></li>
+            <li class="mt-2"><a href="#results" data-i18n="footer.impact">Impact</a></li>
+            <li class="mt-2"><a href="#contact" data-i18n="footer.contact">Contact</a></li>
           </ul>
         </div>
       </div>
     </footer>
+    <script defer src="js/i18n.js"></script>
   </body>
 </html>

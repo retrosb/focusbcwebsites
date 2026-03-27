@@ -325,6 +325,7 @@ function renderFocusbcCaseStudy(study) {
   const robotsContent = study.index === false ? "noindex, follow" : "index, follow";
   const productArea = productAreaFromStudy(study);
   const heroMetaTail = escapeHtml(heroMetaDetailForStudy(study));
+  const readMin = study.readMinutes ?? 5;
   const map = {
     __ROBOTS_CONTENT__: escapeHtml(robotsContent),
     __META_TITLE__: escapeHtml(`${headline} | Focus BC`),
@@ -349,6 +350,9 @@ function renderFocusbcCaseStudy(study) {
     __RELATED_PRODUCT_BLOCK__: caseStudyRelatedProductHtml(study),
     __ASIDE_CAT__: escapeHtml(study.category),
     __RELATED_BLOCK__: caseStudyRelatedBlock(related),
+    __DATE_STR__: escapeHtml(dateStr),
+    __READ_MIN__: escapeHtml(String(readMin)),
+    __READ_TIME_LABEL__: escapeHtml(`${readMin} minutes`),
   };
   let out = tpl;
   const keys = Object.keys(map).sort((a, b) => b.length - a.length);

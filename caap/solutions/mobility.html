@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
     <header class="caap-header">
       <div class="container caap-header__inner">
         <a class="caap-brand" href="./">
@@ -20,8 +20,9 @@
           </span>
         </a>
         <details class="caap-nav-mobile">
-          <summary class="caap-nav-mobile__toggle">Menu</summary>
+          <summary class="caap-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
           <nav class="caap-nav-mobile__panel" aria-label="Primary navigation">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
             <a href="./">Home</a>
             <a href="products/traffic-restrictions">Traffic restrictions</a>
             <a href="casestudies">Case studies</a>
@@ -33,7 +34,8 @@
           <a href="#solutions-areas">All solutions</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a class="btn btn--ink btn--sm caap-header__cta" href="#contact">Contact us</a>
+        <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+        <a class="btn btn--ink btn--sm caap-header__cta" data-i18n="cta.contactUs" href="#contact">Contact us</a>
       </div>
     </header>
     <main id="main-content">
@@ -59,5 +61,6 @@
     <footer class="caap-footer">
       <div class="container"><a href="./">← Home</a></div>
     </footer>
+      <script defer src="js/i18n.js"></script>
   </body>
 </html>

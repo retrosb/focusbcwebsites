@@ -57,6 +57,141 @@ function copyTree(src, dest) {
   fs.cpSync(src, dest, { recursive: true });
 }
 
+const LANG_SWITCH_DESKTOP = '<div class="lang-switch lang-switch--desktop" data-lang-switch></div>';
+const LANG_SWITCH_MOBILE = '<div class="lang-switch lang-switch--mobile" data-lang-switch></div>';
+
+/**
+ * Blog/case-study built HTML: add language switch, data-i18n hooks, i18n script.
+ * Sources pages already include these; skip if present.
+ */
+function injectFocusBuiltI18n(html) {
+  if (html.includes("data-lang-switch")) return html;
+  const scriptSrc = BASE ? `${BASE}/js/i18n.js` : "/js/i18n.js";
+
+  html = html.replace(
+    /<a href="#main-content" class="skip-link">Skip to main content<\/a>/,
+    '<a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>'
+  );
+
+  html = html.replace(
+    /<summary class="site-nav-mobile__toggle">Menu<\/summary>/,
+    '<summary class="site-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>'
+  );
+
+  html = html.replace(
+    /(<nav class="site-nav-desktop"[^>]*>[\s\S]*?<\/nav>)\s*\n\s*(<a href="[^"]*" class="btn btn--primary btn--sm btn--header">)/,
+    `$1\n        ${LANG_SWITCH_DESKTOP}\n        $2`
+  );
+
+  html = html.replace(
+    /(<nav class="site-nav-mobile__panel"[^>]*>)\s*\n\s*(<a href)/,
+    `$1\n            ${LANG_SWITCH_MOBILE}\n            $2`
+  );
+
+  html = html.replace(
+    /<a href="([^"]*\/about\/)"([^>]*)>About<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.about">About</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/google\/)"([^>]*)>Google<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.google">Google</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/case-studies\/)"([^>]*)>Case studies<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.caseStudies">Case studies</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/blog\/)"([^>]*)>Blog<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.blog">Blog</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/careers\/)"([^>]*)>Careers<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.careers">Careers</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/contact\/)"([^>]*)>Contact<\/a>/g,
+    '<a href="$1"$2 data-i18n="nav.contact">Contact</a>'
+  );
+
+  html = html.replace(
+    /<a href="([^"]*\/contact\/)" class="btn btn--primary btn--sm btn--header">Talk to us<\/a>/,
+    '<a href="$1" class="btn btn--primary btn--sm btn--header" data-i18n="cta.talkToUs">Talk to us</a>'
+  );
+
+  html = html.replace(
+    /<p class="site-footer__strap-tagline">\s*/,
+    '<p class="site-footer__strap-tagline" data-i18n-html="footer.strapTagline">'
+  );
+  html = html.replace(
+    /<p class="site-footer__strap-note">Focus BC · Google Premier Partner · Lisbon<\/p>/,
+    '<p class="site-footer__strap-note" data-i18n="footer.strapNote">Focus BC · Google Premier Partner · Lisbon</p>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/contact\/)" class="btn btn--white btn--sm shrink-0">Talk to us<\/a>/,
+    '<a href="$1" class="btn btn--white btn--sm shrink-0" data-i18n="cta.talkToUs">Talk to us</a>'
+  );
+
+  html = html.replace(
+    /<p class="footer-tagline footer-tagline--compact">\s*/,
+    '<p class="footer-tagline footer-tagline--compact" data-i18n-html="footer.taglineCompact">'
+  );
+  html = html.replace(
+    /<p class="footer-tagline">\s*Operational platforms/s,
+    '<p class="footer-tagline" data-i18n-html="footer.tagline">Operational platforms'
+  );
+
+  html = html.replace(
+    /<h3 class="site-footer__heading">Company<\/h3>/g,
+    '<h3 class="site-footer__heading" data-i18n="footer.companyHeading">Company</h3>'
+  );
+  html = html.replace(
+    /<h3 class="site-footer__heading">Offers<\/h3>/g,
+    '<h3 class="site-footer__heading" data-i18n="footer.offersHeading">Offers</h3>'
+  );
+  html = html.replace(
+    /<h3 class="site-footer__heading">Contact<\/h3>/g,
+    '<h3 class="site-footer__heading" data-i18n="footer.contactHeading">Contact</h3>'
+  );
+  html = html.replace(/<h3>Company<\/h3>/g, '<h3 data-i18n="footer.companyHeading">Company</h3>');
+  html = html.replace(/<h3>Offers<\/h3>/g, '<h3 data-i18n="footer.offersHeading">Offers</h3>');
+  html = html.replace(/<h3>Contact<\/h3>/g, '<h3 data-i18n="footer.contactHeading">Contact</h3>');
+
+  html = html.replace(
+    /<a href="([^"]*\/google\/)"([^>]*)>Google partnership<\/a>/g,
+    '<a href="$1"$2 data-i18n="footer.googlePartnership">Google partnership</a>'
+  );
+  html = html.replace(
+    /<p class="footer-note">\s*/,
+    '<p class="footer-note" data-i18n-html="footer.mapifyNote">'
+  );
+  html = html.replace(
+    /<li><a href="([^"]*\/contact\/)"([^>]*)>Get in touch<\/a><\/li>/g,
+    '<li><a href="$1"$2 data-i18n="footer.getInTouch">Get in touch</a></li>'
+  );
+  html = html.replace(
+    /<li><a href="https:\/\/www.linkedin.com"([^>]*)>LinkedIn<\/a><\/li>/g,
+    '<li><a href="https://www.linkedin.com"$1 data-i18n="footer.linkedin">LinkedIn</a></li>'
+  );
+
+  html = html.replace(
+    /<a href="([^"]*\/blog\/)" class="link-coral-underline">← All blog posts<\/a>/,
+    '<a href="$1" class="link-coral-underline" data-i18n="blog.backToBlog">← All blog posts</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/blog\/)" class="link-plain">Blog<\/a>/,
+    '<a href="$1" class="link-plain" data-i18n="blog.eyebrow">Blog</a>'
+  );
+  html = html.replace(
+    /<a href="([^"]*\/case-studies\/)" class="link-plain">Case studies<\/a>/,
+    '<a href="$1" class="link-plain" data-i18n="caseStudy.eyebrow">Case studies</a>'
+  );
+
+  if (!html.includes("i18n.js")) {
+    html = html.replace(/<\/body>/i, `    <script defer src="${scriptSrc}"></script>\n  </body>`);
+  }
+  return html;
+}
+
 function writeHtmlWithNavRewrite(from, to) {
   let html = fs.readFileSync(from, "utf8");
   html = rewriteNavToIndexHtml(html);
@@ -67,6 +202,7 @@ function writeHtmlWithNavRewrite(from, to) {
     );
   }
   html = applyBasePrefix(html);
+  html = injectFocusBuiltI18n(html);
   ensureDir(path.dirname(to));
   fs.writeFileSync(to, html);
 }
@@ -207,7 +343,7 @@ function caseStudyIndexBlocks(items) {
                 <p class="eyebrow">${escAttr(categoryLabel(a))}</p>
                 <h2 class="mt-3 h2"><a href="${escAttr(caseStudyHref(a.slug))}">${escAttr(a.title)}</a></h2>
                 <p class="text-muted mt-4 text-sm-tight">${escAttr(excerpt(a.description, 220))}</p>
-                <a href="${escAttr(caseStudyHref(a.slug))}" class="link-coral-underline mt-8 inline-block">Read case study</a>
+                <a href="${escAttr(caseStudyHref(a.slug))}" class="link-coral-underline mt-8 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
               </div>
             </article>
             <div class="case-studies-featured-stack">
@@ -217,7 +353,7 @@ function caseStudyIndexBlocks(items) {
                 <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
                 <h3 class="mt-3 h3"><a href="${escAttr(caseStudyHref(cs.slug))}">${escAttr(cs.title)}</a></h3>
                 <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(cs.description, 140))}</p>
-                <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block">Read case study</a>
+                <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
               </article>`
                 )
                 .join("")}
@@ -232,7 +368,7 @@ function caseStudyIndexBlocks(items) {
               <p class="eyebrow eyebrow--small">${escAttr(categoryLabel(cs))}</p>
               <h3 class="mt-3 h3"><a href="${escAttr(caseStudyHref(cs.slug))}">${escAttr(cs.title)}</a></h3>
               <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(cs.description, 160))}</p>
-              <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block">Read case study</a>
+              <a href="${escAttr(caseStudyHref(cs.slug))}" class="link-coral-underline mt-5 inline-block" data-i18n="caseStudy.readCaseStudy">Read case study</a>
             </div>
           </article>`
     )
@@ -260,7 +396,7 @@ function blogIndexBlocks(posts) {
                 <p class="eyebrow">${escAttr(a.category || "Blog")}</p>
                 <h2 class="mt-3 h2"><a href="${escAttr(blogPostHref(a.slug))}">${escAttr(a.title)}</a></h2>
                 <p class="text-muted mt-4 text-sm-tight">${escAttr(excerpt(a.excerpt, 220))}</p>
-                <a href="${escAttr(blogPostHref(a.slug))}" class="link-arrow mt-8 inline-block">Read article</a>
+                <a href="${escAttr(blogPostHref(a.slug))}" class="link-arrow mt-8 inline-block" data-i18n="blog.readArticle">Read article</a>
               </div>
             </article>
             <div class="grid gap-lg">
@@ -270,7 +406,7 @@ function blogIndexBlocks(posts) {
                 <p class="eyebrow eyebrow--small">${escAttr(p.category || "Blog")}</p>
                 <h3 class="mt-3 h3"><a href="${escAttr(blogPostHref(p.slug))}">${escAttr(p.title)}</a></h3>
                 <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(p.excerpt, 140))}</p>
-                <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block">Read article</a>
+                <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block" data-i18n="blog.readArticle">Read article</a>
               </article>`
                 )
                 .join("")}
@@ -285,7 +421,7 @@ function blogIndexBlocks(posts) {
               <p class="eyebrow eyebrow--small">${escAttr(p.category || "Blog")}</p>
               <h3 class="mt-3 h3"><a href="${escAttr(blogPostHref(p.slug))}">${escAttr(p.title)}</a></h3>
               <p class="text-muted mt-3 text-sm-tight">${escAttr(excerpt(p.excerpt, 160))}</p>
-              <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block">Read article</a>
+              <a href="${escAttr(blogPostHref(p.slug))}" class="link-arrow mt-5 inline-block" data-i18n="blog.readArticle">Read article</a>
             </div>
           </article>`
     )
@@ -395,6 +531,14 @@ if (fs.existsSync(blogListSrc)) {
 const caseStudiesListSrc = path.join(SOURCES, "js", "case-studies-list.js");
 if (fs.existsSync(caseStudiesListSrc)) {
   copyFile(caseStudiesListSrc, path.join(ROOT, "js", "case-studies-list.js"));
+}
+const i18nSrc = path.join(SOURCES, "js", "i18n.js");
+if (fs.existsSync(i18nSrc)) {
+  copyFile(i18nSrc, path.join(ROOT, "js", "i18n.js"));
+}
+const localesDir = path.join(__dirname, "locales");
+if (fs.existsSync(localesDir)) {
+  copyTree(localesDir, path.join(ROOT, "locales"));
 }
 ["logos", "blog", "case-studies", "about", "google", "careers", "contact"].forEach((sub) =>
   ensureDir(path.join(ROOT, "media", sub))

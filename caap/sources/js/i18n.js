@@ -1,6 +1,6 @@
 /**
- * Client-side i18n for CAAP (not loaded during the English-only PoC).
- * Pages use plain English in HTML; re-add <script src="js/i18n.js" defer></script> when translating.
+ * Client-side i18n for CAAP static pages.
+ * Locales: /caap/locales/{locale}.json (path derived from this script URL).
  */
 (function () {
   "use strict";
@@ -45,7 +45,7 @@
       var n = normalizeLang(list[i]);
       if (n && SUPPORTED.some(function (x) { return x.code === n; })) return n;
     }
-    return "en";
+    return "pt";
   }
 
   function flatten(obj, prefix) {
@@ -91,7 +91,10 @@
   }
 
   function applyToDom(flat) {
-    document.documentElement.lang = currentLocale === "pt" ? "pt" : "en";
+    document.documentElement.lang = currentLocale === "pt" ? "pt-PT" : "en";
+    try {
+      window.__caapI18n = { locale: currentLocale, flat: flat };
+    } catch (e) {}
 
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
@@ -133,7 +136,8 @@
         details.className = "lang-switch__details";
         var sum = document.createElement("summary");
         sum.className = "lang-switch__summary";
-        sum.setAttribute("aria-label", "Language");
+        var langAria = getByPath(flatMessages, "lang.menuAria") || "Language";
+        sum.setAttribute("aria-label", langAria);
         sum.innerHTML =
           '<svg class="lang-switch__globe" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
         var current = SUPPORTED.find(function (x) { return x.code === currentLocale; });
@@ -184,21 +188,18 @@
 
   function run() {
     loadLocale(currentLocale)
-      .then(function (f) {
-        flatMessages = f;
-        applyToDom(flatMessages);
-        mountLangSwitches();
-      })
       .catch(function () {
         currentLocale = "en";
         return loadLocale("en");
       })
       .then(function (f) {
-        if (f) {
-          flatMessages = f;
-          applyToDom(flatMessages);
-          mountLangSwitches();
-        }
+        if (!f) return;
+        flatMessages = f;
+        applyToDom(flatMessages);
+        mountLangSwitches();
+        try {
+          window.dispatchEvent(new CustomEvent("caap:i18n", { detail: { locale: currentLocale } }));
+        } catch (e) {}
       });
   }
 

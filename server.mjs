@@ -1115,6 +1115,19 @@ function handler(req, res) {
 
     if (segments[0] === "casos-estudo" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
+      const staticCase = resolveCaapFile(segments);
+      if (staticCase) {
+        const send = () => {
+          if (req.method === "HEAD") {
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.end();
+            return;
+          }
+          sendFile(res, staticCase, { injectBaseHref: "/caap/" });
+        };
+        send();
+        return;
+      }
       const study = caapCaseBySlug.get(slug);
       if (study) {
         if (req.method === "HEAD") {
@@ -1143,6 +1156,19 @@ function handler(req, res) {
 
     if (segments[0] === "blog" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
+      const staticPost = resolveCaapFile(segments);
+      if (staticPost) {
+        const send = () => {
+          if (req.method === "HEAD") {
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.end();
+            return;
+          }
+          sendFile(res, staticPost, { injectBaseHref: "/caap/" });
+        };
+        send();
+        return;
+      }
       if (caapCaseBySlug.has(slug)) {
         res.writeHead(302, {
           Location: "/caap/casos-estudo/" + encodeURIComponent(slug) + url.search,

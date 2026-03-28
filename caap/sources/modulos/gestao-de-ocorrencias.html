@@ -1,251 +1,442 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
   <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Incident management | City as a Platform</title>
-    <meta name="description" content="Report incidents with photo and location, delegate teams, track status, and notify citizens — with optional sensor automation via Mapify." />
+    <title>Gestão de Ocorrências | Módulo CAAP</title>
+    <meta
+      name="description"
+      content="Módulo de Gestão de Ocorrências do CAAP para identificar, registar, encaminhar e resolver ocorrências no espaço público com maior eficiência."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.city-platform.com/modulos/gestao-de-ocorrencias/" />
+    <meta property="og:title" content="Gestão de Ocorrências | Módulo CAAP" />
+    <meta
+      property="og:description"
+      content="Identificação e gestão de ocorrências no espaço público com cidadãos, equipas operacionais e sensores ligados numa única plataforma."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.city-platform.com/modulos/gestao-de-ocorrencias/" />
+    <meta property="og:image" content="https://www.city-platform.com/media/caap-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gestão de Ocorrências | Módulo CAAP" />
+    <meta
+      name="twitter:description"
+      content="Identificação e gestão de ocorrências no espaço público com workflows, sensores e operação em tempo real."
+    />
+    <meta name="twitter:image" content="https://www.city-platform.com/media/caap-logo.png" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="caap-theme-v2">
-    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <script src="../js/i18n.js" defer></script>
+
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Saltar para o conteúdo</a>
     <header class="cv2-header">
       <div class="cv2-header__inner">
         <a class="cv2-header__brand" href="./">
           <img src="media/caap-logo.png" alt="CAAP" width="44" height="44" />
         </a>
         <details class="cv2-nav-mobile">
-          <summary class="cv2-nav-mobile__toggle">Menu</summary>
-          <nav class="cv2-nav-mobile__panel" aria-label="Navegação principal">
-            <p class="cv2-nav-mobile__label">Soluções</p>
-            <a href="solucoes/">Todas as soluções</a>
-            <a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a>
-            <a href="solucoes/mobilidade">Mobilidade</a>
-            <a href="solucoes/turismo">Turismo</a>
-            <a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a>
-            <a href="solucoes/planeamento-urbano">Planeamento Urbano</a>
-            <a href="solucoes/governanca-e-transparencia-digital">Governança e Transparência Digital</a>
-            <a href="solucoes/sensores-e-monitorizacao">Sensores e Monitorização</a>
-            <p class="cv2-nav-mobile__label">Módulos</p>
-            <a href="modulos/">Todos os módulos</a>
-            <a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a>
-            <a href="modulos/gestao-urbanistica">Gestão Urbanística</a>
-            <a href="modulos/gestao-de-condicionamentos-de-transito">Gestão de Condicionamentos de Trânsito</a>
-            <a href="modulos/higiene-urbana">Higiene Urbana</a>
-            <a href="modulos/appbuilder">AppBuilder</a>
-            <a href="modulos/mapify">Mapify</a>
-            <p class="cv2-nav-mobile__label">Empresa</p>
-            <a href="casos-estudo">Casos de Estudo</a>
-            <a href="sobre-nos">Sobre Nós</a>
-            <a href="contactos">Contactos</a>
-            <a href="parceiros">Parceiros</a>
-            <a href="blog">Blog</a>
-            <a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a>
+          <summary class="cv2-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
+          <nav class="cv2-nav-mobile__panel" data-i18n-attr="aria-label:nav.mainAria">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.solutions">Soluções</p>
+            <a href="solucoes/" data-i18n="nav.allSolutions">Todas as soluções</a>
+            <a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a>
+            <a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a>
+            <a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a>
+            <a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a>
+            <a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a>
+            <a href="solucoes/governanca-e-transparencia-digital" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</a>
+            <a href="solucoes/sensores-e-monitorizacao" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.modules">Módulos</p>
+            <a href="modulos/" data-i18n="nav.allModules">Todos os módulos</a>
+            <a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a>
+            <a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a>
+            <a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</a>
+            <a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a>
+            <a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a>
+            <a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.company">Empresa</p>
+            <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+            <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+            <a href="contactos" data-i18n="nav.contact">Contactos</a>
+            <a href="parceiros" data-i18n="nav.partners">Parceiros</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Iniciar sessão</a>
           </nav>
         </details>
-        <nav class="cv2-nav-desktop" aria-label="Navegação principal">
+        <nav class="cv2-nav-desktop" data-i18n-attr="aria-label:nav.mainAria">
           <div class="cv2-mega-wrap">
-            <a href="solucoes/" class="cv2-mega-trigger">Soluções</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Soluções">
+            <a href="solucoes/" class="cv2-mega-trigger" data-i18n="nav.solutions">Soluções</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.solutionsRegion">
               <div class="cv2-mega-grid">
                 <a href="solucoes/manutencao-dos-espacos-publicos" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 7l3-3 3 3-9 9H8v-3l6-6Z"/><path d="M5 19h14"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc">Gestão de ocorrências, reparação de infraestruturas, higiene urbana, dashboards, centro de operações</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.espacosPublicos.desc">Ocorrências, infraestruturas, higiene urbana e centro de operações.</span></span>
                 </a>
                 <a href="solucoes/mobilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-8h3"/><path d="M9 9h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mobilidade</span><span class="cv2-mega-link__desc">Fiscalização, ocupação da via pública, bicicletas e trotinetes, transportes públicos, estacionamento, Waze</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.mobilidade.desc">Via pública, fiscalização, transportes e integrações como Waze.</span></span>
                 </a>
                 <a href="solucoes/turismo" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.9L12 3Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Turismo</span><span class="cv2-mega-link__desc">Eventos, reparação de infraestruturas, higiene urbana</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.turismo.title">Turismo</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.turismo.desc">Eventos e serviços ligados ao território.</span></span>
                 </a>
                 <a href="solucoes/ambiente-e-sustentabilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 15c0-5 4-9 9-9 0 5-4 9-9 9Z"/><path d="M7 18c0-3 2-5 5-5 0 3-2 5-5 5Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc">Prevenção de cheias, mobilidade suave, transportes públicos</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.ambiente.desc">Dados ambientais e apoio à decisão territorial.</span></span>
                 </a>
                 <a href="solucoes/planeamento-urbano" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M5 19V9l7-4 7 4v10"/><path d="M9 19v-5h6v5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Planeamento Urbano</span><span class="cv2-mega-link__desc">Planos de ordenamento territorial, REN, ruído, alterações climáticas</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.planeamento.desc">Instrumentos de ordenamento e informação territorial.</span></span>
                 </a>
                 <a href="solucoes/governanca-e-transparencia-digital" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12h6"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc">Data governance, dashboards públicos, participação cidadã</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.governanca.desc">Dashboards públicos e participação cidadã.</span></span>
                 </a>
                 <a href="solucoes/sensores-e-monitorizacao" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 18a6 6 0 1 0-6-6"/><path d="M12 14a2 2 0 1 0-2-2"/><path d="M20 20l-4.5-4.5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Sensores e Monitorização</span><span class="cv2-mega-link__desc">Integração de sensores, multidões, parques de estacionamento</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.sensores.desc">Redes de sensores e operações em tempo real.</span></span>
                 </a>
               </div>
             </div>
           </div>
           <div class="cv2-mega-wrap">
-            <a href="modulos/" class="cv2-mega-trigger">Módulos</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Módulos">
+            <a href="modulos/" class="cv2-mega-trigger" data-i18n="nav.modules">Módulos</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.modulesRegion">
               <div class="cv2-mega-grid">
                 <a href="modulos/gestao-de-ocorrencias" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v3l2 2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc">Registar, priorizar e resolver ocorrências com equipas, SLA e acompanhamento em tempo real.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.ocorrencias.desc">Pedidos priorizados com rastreio até ao fecho — cidadãos informados e equipas com SLA visível.</span></span>
                 </a>
                 <a href="modulos/gestao-urbanistica" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M6 19V7h12v12"/><path d="M9 10h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão Urbanística</span><span class="cv2-mega-link__desc">Território, processos e condicionantes num fluxo simples para equipas técnicas.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.urbanistica.desc">Condicionantes e instrumentos no território — decisões técnicas com contexto, menos retrabalho entre serviços.</span></span>
                 </a>
                 <a href="modulos/gestao-de-condicionamentos-de-transito" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M8 7l4-4 4 4"/><path d="M8 17l4 4 4-4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc">Cortes, desvios e impactos viários com visibilidade territorial e comunicação imediata.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.transito.desc">Cortes e desvios no mapa com comunicação imediata — menos fricção para quem circula e para quem opera.</span></span>
                 </a>
                 <a href="modulos/higiene-urbana" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7h8"/><path d="M9 7V5h6v2"/><path d="M7 7l1 12h8l1-12"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Higiene Urbana</span><span class="cv2-mega-link__desc">Planear rotinas, responder a pedidos e monitorizar equipas no terreno.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.higiene.desc">Rotas e ordens de serviço coordenadas — mais cobertura com equipas alinhadas no mapa.</span></span>
                 </a>
                 <a href="modulos/appbuilder" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="M9 10h6m-6 4h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">AppBuilder</span><span class="cv2-mega-link__desc">Criar apps e formulários adaptados à operação sem ciclos pesados de desenvolvimento.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.appbuilder.desc">Formulários e apps ajustados ao processo municipal — evolução sem ciclos longos de desenvolvimento.</span></span>
                 </a>
                 <a href="modulos/mapify" class="cv2-mega-link">
-                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l-5 2V6l5-2m0 14 6-2m-6 2V4m6 12 5 2V4l-5-2m0 14V2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mapify</span><span class="cv2-mega-link__desc">Sensores, regras, alertas e automação low-code numa camada operacional comum.</span></span>
+                  <span class="cv2-mega-link__icon cv2-mega-link__icon--mapify cv2-icon-bg--mapify" aria-hidden="true"
+                    ><img src="media/mapify-logo-white.png" alt="" width="24" height="24" loading="lazy" decoding="async"
+                  /></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.mapify.title">Mapify</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.mapify.desc">Sensores e regras na mesma camada — alertas e automação antes do incidente escalar.</span></span>
                 </a>
               </div>
             </div>
           </div>
-          <a href="casos-estudo">Casos de Estudo</a>
-          <a href="sobre-nos">Sobre Nós</a>
-          <a href="contactos">Contactos</a>
+          <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+          <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+          <a href="contactos" data-i18n="nav.contact">Contactos</a>
         </nav>
-        <a class="cv2-header__cta" href="contactos">Pedir demo</a>
+        <div class="cv2-header__tail">
+          <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+          <a class="cv2-header__cta" href="contactos" data-i18n="cta.demo">Pedir demo</a>
+        </div>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="hero-caap hero-caap--article">
-        <div class="hero-caap__glow" aria-hidden="true"></div>
-        <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="page-hero-inner">
-            <p class="pill-light">Product</p>
-            <h1 class="mt-6 heading-on-ink">Gestão de Ocorrências</h1>
-            <p class="lead lead--on-hero mt-6">
-              Territory administrators and citizens report incidents with a clear description, a photograph, and an associated location — content structure from the 2026 City as a Platform brief.
+      <section class="cv2-page-head cv2-page-head--tint-red" aria-labelledby="page-h1">
+        <div class="cv2-container">
+          <p class="cv2-eyebrow" style="color: rgba(45, 41, 41, 0.55)">Módulos</p>
+          <h1 id="page-h1" class="cv2-h2" style="margin-top: 0.5rem">Gestão de Ocorrências</h1>
+          <p class="cv2-lead" style="max-width: 40rem; margin-top: 1rem">
+            Identificação e gestão de ocorrências no espaço público.
+          </p>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-hero cv2-mapify-hero--mod-ocorrencias" aria-labelledby="go-hero-intro">
+        <div class="cv2-mapify-hero__decor" aria-hidden="true">
+          <div class="cv2-mapify-hero__glow"></div>
+        </div>
+        <div class="cv2-container cv2-mapify-hero__grid">
+          <div id="go-hero-intro">
+            <div class="cv2-mod-hero-badge">
+              <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"
+                ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v3l2 2"/></svg></span>
+            </div>
+            <p class="cv2-mapify-hero__kicker cv2-mapify-hero__kicker--red">Módulo CAAP</p>
+            <p class="cv2-mapify-hero__body" style="margin-top: 0.75rem">
+              A solução de Gestão de Ocorrências permite estabelecer uma relação mais próxima entre cidadãos, executivos e serviços operacionais, internos e externos, melhorando significativamente a capacidade de identificar, encaminhar e resolver ocorrências.
             </p>
-            <a class="btn btn--white mt-8" href="./#contact">Contact us</a>
+            <p class="cv2-mapify-hero__body">
+              As ocorrências podem também ser criadas automaticamente pela análise em tempo real dos dados dos sensores, sem envolvimento humano, acrescentando uma nova camada de inteligência à operação municipal. Integração com regras e automação no
+              <a href="modulos/mapify">Mapify</a>.
+            </p>
+            <div class="cv2-mapify-hero__actions">
+              <a class="cv2-btn cv2-btn--primary" href="contactos">Pedir demonstração</a>
+              <a class="cv2-btn cv2-btn--outline" href="casos-estudo">Ver casos de uso</a>
+            </div>
+            <div class="cv2-mapify-tags">
+              <span>Cidadãos</span>
+              <span>Executivos</span>
+              <span>Serviços operacionais</span>
+              <span>Sensores</span>
+              <span>Tempo real</span>
+            </div>
+          </div>
+          <aside class="cv2-mod-hero-visual cv2-mod-hero-visual--ocorrencias" aria-hidden="true">
+            <div class="cv2-mod-hero-visual__chrome"><span></span><span></span><span></span></div>
+            <div class="cv2-mod-hero-visual__canvas"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow">O que permite</p>
+          <h2 class="cv2-mapify-h2">Mais proximidade, mais controlo, mais capacidade de resposta</h2>
+          <p class="cv2-mapify-intro">
+            O módulo aproxima cidadãos, executivos e serviços operacionais, criando uma gestão mais clara e mais eficaz das ocorrências no espaço público.
+          </p>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--4">
+            <div class="cv2-mapify-card">
+              <h3>Identificação rápida</h3>
+              <p>Maior capacidade para detetar problemas no território de forma estruturada.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Encaminhamento eficiente</h3>
+              <p>Distribuição clara para equipas internas ou serviços externos responsáveis.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Resolução com visibilidade</h3>
+              <p>Acompanhamento de estados, prioridades e tempos de resposta.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Criação automática</h3>
+              <p>Integração com sensores para gerar ocorrências sem intervenção humana.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="video-placeholder max-w-3xl mx-auto" style="color: var(--color-slate-700); border-color: var(--color-border); background: var(--color-mist)">
-          <strong>Video</strong>
-          <span class="text-sm-tight">“Como registar uma ocorrência no City as a Platform” — embed here</span>
-        </div>
-      </section>
-
-      <section class="section container prose">
-        <p class="lead">
-          Incidents can also be created <strong>automatically without human intervention</strong> through sensors, thanks to <a href="modulos/mapify">Mapify</a>, adding a new layer of real-time intelligence.
-        </p>
-        <p>
-          The solution builds a closer relationship between <strong>citizens, executives, and operational services</strong>, significantly improving resolution capacity because teams know the exact location and nature of each issue.
-        </p>
-      </section>
-
-      <section class="section bg-white">
-        <div class="container">
-          <div class="product-showcase__visual mb-10" aria-hidden="true">Screenshot placeholder · back-office &amp; public reporting</div>
-          <h2 class="h2">Funcionalidades do Gestão de Ocorrências</h2>
-          <ul class="plain-list mt-6 text-slate-700 text-sm-loose" style="padding-left: 1.25rem">
-            <li>Digitalisation of incident management</li>
-            <li>Attach a photograph and location to each incident</li>
-            <li>Define status and priority</li>
-            <li>Delegate incidents to the responsible team</li>
-            <li>Track incident status end to end</li>
-            <li>Communicate resolution to the citizen</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section container" aria-labelledby="adv-heading">
-        <h2 id="adv-heading" class="h2">Vantagens — municipality and citizen</h2>
-        <p class="text-slate-600 mt-4 text-sm-loose">
-          PDF structure: split benefits <strong>para o município</strong> and <strong>para o cidadão</strong>.
-        </p>
-        <div class="split-benefits mt-10">
-          <div class="split-benefits__col card card--mist">
-            <h4>For the municipality</h4>
-            <ul>
-              <li>Faster resolution of incidents</li>
-              <li>Digital record of all incidents</li>
-              <li>Resource savings</li>
-              <li>Active citizen participation</li>
-            </ul>
-          </div>
-          <div class="split-benefits__col card card--mist">
-            <h4>For the citizen</h4>
-            <ul>
-              <li>Easy to report issues</li>
-              <li>Faster resolution</li>
-              <li>Transparency on status and location</li>
-            </ul>
+      <section class="cv2-mapify-section cv2-mapify-section--plain">
+        <div class="cv2-container">
+          <div class="cv2-mapify-split">
+            <div>
+              <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--red">Como funciona</p>
+              <h2 class="cv2-mapify-h2">Do registo à resolução</h2>
+              <p class="cv2-mapify-intro">
+                Cada ocorrência segue um fluxo claro, com informação, responsáveis e estados acessíveis em tempo real.
+              </p>
+              <div class="cv2-mapify-steps">
+                <div class="cv2-mapify-step">
+                  <h3>1. Identificação da ocorrência</h3>
+                  <p>A ocorrência pode ser reportada por um cidadão, por uma equipa ou criada automaticamente por sensores.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>2. Registo e categorização</h3>
+                  <p>A informação é estruturada e enriquecida com localização, prioridade e contexto operacional.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>3. Encaminhamento para o serviço responsável</h3>
+                  <p>A plataforma distribui ou apoia a distribuição para a equipa, entidade ou parceiro mais adequado.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>4. Acompanhamento da resolução</h3>
+                  <p>Os estados da ocorrência ficam visíveis ao longo de todo o processo.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>5. Monitorização e melhoria contínua</h3>
+                  <p>Os dados das ocorrências alimentam indicadores, dashboards e decisões operacionais futuras.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cv2-mapify-flow-stack">
+              <p class="cv2-mapify-flow-stack__label">Fluxo da ocorrência</p>
+              <div class="cv2-mapify-flow-stack__steps">
+                <div class="cv2-mapify-fs--panel">Cidadão / Sensor / Equipa</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--blue">Registo</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--green">Encaminhamento</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--yellow">Resolução</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--ink">Dashboards e monitorização</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section container">
-        <h2 class="h2">Among our clients</h2>
-        <p class="text-slate-600 mt-4 text-sm-loose">
-          Add photography-led case tiles (GeoEstrela, Vila do Bispo, etc.) with dramatic quotes — see <a href="casos-estudo">case studies</a>.
-        </p>
-        <a class="btn btn--ink mt-8" href="./#contact">Marque reunião connosco</a>
+      <section class="cv2-mapify-section cv2-mapify-section--sage">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--green">Capacidades principais</p>
+          <h2 class="cv2-mapify-h2">O que o módulo permite fazer</h2>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--5">
+            <div class="cv2-mapify-card">
+              <h3>Registar ocorrências</h3>
+              <p>Centralização da informação com contexto territorial e operacional.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Classificar prioridades</h3>
+              <p>Gestão por tipologia, criticidade e urgência.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Encaminhar equipas</h3>
+              <p>Distribuição para serviços internos ou externos responsáveis.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Automatizar criação</h3>
+              <p>Geração automática a partir da análise em tempo real de sensores.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Monitorizar resultados</h3>
+              <p>Acompanhamento de estados, desempenho e tempos de resposta.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <div class="cv2-mapify-split cv2-mapify-split--center">
+            <div>
+              <p class="cv2-mapify-eyebrow">Inteligência operacional</p>
+              <h2 class="cv2-mapify-h2">Ocorrências criadas automaticamente por sensores</h2>
+              <p class="cv2-mapify-intro">
+                A análise em tempo real dos dados dos sensores permite gerar ocorrências sem intervenção humana, acelerando a resposta e aumentando a capacidade de deteção. Em conjunto com o
+                <a href="modulos/mapify">Mapify</a>, as regras e alertas podem alimentar este fluxo de forma contínua.
+              </p>
+              <p class="cv2-mapify-intro">
+                Esta camada adicional de inteligência torna a operação mais proativa e menos dependente de registo manual.
+              </p>
+            </div>
+            <div class="cv2-mapify-card-grid cv2-mapify-card-grid--2">
+              <div class="cv2-mapify-card">
+                <h3>Deteção automática</h3>
+                <p>Identificação imediata de situações com base em eventos ou limiares definidos.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Menos dependência manual</h3>
+                <p>Redução do esforço de registo e maior rapidez na ativação operacional.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Resposta mais rápida</h3>
+                <p>Os serviços podem atuar mais cedo com base em dados reais.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Operação mais inteligente</h3>
+                <p>Os sensores passam a ser parte ativa do ciclo de gestão de ocorrências.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--red">Casos de uso</p>
+          <h2 class="cv2-mapify-h2">Onde pode ser aplicado</h2>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--4">
+            <div class="cv2-mapify-card">
+              <h3>Espaço público</h3>
+              <p>Buracos, danos em mobiliário urbano, sinalização ou iluminação.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Higiene urbana</h3>
+              <p>Pedidos de limpeza, recolha e gestão operacional no território.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Mobilidade</h3>
+              <p>Incidentes viários, estacionamento, circulação e ocupação da via pública.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Alertas automáticos</h3>
+              <p>Sensores e monitorização a gerar ocorrências em tempo real.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-cta">
+        <div class="cv2-container">
+          <div class="cv2-mapify-cta__inner">
+            <div>
+              <h2>Gerir ocorrências com mais rapidez, visibilidade e inteligência</h2>
+              <p>
+                Descubra como o módulo de Gestão de Ocorrências pode melhorar a identificação, o encaminhamento e a resolução no espaço público.
+              </p>
+            </div>
+            <div class="cv2-mapify-cta__actions">
+              <a class="cv2-btn cv2-btn--white" href="contactos">Pedir demonstração</a>
+              <a class="cv2-btn cv2-btn--ghost-light" href="modulos/">Ver todos os módulos</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-py-20" style="padding-top: 0">
+        <div class="cv2-container">
+          <p class="cv2-inner-nav">
+            <a href="modulos/" class="cv2-inner-cta">← Todos os módulos</a>
+            <span aria-hidden="true" style="margin: 0 0.65rem; color: rgba(45, 41, 41, 0.35)">·</span>
+            <a href="contactos" class="cv2-inner-cta">Pedir demonstração</a>
+          </p>
+        </div>
       </section>
     </main>
     <footer class="cv2-footer">
       <div class="cv2-footer__inner">
         <div>
           <a class="cv2-footer__brand" href="./"><img src="media/caap-logo.png" alt="CAAP" width="44" height="44" /></a>
-          <p class="cv2-footer__intro">
+          <p class="cv2-footer__intro" data-i18n="footer.intro">
             City as a Platform é um produto Focus BC — plataforma operacional para municípios e entidades públicas.
           </p>
           <p class="cv2-footer__intro" style="margin-top: 0.75rem">
-            <a href="/focusbc/">Focus BC</a>
+            <a href="https://focusbcwebsites.pages.dev/focusbc/" target="_blank" rel="noopener noreferrer" data-i18n="footer.focusBc">Focus BC</a>
           </p>
         </div>
         <div>
-          <h3>Soluções</h3>
+          <h3 data-i18n="footer.solutionsHeading">Soluções</h3>
           <ul>
-            <li><a href="solucoes/">Todas as soluções</a></li>
-            <li><a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a></li>
-            <li><a href="solucoes/mobilidade">Mobilidade</a></li>
-            <li><a href="solucoes/turismo">Turismo</a></li>
-            <li><a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a></li>
-            <li><a href="solucoes/planeamento-urbano">Planeamento Urbano</a></li>
-            <li><a href="solucoes/governanca-e-transparencia-digital">Governança Digital</a></li>
-            <li><a href="solucoes/sensores-e-monitorizacao">Sensores</a></li>
+            <li><a href="solucoes/" data-i18n="footer.allSolutions">Todas as soluções</a></li>
+            <li><a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a></li>
+            <li><a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a></li>
+            <li><a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a></li>
+            <li><a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a></li>
+            <li><a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a></li>
+            <li><a href="solucoes/governanca-e-transparencia-digital" data-i18n="footer.governanceShort">Governança Digital</a></li>
+            <li><a href="solucoes/sensores-e-monitorizacao" data-i18n="footer.sensorsShort">Sensores</a></li>
           </ul>
         </div>
         <div>
-          <h3>Módulos</h3>
+          <h3 data-i18n="footer.modulesHeading">Módulos</h3>
           <ul>
-            <li><a href="modulos/">Todos os módulos</a></li>
-            <li><a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a></li>
-            <li><a href="modulos/gestao-urbanistica">Gestão Urbanística</a></li>
-            <li><a href="modulos/gestao-de-condicionamentos-de-transito">Condicionamentos de Trânsito</a></li>
-            <li><a href="modulos/higiene-urbana">Higiene Urbana</a></li>
-            <li><a href="modulos/appbuilder">AppBuilder</a></li>
-            <li><a href="modulos/mapify">Mapify</a></li>
+            <li><a href="modulos/" data-i18n="footer.allModules">Todos os módulos</a></li>
+            <li><a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a></li>
+            <li><a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a></li>
+            <li><a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="footer.trafficShort">Condicionamentos de Trânsito</a></li>
+            <li><a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a></li>
+            <li><a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a></li>
+            <li><a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a></li>
           </ul>
           <ul style="margin-top: 1.25rem">
-            <li><a href="blog">Blog</a></li>
-            <li><a href="parceiros">Parceiros</a></li>
-            <li><a href="casos-estudo">Casos de Estudo</a></li>
+            <li><a href="blog" data-i18n="nav.blog">Blog</a></li>
+            <li><a href="parceiros" data-i18n="nav.partners">Parceiros</a></li>
+            <li><a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a></li>
           </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
+          <h3 data-i18n="footer.contactHeading">Contacto</h3>
           <ul>
-            <li><a href="contactos">Contactos e demonstração</a></li>
+            <li><a href="contactos" data-i18n="footer.contactDemo">Contactos e demonstração</a></li>
             <li><a href="mailto:joao.barata@focus-bc.com">joao.barata@focus-bc.com</a></li>
-            <li><a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a></li>
+            <li><a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="footer.login">Iniciar sessão</a></li>
           </ul>
         </div>
       </div>

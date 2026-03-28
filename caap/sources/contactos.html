@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
   <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contactos | City as a Platform</title>
     <meta
@@ -13,113 +13,121 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="caap-theme-v2">
-    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <script src="js/i18n.js" defer></script>
+
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Saltar para o conteúdo</a>
     <header class="cv2-header">
       <div class="cv2-header__inner">
         <a class="cv2-header__brand" href="./">
           <img src="media/caap-logo.png" alt="CAAP" width="44" height="44" />
         </a>
         <details class="cv2-nav-mobile">
-          <summary class="cv2-nav-mobile__toggle">Menu</summary>
-          <nav class="cv2-nav-mobile__panel" aria-label="Navegação principal">
-            <p class="cv2-nav-mobile__label">Soluções</p>
-            <a href="solucoes/">Todas as soluções</a>
-            <a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a>
-            <a href="solucoes/mobilidade">Mobilidade</a>
-            <a href="solucoes/turismo">Turismo</a>
-            <a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a>
-            <a href="solucoes/planeamento-urbano">Planeamento Urbano</a>
-            <a href="solucoes/governanca-e-transparencia-digital">Governança e Transparência Digital</a>
-            <a href="solucoes/sensores-e-monitorizacao">Sensores e Monitorização</a>
-            <p class="cv2-nav-mobile__label">Módulos</p>
-            <a href="modulos/">Todos os módulos</a>
-            <a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a>
-            <a href="modulos/gestao-urbanistica">Gestão Urbanística</a>
-            <a href="modulos/gestao-de-condicionamentos-de-transito">Gestão de Condicionamentos de Trânsito</a>
-            <a href="modulos/higiene-urbana">Higiene Urbana</a>
-            <a href="modulos/appbuilder">AppBuilder</a>
-            <a href="modulos/mapify">Mapify</a>
-            <p class="cv2-nav-mobile__label">Empresa</p>
-            <a href="casos-estudo">Casos de Estudo</a>
-            <a href="sobre-nos">Sobre Nós</a>
-            <a href="contactos">Contactos</a>
-            <a href="parceiros">Parceiros</a>
-            <a href="blog">Blog</a>
-            <a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a>
+          <summary class="cv2-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
+          <nav class="cv2-nav-mobile__panel" data-i18n-attr="aria-label:nav.mainAria">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.solutions">Soluções</p>
+            <a href="solucoes/" data-i18n="nav.allSolutions">Todas as soluções</a>
+            <a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a>
+            <a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a>
+            <a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a>
+            <a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a>
+            <a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a>
+            <a href="solucoes/governanca-e-transparencia-digital" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</a>
+            <a href="solucoes/sensores-e-monitorizacao" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.modules">Módulos</p>
+            <a href="modulos/" data-i18n="nav.allModules">Todos os módulos</a>
+            <a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a>
+            <a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a>
+            <a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</a>
+            <a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a>
+            <a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a>
+            <a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.company">Empresa</p>
+            <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+            <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+            <a href="contactos" data-i18n="nav.contact">Contactos</a>
+            <a href="parceiros" data-i18n="nav.partners">Parceiros</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Iniciar sessão</a>
           </nav>
         </details>
-        <nav class="cv2-nav-desktop" aria-label="Navegação principal">
+        <nav class="cv2-nav-desktop" data-i18n-attr="aria-label:nav.mainAria">
           <div class="cv2-mega-wrap">
-            <a href="solucoes/" class="cv2-mega-trigger">Soluções</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Soluções">
+            <a href="solucoes/" class="cv2-mega-trigger" data-i18n="nav.solutions">Soluções</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.solutionsRegion">
               <div class="cv2-mega-grid">
                 <a href="solucoes/manutencao-dos-espacos-publicos" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 7l3-3 3 3-9 9H8v-3l6-6Z"/><path d="M5 19h14"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc">Gestão de ocorrências, reparação de infraestruturas, higiene urbana, dashboards, centro de operações</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.espacosPublicos.desc">Ocorrências, infraestruturas, higiene urbana e centro de operações.</span></span>
                 </a>
                 <a href="solucoes/mobilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-8h3"/><path d="M9 9h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mobilidade</span><span class="cv2-mega-link__desc">Fiscalização, ocupação da via pública, bicicletas e trotinetes, transportes públicos, estacionamento, Waze</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.mobilidade.desc">Via pública, fiscalização, transportes e integrações como Waze.</span></span>
                 </a>
                 <a href="solucoes/turismo" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.9L12 3Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Turismo</span><span class="cv2-mega-link__desc">Eventos, reparação de infraestruturas, higiene urbana</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.turismo.title">Turismo</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.turismo.desc">Eventos e serviços ligados ao território.</span></span>
                 </a>
                 <a href="solucoes/ambiente-e-sustentabilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 15c0-5 4-9 9-9 0 5-4 9-9 9Z"/><path d="M7 18c0-3 2-5 5-5 0 3-2 5-5 5Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc">Prevenção de cheias, mobilidade suave, transportes públicos</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.ambiente.desc">Dados ambientais e apoio à decisão territorial.</span></span>
                 </a>
                 <a href="solucoes/planeamento-urbano" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M5 19V9l7-4 7 4v10"/><path d="M9 19v-5h6v5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Planeamento Urbano</span><span class="cv2-mega-link__desc">Planos de ordenamento territorial, REN, ruído, alterações climáticas</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.planeamento.desc">Instrumentos de ordenamento e informação territorial.</span></span>
                 </a>
                 <a href="solucoes/governanca-e-transparencia-digital" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12h6"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc">Data governance, dashboards públicos, participação cidadã</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.governanca.desc">Dashboards públicos e participação cidadã.</span></span>
                 </a>
                 <a href="solucoes/sensores-e-monitorizacao" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 18a6 6 0 1 0-6-6"/><path d="M12 14a2 2 0 1 0-2-2"/><path d="M20 20l-4.5-4.5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Sensores e Monitorização</span><span class="cv2-mega-link__desc">Integração de sensores, multidões, parques de estacionamento</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.sensores.desc">Redes de sensores e operações em tempo real.</span></span>
                 </a>
               </div>
             </div>
           </div>
           <div class="cv2-mega-wrap">
-            <a href="modulos/" class="cv2-mega-trigger">Módulos</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Módulos">
+            <a href="modulos/" class="cv2-mega-trigger" data-i18n="nav.modules">Módulos</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.modulesRegion">
               <div class="cv2-mega-grid">
                 <a href="modulos/gestao-de-ocorrencias" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v3l2 2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc">Registar, priorizar e resolver ocorrências com equipas, SLA e acompanhamento em tempo real.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.ocorrencias.desc">Pedidos priorizados com rastreio até ao fecho — cidadãos informados e equipas com SLA visível.</span></span>
                 </a>
                 <a href="modulos/gestao-urbanistica" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M6 19V7h12v12"/><path d="M9 10h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão Urbanística</span><span class="cv2-mega-link__desc">Território, processos e condicionantes num fluxo simples para equipas técnicas.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.urbanistica.desc">Condicionantes e instrumentos no território — decisões técnicas com contexto, menos retrabalho entre serviços.</span></span>
                 </a>
                 <a href="modulos/gestao-de-condicionamentos-de-transito" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M8 7l4-4 4 4"/><path d="M8 17l4 4 4-4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc">Cortes, desvios e impactos viários com visibilidade territorial e comunicação imediata.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.transito.desc">Cortes e desvios no mapa com comunicação imediata — menos fricção para quem circula e para quem opera.</span></span>
                 </a>
                 <a href="modulos/higiene-urbana" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7h8"/><path d="M9 7V5h6v2"/><path d="M7 7l1 12h8l1-12"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Higiene Urbana</span><span class="cv2-mega-link__desc">Planear rotinas, responder a pedidos e monitorizar equipas no terreno.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.higiene.desc">Rotas e ordens de serviço coordenadas — mais cobertura com equipas alinhadas no mapa.</span></span>
                 </a>
                 <a href="modulos/appbuilder" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="M9 10h6m-6 4h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">AppBuilder</span><span class="cv2-mega-link__desc">Criar apps e formulários adaptados à operação sem ciclos pesados de desenvolvimento.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.appbuilder.desc">Formulários e apps ajustados ao processo municipal — evolução sem ciclos longos de desenvolvimento.</span></span>
                 </a>
                 <a href="modulos/mapify" class="cv2-mega-link">
-                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l-5 2V6l5-2m0 14 6-2m-6 2V4m6 12 5 2V4l-5-2m0 14V2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mapify</span><span class="cv2-mega-link__desc">Sensores, regras, alertas e automação low-code numa camada operacional comum.</span></span>
+                  <span class="cv2-mega-link__icon cv2-mega-link__icon--mapify cv2-icon-bg--mapify" aria-hidden="true"
+                    ><img src="media/mapify-logo-white.png" alt="" width="24" height="24" loading="lazy" decoding="async"
+                  /></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.mapify.title">Mapify</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.mapify.desc">Sensores e regras na mesma camada — alertas e automação antes do incidente escalar.</span></span>
                 </a>
               </div>
             </div>
           </div>
-          <a href="casos-estudo">Casos de Estudo</a>
-          <a href="sobre-nos">Sobre Nós</a>
-          <a href="contactos">Contactos</a>
+          <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+          <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+          <a href="contactos" data-i18n="nav.contact">Contactos</a>
         </nav>
-        <a class="cv2-header__cta" href="contactos">Pedir demo</a>
+        <div class="cv2-header__tail">
+          <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+          <a class="cv2-header__cta" href="contactos" data-i18n="cta.demo">Pedir demo</a>
+        </div>
       </div>
     </header>
 
@@ -189,49 +197,49 @@
       <div class="cv2-footer__inner">
         <div>
           <a class="cv2-footer__brand" href="./"><img src="media/caap-logo.png" alt="CAAP" width="44" height="44" /></a>
-          <p class="cv2-footer__intro">
+          <p class="cv2-footer__intro" data-i18n="footer.intro">
             City as a Platform é um produto Focus BC — plataforma operacional para municípios e entidades públicas.
           </p>
           <p class="cv2-footer__intro" style="margin-top: 0.75rem">
-            <a href="/focusbc/">Focus BC</a>
+            <a href="https://focusbcwebsites.pages.dev/focusbc/" target="_blank" rel="noopener noreferrer" data-i18n="footer.focusBc">Focus BC</a>
           </p>
         </div>
         <div>
-          <h3>Soluções</h3>
+          <h3 data-i18n="footer.solutionsHeading">Soluções</h3>
           <ul>
-            <li><a href="solucoes/">Todas as soluções</a></li>
-            <li><a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a></li>
-            <li><a href="solucoes/mobilidade">Mobilidade</a></li>
-            <li><a href="solucoes/turismo">Turismo</a></li>
-            <li><a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a></li>
-            <li><a href="solucoes/planeamento-urbano">Planeamento Urbano</a></li>
-            <li><a href="solucoes/governanca-e-transparencia-digital">Governança Digital</a></li>
-            <li><a href="solucoes/sensores-e-monitorizacao">Sensores</a></li>
+            <li><a href="solucoes/" data-i18n="footer.allSolutions">Todas as soluções</a></li>
+            <li><a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a></li>
+            <li><a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a></li>
+            <li><a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a></li>
+            <li><a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a></li>
+            <li><a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a></li>
+            <li><a href="solucoes/governanca-e-transparencia-digital" data-i18n="footer.governanceShort">Governança Digital</a></li>
+            <li><a href="solucoes/sensores-e-monitorizacao" data-i18n="footer.sensorsShort">Sensores</a></li>
           </ul>
         </div>
         <div>
-          <h3>Módulos</h3>
+          <h3 data-i18n="footer.modulesHeading">Módulos</h3>
           <ul>
-            <li><a href="modulos/">Todos os módulos</a></li>
-            <li><a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a></li>
-            <li><a href="modulos/gestao-urbanistica">Gestão Urbanística</a></li>
-            <li><a href="modulos/gestao-de-condicionamentos-de-transito">Condicionamentos de Trânsito</a></li>
-            <li><a href="modulos/higiene-urbana">Higiene Urbana</a></li>
-            <li><a href="modulos/appbuilder">AppBuilder</a></li>
-            <li><a href="modulos/mapify">Mapify</a></li>
+            <li><a href="modulos/" data-i18n="footer.allModules">Todos os módulos</a></li>
+            <li><a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a></li>
+            <li><a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a></li>
+            <li><a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="footer.trafficShort">Condicionamentos de Trânsito</a></li>
+            <li><a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a></li>
+            <li><a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a></li>
+            <li><a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a></li>
           </ul>
           <ul style="margin-top: 1.25rem">
-            <li><a href="blog">Blog</a></li>
-            <li><a href="parceiros">Parceiros</a></li>
-            <li><a href="casos-estudo">Casos de Estudo</a></li>
+            <li><a href="blog" data-i18n="nav.blog">Blog</a></li>
+            <li><a href="parceiros" data-i18n="nav.partners">Parceiros</a></li>
+            <li><a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a></li>
           </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
+          <h3 data-i18n="footer.contactHeading">Contacto</h3>
           <ul>
-            <li><a href="contactos">Contactos e demonstração</a></li>
+            <li><a href="contactos" data-i18n="footer.contactDemo">Contactos e demonstração</a></li>
             <li><a href="mailto:joao.barata@focus-bc.com">joao.barata@focus-bc.com</a></li>
-            <li><a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a></li>
+            <li><a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="footer.login">Iniciar sessão</a></li>
           </ul>
         </div>
       </div>

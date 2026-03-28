@@ -234,7 +234,7 @@ function pageShell({ title, description, bodyHtml, slug }) {
           <p class="eyebrow eyebrow--small">Product context</p>
           <p class="text-sm-loose mt-3 text-muted">
             Municipal and urban work is typically delivered through
-            <a href="https://www.city-platform.com/" class="link-plain">City as a Platform</a>. Sports venues and large-scale event operations use
+            <a href="https://focusbcwebsites.pages.dev/caap/" class="link-plain">City as a Platform</a>. Sports venues and large-scale event operations use
             <a href="https://www.virtualvenue-events.com/" class="link-plain">Virtual Venue</a>.
             <a href="https://www.mapify.ai/" class="link-plain">Mapify</a> provides geospatial and integration capability inside City as a Platform where relevant.
           </p>
@@ -278,7 +278,7 @@ function pageShell({ title, description, bodyHtml, slug }) {
             <h3>Offers</h3>
             <ul>
               <li><a href="https://www.virtualvenue-events.com/" target="_blank" rel="noopener noreferrer">Virtual Venue</a></li>
-              <li><a href="https://www.city-platform.com/" target="_blank" rel="noopener noreferrer">City as a Platform</a></li>
+              <li><a href="https://focusbcwebsites.pages.dev/caap/" target="_blank" rel="noopener noreferrer">City as a Platform</a></li>
               <li><a href="/google/index.html">Google partnership</a></li>
             </ul>
             <p class="footer-note">

@@ -1,3 +1,114 @@
 {
-  "_note": "CAAP PoC is English-only; copy lives in caap/sources HTML. Reintroduce messages here when adding translations."
+  "skipLink": "Skip to main content",
+  "lang": {
+    "menuAria": "Language"
+  },
+  "nav": {
+    "menu": "Menu",
+    "mainAria": "Main navigation",
+    "solutions": "Solutions",
+    "modules": "Modules",
+    "solutionsRegion": "Solutions",
+    "modulesRegion": "Modules",
+    "labels": {
+      "solutions": "Solutions",
+      "modules": "Modules",
+      "company": "Company"
+    },
+    "allSolutions": "All solutions",
+    "allModules": "All modules",
+    "caseStudies": "Case studies",
+    "about": "About us",
+    "contact": "Contact",
+    "partners": "Partners",
+    "blog": "Blog",
+    "login": "Sign in",
+    "mega": {
+      "sol": {
+        "espacosPublicos": {
+          "title": "Public space maintenance",
+          "desc": "Incidents, infrastructure, urban hygiene and operations centre."
+        },
+        "mobilidade": {
+          "title": "Mobility",
+          "desc": "Public space, enforcement, transport and integrations such as Waze."
+        },
+        "turismo": {
+          "title": "Tourism",
+          "desc": "Events and services linked to the territory."
+        },
+        "ambiente": {
+          "title": "Environment and sustainability",
+          "desc": "Environmental data and support for territorial decisions."
+        },
+        "planeamento": {
+          "title": "Urban planning",
+          "desc": "Planning instruments and territorial information."
+        },
+        "governanca": {
+          "title": "Digital governance and transparency",
+          "desc": "Public dashboards and citizen participation."
+        },
+        "sensores": {
+          "title": "Sensors and monitoring",
+          "desc": "Sensor networks and real-time operations."
+        }
+      },
+      "mod": {
+        "ocorrencias": {
+          "title": "Incident management",
+          "desc": "Prioritised requests tracked to closure — citizens informed and teams with visible SLAs."
+        },
+        "urbanistica": {
+          "title": "Urban development management",
+          "desc": "Constraints and instruments on the map — technical decisions with context, less rework across departments."
+        },
+        "transito": {
+          "title": "Traffic restrictions management",
+          "desc": "Closures and diversions on the map with immediate communication — less friction for road users and operators."
+        },
+        "higiene": {
+          "title": "Urban hygiene",
+          "desc": "Coordinated routes and work orders — more coverage with teams aligned on the map."
+        },
+        "appbuilder": {
+          "title": "AppBuilder",
+          "desc": "Forms and apps tailored to municipal processes — evolution without long development cycles."
+        },
+        "mapify": {
+          "title": "Mapify",
+          "desc": "Sensors and rules in one layer — alerts and automation before incidents escalate."
+        }
+      }
+    }
+  },
+  "cta": {
+    "demo": "Request a demo"
+  },
+  "footer": {
+    "intro": "City as a Platform is a Focus BC product — an operational platform for municipalities and public bodies.",
+    "focusBc": "Focus BC",
+    "solutionsHeading": "Solutions",
+    "modulesHeading": "Modules",
+    "contactHeading": "Contact",
+    "allSolutions": "All solutions",
+    "allModules": "All modules",
+    "governanceShort": "Digital governance",
+    "sensorsShort": "Sensors",
+    "trafficShort": "Traffic restrictions",
+    "contactDemo": "Contact and demo",
+    "login": "Sign in"
+  },
+  "blog": {
+    "loadError": "Could not load articles. Open the site via the local server (for example <code class=\"caap-code\">/caap/blog</code>).",
+    "featuredEyebrow": "Featured article",
+    "minRead": "min read",
+    "readArticle": "Read article"
+  },
+  "caseStudies": {
+    "loadError": "Could not load case studies. Open the site via the local server (for example <code class=\"caap-code\">/caap/casos-estudo</code>).",
+    "featuredEyebrow": "Featured case study",
+    "minRead": "min read",
+    "readStudy": "Read case study"
+  }
 }

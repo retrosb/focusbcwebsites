@@ -1,229 +1,439 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
   <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urban management | City as a Platform</title>
-    <meta name="description" content="Location map issuance and claims confrontation against planning instruments — templates, layers, process queries, online plans." />
+    <title>Gestão Urbanística | Módulo CAAP</title>
+    <meta
+      name="description"
+      content="Módulo de Gestão Urbanística do CAAP para emissão de plantas de localização, consulta de processo, planos online e confrontação de pretensões com planos de ordenamento."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.city-platform.com/modulos/gestao-urbanistica/" />
+    <meta property="og:title" content="Gestão Urbanística | Módulo CAAP" />
+    <meta
+      property="og:description"
+      content="Serviços urbanísticos digitais com emissão de plantas, consulta de processo, planos online e análise de pretensões."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.city-platform.com/modulos/gestao-urbanistica/" />
+    <meta property="og:image" content="https://www.city-platform.com/media/caap-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gestão Urbanística | Módulo CAAP" />
+    <meta
+      name="twitter:description"
+      content="Módulo do CAAP para serviços urbanísticos digitais, processos, plantas e planos de ordenamento."
+    />
+    <meta name="twitter:image" content="https://www.city-platform.com/media/caap-logo.png" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="caap-theme-v2">
-    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <script src="../js/i18n.js" defer></script>
+
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Saltar para o conteúdo</a>
     <header class="cv2-header">
       <div class="cv2-header__inner">
         <a class="cv2-header__brand" href="./">
           <img src="media/caap-logo.png" alt="CAAP" width="44" height="44" />
         </a>
         <details class="cv2-nav-mobile">
-          <summary class="cv2-nav-mobile__toggle">Menu</summary>
-          <nav class="cv2-nav-mobile__panel" aria-label="Navegação principal">
-            <p class="cv2-nav-mobile__label">Soluções</p>
-            <a href="solucoes/">Todas as soluções</a>
-            <a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a>
-            <a href="solucoes/mobilidade">Mobilidade</a>
-            <a href="solucoes/turismo">Turismo</a>
-            <a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a>
-            <a href="solucoes/planeamento-urbano">Planeamento Urbano</a>
-            <a href="solucoes/governanca-e-transparencia-digital">Governança e Transparência Digital</a>
-            <a href="solucoes/sensores-e-monitorizacao">Sensores e Monitorização</a>
-            <p class="cv2-nav-mobile__label">Módulos</p>
-            <a href="modulos/">Todos os módulos</a>
-            <a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a>
-            <a href="modulos/gestao-urbanistica">Gestão Urbanística</a>
-            <a href="modulos/gestao-de-condicionamentos-de-transito">Gestão de Condicionamentos de Trânsito</a>
-            <a href="modulos/higiene-urbana">Higiene Urbana</a>
-            <a href="modulos/appbuilder">AppBuilder</a>
-            <a href="modulos/mapify">Mapify</a>
-            <p class="cv2-nav-mobile__label">Empresa</p>
-            <a href="casos-estudo">Casos de Estudo</a>
-            <a href="sobre-nos">Sobre Nós</a>
-            <a href="contactos">Contactos</a>
-            <a href="parceiros">Parceiros</a>
-            <a href="blog">Blog</a>
-            <a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a>
+          <summary class="cv2-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
+          <nav class="cv2-nav-mobile__panel" data-i18n-attr="aria-label:nav.mainAria">
+            <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.solutions">Soluções</p>
+            <a href="solucoes/" data-i18n="nav.allSolutions">Todas as soluções</a>
+            <a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a>
+            <a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a>
+            <a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a>
+            <a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a>
+            <a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a>
+            <a href="solucoes/governanca-e-transparencia-digital" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</a>
+            <a href="solucoes/sensores-e-monitorizacao" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.modules">Módulos</p>
+            <a href="modulos/" data-i18n="nav.allModules">Todos os módulos</a>
+            <a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a>
+            <a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a>
+            <a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</a>
+            <a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a>
+            <a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a>
+            <a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a>
+            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.company">Empresa</p>
+            <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+            <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+            <a href="contactos" data-i18n="nav.contact">Contactos</a>
+            <a href="parceiros" data-i18n="nav.partners">Parceiros</a>
+            <a href="blog" data-i18n="nav.blog">Blog</a>
+            <a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="nav.login">Iniciar sessão</a>
           </nav>
         </details>
-        <nav class="cv2-nav-desktop" aria-label="Navegação principal">
+        <nav class="cv2-nav-desktop" data-i18n-attr="aria-label:nav.mainAria">
           <div class="cv2-mega-wrap">
-            <a href="solucoes/" class="cv2-mega-trigger">Soluções</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Soluções">
+            <a href="solucoes/" class="cv2-mega-trigger" data-i18n="nav.solutions">Soluções</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.solutionsRegion">
               <div class="cv2-mega-grid">
                 <a href="solucoes/manutencao-dos-espacos-publicos" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 7l3-3 3 3-9 9H8v-3l6-6Z"/><path d="M5 19h14"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc">Gestão de ocorrências, reparação de infraestruturas, higiene urbana, dashboards, centro de operações</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.espacosPublicos.desc">Ocorrências, infraestruturas, higiene urbana e centro de operações.</span></span>
                 </a>
                 <a href="solucoes/mobilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-8h3"/><path d="M9 9h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mobilidade</span><span class="cv2-mega-link__desc">Fiscalização, ocupação da via pública, bicicletas e trotinetes, transportes públicos, estacionamento, Waze</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.mobilidade.desc">Via pública, fiscalização, transportes e integrações como Waze.</span></span>
                 </a>
                 <a href="solucoes/turismo" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.9L12 3Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Turismo</span><span class="cv2-mega-link__desc">Eventos, reparação de infraestruturas, higiene urbana</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.turismo.title">Turismo</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.turismo.desc">Eventos e serviços ligados ao território.</span></span>
                 </a>
                 <a href="solucoes/ambiente-e-sustentabilidade" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 15c0-5 4-9 9-9 0 5-4 9-9 9Z"/><path d="M7 18c0-3 2-5 5-5 0 3-2 5-5 5Z"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc">Prevenção de cheias, mobilidade suave, transportes públicos</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.ambiente.desc">Dados ambientais e apoio à decisão territorial.</span></span>
                 </a>
                 <a href="solucoes/planeamento-urbano" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M5 19V9l7-4 7 4v10"/><path d="M9 19v-5h6v5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Planeamento Urbano</span><span class="cv2-mega-link__desc">Planos de ordenamento territorial, REN, ruído, alterações climáticas</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.planeamento.desc">Instrumentos de ordenamento e informação territorial.</span></span>
                 </a>
                 <a href="solucoes/governanca-e-transparencia-digital" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12h6"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc">Data governance, dashboards públicos, participação cidadã</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.governanca.desc">Dashboards públicos e participação cidadã.</span></span>
                 </a>
                 <a href="solucoes/sensores-e-monitorizacao" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 18a6 6 0 1 0-6-6"/><path d="M12 14a2 2 0 1 0-2-2"/><path d="M20 20l-4.5-4.5"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Sensores e Monitorização</span><span class="cv2-mega-link__desc">Integração de sensores, multidões, parques de estacionamento</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.sol.sensores.desc">Redes de sensores e operações em tempo real.</span></span>
                 </a>
               </div>
             </div>
           </div>
           <div class="cv2-mega-wrap">
-            <a href="modulos/" class="cv2-mega-trigger">Módulos</a>
-            <div class="cv2-mega-panel" role="region" aria-label="Módulos">
+            <a href="modulos/" class="cv2-mega-trigger" data-i18n="nav.modules">Módulos</a>
+            <div class="cv2-mega-panel" role="region" data-i18n-attr="aria-label:nav.modulesRegion">
               <div class="cv2-mega-grid">
                 <a href="modulos/gestao-de-ocorrencias" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--red" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M11 8v3l2 2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc">Registar, priorizar e resolver ocorrências com equipas, SLA e acompanhamento em tempo real.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.ocorrencias.desc">Pedidos priorizados com rastreio até ao fecho — cidadãos informados e equipas com SLA visível.</span></span>
                 </a>
                 <a href="modulos/gestao-urbanistica" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M6 19V7h12v12"/><path d="M9 10h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão Urbanística</span><span class="cv2-mega-link__desc">Território, processos e condicionantes num fluxo simples para equipas técnicas.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.urbanistica.desc">Condicionantes e instrumentos no território — decisões técnicas com contexto, menos retrabalho entre serviços.</span></span>
                 </a>
                 <a href="modulos/gestao-de-condicionamentos-de-transito" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M8 7l4-4 4 4"/><path d="M8 17l4 4 4-4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc">Cortes, desvios e impactos viários com visibilidade territorial e comunicação imediata.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.transito.desc">Cortes e desvios no mapa com comunicação imediata — menos fricção para quem circula e para quem opera.</span></span>
                 </a>
                 <a href="modulos/higiene-urbana" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7h8"/><path d="M9 7V5h6v2"/><path d="M7 7l1 12h8l1-12"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Higiene Urbana</span><span class="cv2-mega-link__desc">Planear rotinas, responder a pedidos e monitorizar equipas no terreno.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.higiene.desc">Rotas e ordens de serviço coordenadas — mais cobertura com equipas alinhadas no mapa.</span></span>
                 </a>
                 <a href="modulos/appbuilder" class="cv2-mega-link">
                   <span class="cv2-mega-link__icon cv2-icon-bg--yellow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="M9 10h6m-6 4h4"/></svg></span>
-                  <span><span class="cv2-mega-link__title">AppBuilder</span><span class="cv2-mega-link__desc">Criar apps e formulários adaptados à operação sem ciclos pesados de desenvolvimento.</span></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.appbuilder.desc">Formulários e apps ajustados ao processo municipal — evolução sem ciclos longos de desenvolvimento.</span></span>
                 </a>
                 <a href="modulos/mapify" class="cv2-mega-link">
-                  <span class="cv2-mega-link__icon cv2-icon-bg--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l-5 2V6l5-2m0 14 6-2m-6 2V4m6 12 5 2V4l-5-2m0 14V2"/></svg></span>
-                  <span><span class="cv2-mega-link__title">Mapify</span><span class="cv2-mega-link__desc">Sensores, regras, alertas e automação low-code numa camada operacional comum.</span></span>
+                  <span class="cv2-mega-link__icon cv2-mega-link__icon--mapify cv2-icon-bg--mapify" aria-hidden="true"
+                    ><img src="media/mapify-logo-white.png" alt="" width="24" height="24" loading="lazy" decoding="async"
+                  /></span>
+                  <span><span class="cv2-mega-link__title" data-i18n="nav.mega.mod.mapify.title">Mapify</span><span class="cv2-mega-link__desc" data-i18n="nav.mega.mod.mapify.desc">Sensores e regras na mesma camada — alertas e automação antes do incidente escalar.</span></span>
                 </a>
               </div>
             </div>
           </div>
-          <a href="casos-estudo">Casos de Estudo</a>
-          <a href="sobre-nos">Sobre Nós</a>
-          <a href="contactos">Contactos</a>
+          <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
+          <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
+          <a href="contactos" data-i18n="nav.contact">Contactos</a>
         </nav>
-        <a class="cv2-header__cta" href="contactos">Pedir demo</a>
+        <div class="cv2-header__tail">
+          <div class="lang-switch lang-switch--desktop" data-lang-switch></div>
+          <a class="cv2-header__cta" href="contactos" data-i18n="cta.demo">Pedir demo</a>
+        </div>
       </div>
     </header>
     <main id="main-content">
-      <section class="hero-caap hero-caap--article">
-        <div class="hero-caap__glow" aria-hidden="true"></div>
-        <div class="container hero-caap__grid hero-caap__grid--article">
-          <div class="page-hero-inner">
-            <p class="pill-light">Gestão Urbanística</p>
-            <h1 class="mt-6 heading-on-ink">Gestão Urbanística</h1>
-            <p class="lead lead--on-hero mt-6">
-              Deliver <strong>location map issuance</strong> and <strong>claims confrontation</strong> services against development plans on intranet and/or internet — templates, information layers, process queries, and online plan availability.
+      <section class="cv2-page-head cv2-page-head--tint-ink" aria-labelledby="page-h1">
+        <div class="cv2-container">
+          <p class="cv2-eyebrow" style="color: rgba(45, 41, 41, 0.55)">Módulos</p>
+          <h1 id="page-h1" class="cv2-h2" style="margin-top: 0.5rem">Gestão Urbanística</h1>
+          <p class="cv2-lead" style="max-width: 40rem; margin-top: 1rem">
+            Serviços urbanísticos digitais com mais contexto, mais rapidez e mais autonomia.
+          </p>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-hero cv2-mapify-hero--mod-urbanistica" aria-labelledby="gu-hero-intro">
+        <div class="cv2-mapify-hero__decor" aria-hidden="true">
+          <div class="cv2-mapify-hero__glow"></div>
+        </div>
+        <div class="cv2-container cv2-mapify-hero__grid">
+          <div id="gu-hero-intro">
+            <div class="cv2-mod-hero-badge">
+              <span class="cv2-mega-link__icon cv2-icon-bg--ink" aria-hidden="true"
+                ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16"/><path d="M6 19V7h12v12"/><path d="M9 10h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
+            </div>
+            <p class="cv2-mapify-hero__kicker">Módulo CAAP</p>
+            <p class="cv2-mapify-hero__body" style="margin-top: 0.75rem">
+              A solução de Gestão Urbanística disponibiliza serviços de emissão de plantas de localização, consulta de processo, disponibilização de planos online e confrontação de pretensões com planos de ordenamento.
             </p>
+            <p class="cv2-mapify-hero__body">
+              Tudo isto numa experiência mais integrada, com leitura territorial, acesso simples à informação e maior apoio à decisão técnica e administrativa.
+            </p>
+            <div class="cv2-mapify-hero__actions">
+              <a class="cv2-btn cv2-btn--primary" href="contactos">Pedir demonstração</a>
+              <a class="cv2-btn cv2-btn--outline" href="casos-estudo">Ver casos de uso</a>
+            </div>
+            <div class="cv2-mapify-tags">
+              <span>Plantas de localização</span>
+              <span>Consulta de processo</span>
+              <span>Planos online</span>
+              <span>Ordenamento</span>
+              <span>Território</span>
+            </div>
+          </div>
+          <aside class="cv2-mod-hero-visual cv2-mod-hero-visual--urbanistica" aria-hidden="true">
+            <div class="cv2-mod-hero-visual__chrome"><span></span><span></span><span></span></div>
+            <div class="cv2-mod-hero-visual__canvas"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow">O que permite</p>
+          <h2 class="cv2-mapify-h2">Mais clareza nos serviços urbanísticos</h2>
+          <p class="cv2-mapify-intro">
+            O módulo organiza informação territorial e administrativa para tornar os serviços urbanísticos mais acessíveis, mais rápidos e mais consistentes.
+          </p>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--4">
+            <div class="cv2-mapify-card">
+              <h3>Emissão de plantas</h3>
+              <p>Produção simplificada de plantas de localização com enquadramento territorial.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Consulta de processo</h3>
+              <p>Acesso mais direto à informação relevante associada a cada processo.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Planos online</h3>
+              <p>Disponibilização digital de planos para consulta técnica e administrativa.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Confrontação com ordenamento</h3>
+              <p>Verificação de compatibilidade entre pretensões e planos aplicáveis.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="video-placeholder max-w-3xl mx-auto" style="color: var(--color-slate-700); border-color: var(--color-border); background: var(--color-mist)">
-          <strong>Video</strong>
-          <span class="text-sm-tight">“Como criar plantas de localização no City as a Platform”</span>
+      <section class="cv2-mapify-section cv2-mapify-section--sage">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--green">Capacidades principais</p>
+          <h2 class="cv2-mapify-h2">O que o módulo disponibiliza</h2>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--5">
+            <div class="cv2-mapify-card">
+              <h3>Plantas de localização</h3>
+              <p>Serviço de emissão com base em localização e contexto territorial.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Consulta de processo</h3>
+              <p>Acesso centralizado a informação processual relevante.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Planos online</h3>
+              <p>Disponibilização digital de instrumentos de ordenamento.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Confrontação de pretensões</h3>
+              <p>Cruzamento entre pedidos e enquadramento territorial aplicável.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Apoio técnico</h3>
+              <p>Mais clareza para equipas urbanísticas e serviços de atendimento.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section container prose">
-        <h2>Location map issuance</h2>
-        <p>
-          The municipality provides an application for issuing location maps online — publicly or internally.
-        </p>
-        <ul>
-          <li>Issue a single map or a collection for process documentation, with predefined scales and sheet formats</li>
-          <li>Archive, search, and print issued maps</li>
-          <li>Select or draw a location on the map</li>
-          <li>Search by address, POI, parishes, spatial classes, cadastral matrices, or portal data</li>
-          <li>Collect applicant data via forms stored on the platform</li>
-          <li>Back office for application configuration</li>
-        </ul>
-
-        <div class="video-placeholder mt-10 max-w-3xl" style="color: var(--color-slate-700); border-color: var(--color-border); background: var(--color-soft)">
-          <strong>Video</strong>
-          <span class="text-sm-tight">“Como fazer confrontações urbanísticas no City as a Platform”</span>
+      <section class="cv2-mapify-section cv2-mapify-section--plain">
+        <div class="cv2-container">
+          <div class="cv2-mapify-split">
+            <div>
+              <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--red">Como funciona</p>
+              <h2 class="cv2-mapify-h2">Do pedido à análise territorial</h2>
+              <p class="cv2-mapify-intro">
+                O módulo concentra a informação necessária para apoiar a resposta aos pedidos urbanísticos e a análise técnica associada.
+              </p>
+              <div class="cv2-mapify-steps">
+                <div class="cv2-mapify-step">
+                  <h3>1. Acesso ao serviço pretendido</h3>
+                  <p>O utilizador consulta processos, emite plantas ou acede a planos através de um ponto único.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>2. Leitura territorial</h3>
+                  <p>A localização e os elementos geográficos associados são apresentados com contexto urbano.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>3. Consulta de planos e condicionantes</h3>
+                  <p>Os instrumentos de ordenamento podem ser consultados digitalmente e cruzados com a pretensão.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>4. Confrontação da pretensão</h3>
+                  <p>A análise ajuda a perceber o enquadramento territorial e regulamentar do pedido.</p>
+                </div>
+                <div class="cv2-mapify-step">
+                  <h3>5. Apoio à decisão</h3>
+                  <p>A informação fica organizada para apoiar equipas técnicas, executivos e atendimento.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cv2-mapify-flow-stack">
+              <p class="cv2-mapify-flow-stack__label">Fluxo urbanístico</p>
+              <div class="cv2-mapify-flow-stack__steps">
+                <div class="cv2-mapify-fs--panel">Pedido / Processo</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--blue">Consulta</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--green">Planos e condicionantes</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--yellow">Confrontação</div>
+                <div class="cv2-mapify-flow-stack__arrow" aria-hidden="true">↓</div>
+                <div class="cv2-mapify-fs--ink">Apoio à decisão</div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <h2>Claims confrontation</h2>
-        <p>Land management and territorial planning tools for municipal technicians.</p>
-        <ul>
-          <li>Issue confrontation maps for process documentation</li>
-          <li>Select or draw the claim on the map</li>
-          <li>Create maps for printing</li>
-          <li>Occupancy matrices by spatial class with areas, percentages, and regulations</li>
-          <li>Search toponymy, addresses, POIs, parishes, spatial classes, cadastre</li>
-          <li>Consult regulations and planning instrument legislation</li>
-          <li>Integrate national and regional plans for joint analysis</li>
-          <li>Back office configuration</li>
-        </ul>
-        <p class="text-muted text-sm-tight">Example application galleries: TBD (per 2026 brief).</p>
       </section>
 
-      <section class="section section--bottom container">
-        <a class="btn btn--ink" href="./#contact">Contact us</a>
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <div class="cv2-mapify-split cv2-mapify-split--center">
+            <div>
+              <p class="cv2-mapify-eyebrow">Valor para o município</p>
+              <h2 class="cv2-mapify-h2">Mais autonomia e melhor acesso à informação</h2>
+              <p class="cv2-mapify-intro">
+                Ao concentrar serviços urbanísticos digitais numa única experiência, o módulo reduz fricção, melhora o acesso à informação e apoia decisões mais consistentes.
+              </p>
+              <p class="cv2-mapify-intro">
+                O resultado é uma relação mais eficiente entre território, processos e equipas técnicas.
+              </p>
+            </div>
+            <div class="cv2-mapify-card-grid cv2-mapify-card-grid--2">
+              <div class="cv2-mapify-card">
+                <h3>Melhor acesso</h3>
+                <p>Informação urbanística disponível de forma mais simples e organizada.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Mais rapidez</h3>
+                <p>Redução do esforço necessário para consultar e analisar informação.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Mais contexto territorial</h3>
+                <p>Os processos passam a estar ligados ao território e aos planos aplicáveis.</p>
+              </div>
+              <div class="cv2-mapify-card">
+                <h3>Mais consistência técnica</h3>
+                <p>Apoio estruturado para equipas urbanísticas e atendimento municipal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-section">
+        <div class="cv2-container">
+          <p class="cv2-mapify-eyebrow cv2-mapify-eyebrow--red">Casos de uso</p>
+          <h2 class="cv2-mapify-h2">Onde pode ser aplicado</h2>
+          <div class="cv2-mapify-card-grid cv2-mapify-card-grid--4">
+            <div class="cv2-mapify-card">
+              <h3>Atendimento urbanístico</h3>
+              <p>Resposta a pedidos com consulta rápida de informação e enquadramento territorial.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Análise de processos</h3>
+              <p>Consulta de processo com leitura mais integrada dos elementos relevantes.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Consulta de planos</h3>
+              <p>Disponibilização digital de planos e condicionantes para apoio técnico.</p>
+            </div>
+            <div class="cv2-mapify-card">
+              <h3>Confrontação territorial</h3>
+              <p>Verificação de pretensões face aos instrumentos de ordenamento aplicáveis.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-mapify-cta">
+        <div class="cv2-container">
+          <div class="cv2-mapify-cta__inner">
+            <div>
+              <h2>Tornar os serviços urbanísticos mais claros e mais digitais</h2>
+              <p>
+                Descubra como o módulo de Gestão Urbanística pode melhorar a consulta, a análise territorial e o apoio à decisão no município.
+              </p>
+            </div>
+            <div class="cv2-mapify-cta__actions">
+              <a class="cv2-btn cv2-btn--white" href="contactos">Pedir demonstração</a>
+              <a class="cv2-btn cv2-btn--ghost-light" href="modulos/">Ver todos os módulos</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv2-py-20" style="padding-top: 0">
+        <div class="cv2-container">
+          <p class="cv2-inner-nav">
+            <a href="modulos/" class="cv2-inner-cta">← Todos os módulos</a>
+            <span aria-hidden="true" style="margin: 0 0.65rem; color: rgba(45, 41, 41, 0.35)">·</span>
+            <a href="contactos" class="cv2-inner-cta">Pedir demonstração</a>
+          </p>
+        </div>
       </section>
     </main>
     <footer class="cv2-footer">
       <div class="cv2-footer__inner">
         <div>
           <a class="cv2-footer__brand" href="./"><img src="media/caap-logo.png" alt="CAAP" width="44" height="44" /></a>
-          <p class="cv2-footer__intro">
+          <p class="cv2-footer__intro" data-i18n="footer.intro">
             City as a Platform é um produto Focus BC — plataforma operacional para municípios e entidades públicas.
           </p>
           <p class="cv2-footer__intro" style="margin-top: 0.75rem">
-            <a href="/focusbc/">Focus BC</a>
+            <a href="https://focusbcwebsites.pages.dev/focusbc/" target="_blank" rel="noopener noreferrer" data-i18n="footer.focusBc">Focus BC</a>
           </p>
         </div>
         <div>
-          <h3>Soluções</h3>
+          <h3 data-i18n="footer.solutionsHeading">Soluções</h3>
           <ul>
-            <li><a href="solucoes/">Todas as soluções</a></li>
-            <li><a href="solucoes/manutencao-dos-espacos-publicos">Manutenção dos Espaços Públicos</a></li>
-            <li><a href="solucoes/mobilidade">Mobilidade</a></li>
-            <li><a href="solucoes/turismo">Turismo</a></li>
-            <li><a href="solucoes/ambiente-e-sustentabilidade">Ambiente e Sustentabilidade</a></li>
-            <li><a href="solucoes/planeamento-urbano">Planeamento Urbano</a></li>
-            <li><a href="solucoes/governanca-e-transparencia-digital">Governança Digital</a></li>
-            <li><a href="solucoes/sensores-e-monitorizacao">Sensores</a></li>
+            <li><a href="solucoes/" data-i18n="footer.allSolutions">Todas as soluções</a></li>
+            <li><a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a></li>
+            <li><a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a></li>
+            <li><a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a></li>
+            <li><a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a></li>
+            <li><a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a></li>
+            <li><a href="solucoes/governanca-e-transparencia-digital" data-i18n="footer.governanceShort">Governança Digital</a></li>
+            <li><a href="solucoes/sensores-e-monitorizacao" data-i18n="footer.sensorsShort">Sensores</a></li>
           </ul>
         </div>
         <div>
-          <h3>Módulos</h3>
+          <h3 data-i18n="footer.modulesHeading">Módulos</h3>
           <ul>
-            <li><a href="modulos/">Todos os módulos</a></li>
-            <li><a href="modulos/gestao-de-ocorrencias">Gestão de Ocorrências</a></li>
-            <li><a href="modulos/gestao-urbanistica">Gestão Urbanística</a></li>
-            <li><a href="modulos/gestao-de-condicionamentos-de-transito">Condicionamentos de Trânsito</a></li>
-            <li><a href="modulos/higiene-urbana">Higiene Urbana</a></li>
-            <li><a href="modulos/appbuilder">AppBuilder</a></li>
-            <li><a href="modulos/mapify">Mapify</a></li>
+            <li><a href="modulos/" data-i18n="footer.allModules">Todos os módulos</a></li>
+            <li><a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a></li>
+            <li><a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a></li>
+            <li><a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="footer.trafficShort">Condicionamentos de Trânsito</a></li>
+            <li><a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a></li>
+            <li><a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a></li>
+            <li><a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a></li>
           </ul>
           <ul style="margin-top: 1.25rem">
-            <li><a href="blog">Blog</a></li>
-            <li><a href="parceiros">Parceiros</a></li>
-            <li><a href="casos-estudo">Casos de Estudo</a></li>
+            <li><a href="blog" data-i18n="nav.blog">Blog</a></li>
+            <li><a href="parceiros" data-i18n="nav.partners">Parceiros</a></li>
+            <li><a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a></li>
           </ul>
         </div>
         <div>
-          <h3>Contacto</h3>
+          <h3 data-i18n="footer.contactHeading">Contacto</h3>
           <ul>
-            <li><a href="contactos">Contactos e demonstração</a></li>
+            <li><a href="contactos" data-i18n="footer.contactDemo">Contactos e demonstração</a></li>
             <li><a href="mailto:joao.barata@focus-bc.com">joao.barata@focus-bc.com</a></li>
-            <li><a href="https://www.city-platform.com" rel="noopener noreferrer">Iniciar sessão</a></li>
+            <li><a href="https://www.city-platform.com" rel="noopener noreferrer" data-i18n="footer.login">Iniciar sessão</a></li>
           </ul>
         </div>
       </div>

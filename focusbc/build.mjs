@@ -709,7 +709,7 @@ const copies = [
   ["mapify-logo.png", "logos/mapify.png"],
   ["logos/google-partner-logo.png", "logos/google-partner-logo.png"],
   ["focusbc-team.avif", "about/focus-bc-team.avif"],
-  /* Home page (sources/index.html): WebP brand marks at media root; CAAP PNG also at root for direct URLs. */
+  /* Home page (sources/index.html): WebP brand marks at media root; CaaP logo PNG also at root for direct URLs. */
   ["focusbc-logo.webp", "focusbc-logo.webp"],
   ["caap-logo.png", "caap-logo.png"],
   ["virtualvenue_logo.webp", "virtualvenue_logo.webp"],

@@ -1,5 +1,5 @@
 /**
- * Legacy: add i18n hooks + lang switch + script to CAAP HTML.
+ * Legacy: add i18n hooks + lang switch + script to City as a Platform (CaaP) HTML.
  * Not used while the site is English-only; run strip-i18n-html.mjs if this script is applied by mistake.
  * Run: node caap/scripts/patch-i18n-html.mjs
  */
@@ -57,5 +57,5 @@ for (const fp of walkHtmlFiles(CAAP_SOURCES)) {
   }
 
   fs.writeFileSync(fp, html);
-  console.log("patched", path.relative(CAAP, fp));
+  console.log("patched", path.relative(path.join(__dirname, ".."), fp));
 }

@@ -4,7 +4,7 @@
  * Scope: only WIX-imported assets used by blog/case-study content:
  * - focusbc/media/wix
  *
- * Does not convert logos, heroes, marketing images, or CAAP assets.
+ * Does not convert logos, heroes, marketing images, or City as a Platform (caap/) assets.
  *
  * Run: npm run convert:blog-case-webp
  */

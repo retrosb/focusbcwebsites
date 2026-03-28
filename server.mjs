@@ -14,7 +14,7 @@ const PORT = Number(process.env.PORT) || 8888;
 const FOCUSBC = path.join(__dirname, "focusbc");
 /** Built Focus BC static tree from `npm run build` → public/focusbc/. */
 const FOCUSBC_OUTPUT = path.join(__dirname, "public", "focusbc");
-/** CAAP repo root: templates, data, media. Pages live in caap/sources/ (dev) or public/caap/ (after build). */
+/** City as a Platform (CaaP) package at caap/: templates, data, media. Pages in caap/sources/ (dev) or public/caap/ (after build). */
 const CAAP_REPO = path.join(__dirname, "caap");
 const CAAP_PUBLIC = path.join(__dirname, "public", "caap");
 const useCaapPublicBuild = fs.existsSync(path.join(CAAP_PUBLIC, "index.html"));
@@ -590,7 +590,7 @@ function resolveFocusbcFile(segments) {
   return null;
 }
 
-/** Map legacy English CAAP URLs to PT-PT slugs (pathname without /caap prefix, no leading slash). */
+/** Map legacy English site URLs to PT-PT slugs (pathname without /caap prefix, no leading slash). */
 const CAAP_LEGACY_SOLUTION_SLUG = {
   "public-space": "manutencao-dos-espacos-publicos",
   mobility: "mobilidade",
@@ -787,7 +787,7 @@ function handler(req, res) {
   /* Collapse duplicate slashes so /caap//products/foo still routes. */
   pathname = pathname.replace(/\/{2,}/g, "/");
 
-  /* Normalize /CAAP/... → /caap/... so routing always matches (some clients vary case). */
+  /* Normalize mixed-case /caap/ prefix to lowercase so routing always matches. */
   if (pathname.length >= 6 && pathname.slice(0, 6).toLowerCase() === "/caap/") {
     pathname = "/caap/" + pathname.slice(6);
   }
@@ -934,7 +934,7 @@ function handler(req, res) {
     if (segments[0] === "casestudies" && segments.length === 2 && segments[1]) {
       const slug = segments[1];
       /* Prefer npm-built HTML (case-studies-built → public/focusbc/case-studies/) over JSON
-         templates: templates use CAAP-relative assets (styles.css, caap-logo.png) and break
+         templates: templates use CaaP-package-relative assets (styles.css, caap-logo.png) and break
          under /focusbc/ even with <base>. */
       const staticCaseDir = path.join(FOCUSBC_OUTPUT, "case-studies", slug, "index.html");
       if (fs.existsSync(staticCaseDir)) {
@@ -1240,5 +1240,5 @@ server.on("error", (err) => {
 server.listen(PORT, () => {
   console.log(`Websites server listening on http://localhost:${PORT}`);
   console.log(`  Focus BC:  http://localhost:${PORT}/focusbc/`);
-  console.log(`  CAAP:      http://localhost:${PORT}/caap/`);
+  console.log(`  CaaP:      http://localhost:${PORT}/caap/`);
 });

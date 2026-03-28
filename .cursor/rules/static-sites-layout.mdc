@@ -3,7 +3,7 @@ description: Where to put files in focusbc/ and caap/ — sources vs package roo
 alwaysApply: true
 ---
 
-# Static sites layout (Focus BC & CAAP)
+# Static sites layout (Focus BC & City as a Platform / CaaP)
 
 This repo hosts **two sibling sites** under `focusbc/` and `caap/`. **Use the same mental model for both.**
 
@@ -36,7 +36,7 @@ Everything here is **intentionally outside** `sources/`: it is either **build to
 
 ## Build output (single destination)
 
-- Focus BC and CAAP builds write only to **`public/focusbc/`** and **`public/caap/`** (via `FOCUSBC_OUT` / `CAAP_OUT` in `scripts/build-pages.mjs`, or each `build.mjs` default).
+- Focus BC and CaaP (City as a Platform) builds write only to **`public/focusbc/`** and **`public/caap/`** (via `FOCUSBC_OUT` / `CAAP_OUT` in `scripts/build-pages.mjs`, or each `build.mjs` default).
 - **Do not** introduce or rely on a repo-root folder such as **`focusbc-output/`** — it is not part of the pipeline; remove if present.
 
 ## Focus BC: `/media/` URLs under `/focusbc/`

@@ -1,5 +1,5 @@
 /**
- * Downloads static.wixstatic.com/media/* assets referenced in Focus BC and CAAP
+ * Downloads static.wixstatic.com/media/* assets referenced in Focus BC and City as a Platform (caap/)
  * data (and Focus BC build sources), saves under each site's media/wix/, and
  * rewrites those files to use media/wix/<filename>.
  *

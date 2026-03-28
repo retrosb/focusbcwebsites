@@ -2,7 +2,7 @@
 
 Static sites for local preview and Cloudflare Pages deployment.
 
-## Layout convention (same for Focus BC and CAAP)
+## Layout convention (same for Focus BC and City as a Platform / CaaP)
 
 Each site lives in its own folder (`focusbc/`, `caap/`). Inside that folder there are **two layers**:
 
@@ -27,7 +27,7 @@ These files are **not** “missing” from `sources/`; they play different roles
 
 ## Repository layout (mirrored for both sites)
 
-| Area | Focus BC | City as a Platform (CAAP) |
+| Area | Focus BC | City as a Platform (CaaP) |
 |------|----------|---------------------------|
 | Page/CSS/JS sources (+ `favicon.png`) | `focusbc/sources/` | `caap/sources/` |
 | Media assets | `focusbc/media/` | `caap/media/` |
@@ -63,12 +63,12 @@ The hub serves Focus BC under **`/focusbc/`**. Root-relative URLs like **`/media
 4. **CSS `url(/media/...)`** — The build rewrites these in emitted `styles.css` when `BASE` is set.
 
 Changing list card markup without keeping (1)–(2) is the usual cause of “broken images” on `/focusbc/blog/` and similar routes.
-- **CAAP:** `node caap/build.mjs` — reads `caap/sources/`, copies `caap/media`, `caap/locales`, `caap/data`, writes `CAAP_OUT` (default `public/caap`). Set `CAAP_BASE_PATH=/caap` when using the hub layout (the unified `npm run build` sets both).
+- **City as a Platform (CaaP):** `node caap/build.mjs` — reads `caap/sources/`, copies `caap/media`, `caap/locales`, `caap/data`, writes `CAAP_OUT` (default `public/caap`). Set `CAAP_BASE_PATH=/caap` when using the hub layout (the unified `npm run build` sets both).
 
 Convenience scripts: `npm run build:focusbc`, `npm run build:caap` (same as `build:caap-public`).
 
 ## Local server
 
-- `npm run serve:server` — serves `public/` when present; CAAP and Focus BC can fall back to unbuilt source trees for development (see `server.mjs`).
+- `npm run serve:server` — serves `public/` when present; CaaP and Focus BC can fall back to unbuilt source trees for development (see `server.mjs`).
 
 Use **`public/`** as the only deployable tree. There is no second official output directory. If you see **`focusbc-output/`** at the repo root, it is not produced by `npm run build` or `scripts/build-pages.mjs` — remove it; it is listed in `.gitignore` so it cannot be committed by mistake.

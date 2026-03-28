@@ -1,5 +1,5 @@
 /**
- * Static site build: reads HTML/CSS/JS from caap/sources/, copies assets from caap/, writes to CAAP_OUT (default public/caap).
+ * City as a Platform (CaaP) static site build: reads HTML/CSS/JS from caap/sources/, copies assets from caap/, writes to CAAP_OUT (default public/caap).
  * Mirrors focusbc/build.mjs layout (sources → build script at package root, locales + media + data beside sources).
  *
  * Run from repo root: node caap/build.mjs

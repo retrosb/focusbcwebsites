@@ -3196,7 +3196,7 @@ h3,
   }
 }
 
-/* ========== CAAP v2 (caap_website_updated_v2) ========== */
+/* ========== City as a Platform (CaaP) v2 (caap_website_updated_v2) ========== */
 body.caap-theme-v2 {
   --cv2-ink: #2d2929;
   --cv2-blue: #4885ed;
@@ -5551,7 +5551,7 @@ a.cv2-card:hover {
   }
 }
 
-/* ——— CAAP module pages: personality (hero badge, visuals, backgrounds) ——— */
+/* ——— CaaP module pages: personality (hero badge, visuals, backgrounds) ——— */
 
 .cv2-mod-hero-badge {
   display: flex;

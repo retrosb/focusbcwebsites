@@ -148,7 +148,7 @@ async function downloadSitemapImageToWebp(absUrl, destAbs) {
   fs.mkdirSync(path.dirname(destAbs), { recursive: true });
   if (fs.existsSync(destAbs)) return;
   const res = await fetch(absUrl, {
-    headers: { "User-Agent": "CAAP-static-build/1.0 (+https://www.city-platform.com)" },
+    headers: { "User-Agent": "City-as-a-Platform-static-build/1.0 (+https://www.city-platform.com)" },
   });
   if (!res.ok) throw new Error(`GET image ${absUrl} → ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());

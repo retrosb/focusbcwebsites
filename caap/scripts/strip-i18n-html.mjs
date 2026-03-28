@@ -1,5 +1,5 @@
 /**
- * Removes client i18n hooks from CAAP static HTML (English-only PoC).
+ * Removes client i18n hooks from City as a Platform (CaaP) static HTML (English-only PoC).
  * Strips data-i18n* attributes, language switcher placeholders, and i18n.js script tags.
  *
  * Run: node caap/scripts/strip-i18n-html.mjs

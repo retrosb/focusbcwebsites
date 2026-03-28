@@ -1,5 +1,5 @@
 /**
- * Client-side i18n for CAAP static pages.
+ * Client-side i18n for City as a Platform (CaaP) static pages.
  * Locales: /caap/locales/{locale}.json (path derived from this script URL).
  */
 (function () {

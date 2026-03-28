@@ -85,6 +85,13 @@
   "cta": {
     "demo": "Request a demo"
   },
+  "contact": {
+    "heroCtaForm": "Send a message",
+    "submitEmail": "Send via email",
+    "writeDirect": "Write directly",
+    "ctaTitle": "Let's align the platform with your context",
+    "ctaLead": "Send us a message and we will arrange a demo focused on your municipality's priorities."
+  },
   "footer": {
     "intro": "City as a Platform is a Focus BC product — an operational platform for municipalities and public bodies.",
     "focusBc": "Focus BC",

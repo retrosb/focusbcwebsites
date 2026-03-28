@@ -85,6 +85,13 @@
   "cta": {
     "demo": "Pedir demo"
   },
+  "contact": {
+    "heroCtaForm": "Enviar mensagem",
+    "submitEmail": "Enviar por email",
+    "writeDirect": "Escrever diretamente",
+    "ctaTitle": "Vamos enquadrar a plataforma na sua realidade",
+    "ctaLead": "Envie-nos uma mensagem e organizamos uma demonstração focada nas prioridades do seu município."
+  },
   "footer": {
     "intro": "City as a Platform é um produto Focus BC — plataforma operacional para municípios e entidades públicas.",
     "focusBc": "Focus BC",

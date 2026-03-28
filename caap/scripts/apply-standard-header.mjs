@@ -20,23 +20,8 @@ const STANDARD_HEADER = `
           <summary class="cv2-nav-mobile__toggle" data-i18n="nav.menu">Menu</summary>
           <nav class="cv2-nav-mobile__panel" data-i18n-attr="aria-label:nav.mainAria">
             <div class="lang-switch lang-switch--mobile" data-lang-switch></div>
-            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.solutions">Soluções</p>
-            <a href="solucoes/" data-i18n="nav.allSolutions">Todas as soluções</a>
-            <a href="solucoes/manutencao-dos-espacos-publicos" data-i18n="nav.mega.sol.espacosPublicos.title">Manutenção dos Espaços Públicos</a>
-            <a href="solucoes/mobilidade" data-i18n="nav.mega.sol.mobilidade.title">Mobilidade</a>
-            <a href="solucoes/turismo" data-i18n="nav.mega.sol.turismo.title">Turismo</a>
-            <a href="solucoes/ambiente-e-sustentabilidade" data-i18n="nav.mega.sol.ambiente.title">Ambiente e Sustentabilidade</a>
-            <a href="solucoes/planeamento-urbano" data-i18n="nav.mega.sol.planeamento.title">Planeamento Urbano</a>
-            <a href="solucoes/governanca-e-transparencia-digital" data-i18n="nav.mega.sol.governanca.title">Governança e Transparência Digital</a>
-            <a href="solucoes/sensores-e-monitorizacao" data-i18n="nav.mega.sol.sensores.title">Sensores e Monitorização</a>
-            <p class="cv2-nav-mobile__label" data-i18n="nav.labels.modules">Módulos</p>
-            <a href="modulos/" data-i18n="nav.allModules">Todos os módulos</a>
-            <a href="modulos/gestao-de-ocorrencias" data-i18n="nav.mega.mod.ocorrencias.title">Gestão de Ocorrências</a>
-            <a href="modulos/gestao-urbanistica" data-i18n="nav.mega.mod.urbanistica.title">Gestão Urbanística</a>
-            <a href="modulos/gestao-de-condicionamentos-de-transito" data-i18n="nav.mega.mod.transito.title">Gestão de Condicionamentos de Trânsito</a>
-            <a href="modulos/higiene-urbana" data-i18n="nav.mega.mod.higiene.title">Higiene Urbana</a>
-            <a href="modulos/appbuilder" data-i18n="nav.mega.mod.appbuilder.title">AppBuilder</a>
-            <a href="modulos/mapify" data-i18n="nav.mega.mod.mapify.title">Mapify</a>
+            <a href="solucoes/" data-i18n="nav.solutions">Soluções</a>
+            <a href="modulos/" data-i18n="nav.modules">Módulos</a>
             <p class="cv2-nav-mobile__label" data-i18n="nav.labels.company">Empresa</p>
             <a href="casos-estudo" data-i18n="nav.caseStudies">Casos de Estudo</a>
             <a href="sobre-nos" data-i18n="nav.about">Sobre Nós</a>
@@ -126,6 +111,93 @@ const STANDARD_HEADER = `
       </div>
     </header>`;
 
+/**
+ * Filled SVG circles + same drift keyframes as `.cv2-hero__blob` (hidden on homepage via CSS `:has(.cv2-hero)`).
+ * Several layouts (positions, radii, motion class mix); picked per file via stable path hash.
+ */
+const PAGE_FLOAT_VARIANTS = [
+  {
+    circles: [
+      { anim: "y", cx: 120, cy: 200, r: 90, fill: "rgba(244, 194, 13, 0.38)" },
+      { anim: "r", cx: 340, cy: 140, r: 54, fill: "rgba(219, 50, 54, 0.36)" },
+      { anim: "b", cx: 940, cy: 110, r: 100, fill: "rgba(72, 133, 237, 0.34)" },
+      { anim: "g", cx: 1020, cy: 280, r: 58, fill: "rgba(60, 186, 84, 0.36)" },
+      { anim: "y2", cx: 720, cy: 520, r: 72, fill: "rgba(244, 194, 13, 0.26)" },
+    ],
+  },
+  {
+    circles: [
+      { anim: "b", cx: 90, cy: 360, r: 72, fill: "rgba(244, 194, 13, 0.36)" },
+      { anim: "y", cx: 260, cy: 120, r: 48, fill: "rgba(219, 50, 54, 0.34)" },
+      { anim: "g", cx: 560, cy: 80, r: 88, fill: "rgba(72, 133, 237, 0.32)" },
+      { anim: "r", cx: 1080, cy: 420, r: 62, fill: "rgba(60, 186, 84, 0.35)" },
+      { anim: "y2", cx: 420, cy: 640, r: 56, fill: "rgba(244, 194, 13, 0.24)" },
+    ],
+  },
+  {
+    circles: [
+      { anim: "r", cx: 180, cy: 520, r: 96, fill: "rgba(244, 194, 13, 0.34)" },
+      { anim: "g", cx: 920, cy: 200, r: 52, fill: "rgba(219, 50, 54, 0.36)" },
+      { anim: "y", cx: 200, cy: 160, r: 64, fill: "rgba(72, 133, 237, 0.33)" },
+      { anim: "b", cx: 680, cy: 340, r: 78, fill: "rgba(60, 186, 84, 0.34)" },
+      { anim: "y2", cx: 1040, cy: 600, r: 44, fill: "rgba(244, 194, 13, 0.28)" },
+    ],
+  },
+  {
+    circles: [
+      { anim: "g", cx: 1020, cy: 480, r: 84, fill: "rgba(244, 194, 13, 0.35)" },
+      { anim: "y", cx: 160, cy: 280, r: 58, fill: "rgba(219, 50, 54, 0.33)" },
+      { anim: "r", cx: 480, cy: 420, r: 108, fill: "rgba(72, 133, 237, 0.3)" },
+      { anim: "b", cx: 860, cy: 140, r: 50, fill: "rgba(60, 186, 84, 0.36)" },
+      { anim: "y2", cx: 320, cy: 680, r: 68, fill: "rgba(244, 194, 13, 0.22)" },
+    ],
+  },
+  {
+    circles: [
+      { anim: "y", cx: 520, cy: 90, r: 68, fill: "rgba(244, 194, 13, 0.36)" },
+      { anim: "b", cx: 780, cy: 560, r: 74, fill: "rgba(219, 50, 54, 0.32)" },
+      { anim: "y2", cx: 240, cy: 380, r: 82, fill: "rgba(72, 133, 237, 0.31)" },
+      { anim: "r", cx: 1120, cy: 320, r: 54, fill: "rgba(60, 186, 84, 0.35)" },
+      { anim: "g", cx: 60, cy: 560, r: 46, fill: "rgba(244, 194, 13, 0.3)" },
+    ],
+  },
+  {
+    circles: [
+      { anim: "b", cx: 620, cy: 260, r: 92, fill: "rgba(244, 194, 13, 0.33)" },
+      { anim: "y2", cx: 360, cy: 580, r: 42, fill: "rgba(219, 50, 54, 0.35)" },
+      { anim: "g", cx: 980, cy: 360, r: 98, fill: "rgba(72, 133, 237, 0.32)" },
+      { anim: "y", cx: 220, cy: 440, r: 60, fill: "rgba(60, 186, 84, 0.33)" },
+      { anim: "r", cx: 500, cy: 120, r: 66, fill: "rgba(244, 194, 13, 0.27)" },
+    ],
+  },
+];
+
+function hashPath(p) {
+  const s = p.split(path.sep).join("/");
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function pageFloatMarkup(filePath) {
+  const idx = hashPath(filePath) % PAGE_FLOAT_VARIANTS.length;
+  const { circles } = PAGE_FLOAT_VARIANTS[idx];
+  const inner = circles
+    .map(
+      (c) =>
+        `        <g class="cv2-page-float__move cv2-page-float__move--${c.anim}"><circle cx="${c.cx}" cy="${c.cy}" r="${c.r}" fill="${c.fill}"/></g>`
+    )
+    .join("\n");
+  return `    <div class="cv2-page-float cv2-page-float--layout-${idx}" aria-hidden="true">
+      <svg class="cv2-page-float__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+${inner}
+      </svg>
+    </div>`;
+}
+
 const STANDARD_FOOTER = `
     <footer class="cv2-footer">
       <div class="cv2-footer__inner">
@@ -214,7 +286,7 @@ function i18nScriptSrc(filePath) {
 }
 
 function ensureI18nScript(html, filePath) {
-  if (/\/js\/i18n\.js/.test(html)) return html;
+  if (/<script[^>]*src="[^"]*js\/i18n\.js"[^>]*>/i.test(html)) return html;
   const src = i18nScriptSrc(filePath);
   const tag = `    <script src="${src}" defer></script>\n`;
   const m = html.match(/<body[^>]*>/i);
@@ -222,6 +294,36 @@ function ensureI18nScript(html, filePath) {
     return html.replace(m[0], `${m[0]}\n${tag}`);
   }
   return `${html}\n${tag}`;
+}
+
+/** Collapse repeated i18n.js tags right after <body> (keeps first src path). */
+function dedupeI18nScriptsAfterBody(html) {
+  return html.replace(
+    /(<body[^>]*>)((?:\s*<script[^>]*src="([^"]*js\/i18n\.js)"[^>]*>\s*<\/script>)+)/i,
+    (full, bodyOpen, block) => {
+      const paths = [...block.matchAll(/src="([^"]*js\/i18n\.js)"/gi)].map((x) => x[1]);
+      if (paths.length < 2) return full;
+      return `${bodyOpen}\n    <script src="${paths[0]}" defer></script>\n`;
+    }
+  );
+}
+
+function stripPageFloat(html) {
+  return html.replace(/\s*<div class="cv2-page-float"[^>]*>[\s\S]*?<\/div>\s*/i, "\n");
+}
+
+function ensurePageFloat(html, filePath) {
+  const float = pageFloatMarkup(filePath);
+  let h = stripPageFloat(html);
+  const beforeSkip = h.replace(
+    /\n\s*<a href="#main-content" class="skip-link"/i,
+    `\n${float}\n    <a href="#main-content" class="skip-link"`
+  );
+  if (beforeSkip !== h) return beforeSkip;
+  return h.replace(
+    /(<script[^>]*src="[^"]*js\/i18n\.js"[^>]*>\s*<\/script>)/i,
+    `$1\n${float}`
+  );
 }
 
 function ensureSkipLinkI18n(html) {
@@ -265,6 +367,16 @@ function main() {
     const withScript = ensureI18nScript(html, filePath);
     if (withScript !== html) {
       html = withScript;
+      changed = true;
+    }
+    const deduped = dedupeI18nScriptsAfterBody(html);
+    if (deduped !== html) {
+      html = deduped;
+      changed = true;
+    }
+    const withFloat = ensurePageFloat(html, filePath);
+    if (withFloat !== html) {
+      html = withFloat;
       changed = true;
     }
     const next = ensureBodyTheme(html);
